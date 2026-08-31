@@ -1,0 +1,51 @@
+[main 2c9dfbd] add hw 1 analysis
+ 33 files changed, 22335 insertions(+)
+ create mode 100644 104_hw1.pdf
+ create mode 100644 113_hw1.pdf
+ create mode 100644 118_hw1.pdf
+ create mode 100644 "A First Course in Abstract Algebra [Seventh 7th Edition] -- Fraleigh, John B_ -- 7th ed_ Pearson New International Ed, Harlow, Essex, cop_ -- Pearson -- isbn13 9781292024967 -- c84bb8c5695c3cdf953947bcb7119ba6 -- Anna\342\200\231s Archive.pdf"
+ create mode 100644 Albert Boggess_ Francis J Narcowich - A first course in wavelets with Fourier analysis (2009, John Wiley & Sons) - libgen.li.djvu
+ create mode 100644 An Introduction to Stochastic Modeling, Fourth Edition (Pinsky, Mark A. Karlin, Samuel) (z-library.sk, 1lib.sk, z-lib.sk).pdf
+ create mode 100644 Essentials of Stochastic Processes (Richard Durrett) (z-library.sk, 1lib.sk, z-lib.sk).pdf
+ create mode 100644 Linear Algebra Done Right, 4th Edition (Sheldon Axler) (z-library.sk, 1lib.sk, z-lib.sk).pdf
+ create mode 100644 Math110.Fall2026.Homework.pdf
+ create mode 100644 [Undergraduate Texts in Mathematics] Kenneth A. Ross - Elementary Analysis_ The Theory of Calculus (2013, Springer) - libgen.li.pdf
+ create mode 100644 assignments/104_hw1sol.tex
+ create mode 100644 assignments/110_hw10sol.tex
+ create mode 100644 assignments/110_hw11sol.tex
+ create mode 100644 assignments/110_hw12sol.tex
+ create mode 100644 assignments/110_hw13sol.tex
+ create mode 100644 assignments/110_hw1sol.tex
+ create mode 100644 assignments/110_hw2sol.tex
+ create mode 100644 assignments/110_hw3sol.tex
+ create mode 100644 assignments/110_hw4sol.tex
+ create mode 100644 assignments/110_hw5sol.tex
+ create mode 100644 assignments/110_hw6sol.tex
+ create mode 100644 assignments/110_hw7sol.tex
+ create mode 100644 assignments/110_hw8sol.tex
+ create mode 100644 assignments/110_hw9sol.tex
+ create mode 100644 assignments/113_hw1sol.tex
+ create mode 100644 assignments/118_hw1sol.tex
+ create mode 100644 assignments/build/104_hw1sol.aux
+ create mode 100644 assignments/build/104_hw1sol.fdb_latexmk
+ create mode 100644 assignments/build/104_hw1sol.fls
+ create mode 100644 assignments/build/104_hw1sol.log
+ create mode 100644 assignments/build/104_hw1sol.out
+ create mode 100644 assignments/build/104_hw1sol.pdf
+ create mode 100644 assignments/build/104_hw1sol.synctex.gz
+keshavramamurthy:fa26_books keshavramamurthy$ git push -u origin main
+Enumerating objects: 38, done.
+Counting objects: 100% (38/38), done.
+Delta compression using up to 14 threads
+Compressing objects: 100% (36/36), done.
+Writing objects: 100% (37/37), 19.03 MiB | 10.34 MiB/s, done.
+Total 37 (delta 15), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (15/15), done.
+To github.com:fvdqyxm/lockedin.git
+   3ab1fbd..2c9dfbd  main -> main
+branch 'main' set up to track 'origin/main'.
+keshavramamurthy:fa26_books keshavramamurthy$ echo "# lockedin" >> README.md
+keshavramamurthy:fa26_books keshavramamurthy$ git init
+Reinitialized existing Git repository in /Users/keshavramamurthy/Downloads/fa26_books/.git/
+keshavramamurthy:fa26_books keshavramamurthy$ git add README.md
+keshavramamurthy:fa26_books keshavramamurthy$ git commit -m "f
