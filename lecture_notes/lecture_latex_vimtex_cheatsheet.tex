@@ -1,0 +1,191 @@
+% !TEX program = lualatex
+\documentclass[10pt]{article}
+\usepackage{fontspec}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{booktabs,tabularx,array}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage[most]{tcolorbox}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+
+\geometry{letterpaper,margin=0.58in,top=0.52in,bottom=0.52in}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.25em}
+\setlist{nosep,leftmargin=*}
+\setlength{\columnsep}{0.32in}
+\definecolor{ink}{HTML}{1E293B}
+\definecolor{navy}{HTML}{183B56}
+\definecolor{blue}{HTML}{E8F1F8}
+\definecolor{gold}{HTML}{FFF3CD}
+\definecolor{green}{HTML}{E8F5E9}
+\definecolor{rose}{HTML}{FCE8EE}
+\definecolor{muted}{HTML}{52606D}
+\definecolor{rule}{HTML}{C9D5DF}
+
+\pagecolor{white}
+\color{ink}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{navy}{FAST LECTURE NOTES}}
+\fancyhead[R]{\small\sffamily\textcolor{muted}{LaTeX + VimTeX}}
+\fancyfoot[C]{\small\sffamily\textcolor{muted}{\thepage}}
+\setlength{\headheight}{20pt}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{rule}\leaders\hrule height \headrulewidth\hfill}}
+
+\newcommand{\key}[1]{\tcbox[on line,boxsep=1pt,left=3pt,right=3pt,top=1pt,bottom=1pt,colback=blue,colframe=rule,boxrule=0.35pt,arc=2pt]{\ttfamily\small #1}}
+\newcommand{\cmd}[1]{\texttt{#1}}
+\newcommand{\good}[1]{\tcbox[colback=green,colframe=green,boxrule=0pt,arc=2pt,left=4pt,right=4pt,top=2pt,bottom=2pt]{#1}}
+\newcommand{\warn}[1]{\tcbox[colback=gold,colframe=gold,boxrule=0pt,arc=2pt,left=4pt,right=4pt,top=2pt,bottom=2pt]{#1}}
+\newcommand{\sectiontitle}[1]{\vspace{0.35em}{\large\sffamily\bfseries\textcolor{navy}{#1}}\par\vspace{-0.2em}\textcolor{rule}{\rule{\linewidth}{0.6pt}}}
+\newcommand{\smalltitle}[1]{\vspace{0.15em}{\sffamily\bfseries\textcolor{navy}{#1}}\par}
+\newenvironment{tipbox}[1]{\begin{tcolorbox}[title={\sffamily\bfseries #1},colback=blue!42,colframe=rule,boxrule=0.4pt,arc=3pt,left=5pt,right=5pt,top=4pt,bottom=4pt]}{\end{tcolorbox}}
+\newenvironment{lecturebox}[1]{\begin{tcolorbox}[title={\sffamily\bfseries #1},colback=white,colframe=rule,boxrule=0.4pt,arc=3pt,left=5pt,right=5pt,top=4pt,bottom=4pt]}{\end{tcolorbox}}
+
+\begin{document}
+
+\begin{center}
+  {\Huge\sffamily\bfseries\textcolor{navy}{Lecture Notes, Fast}}\\[-0.1em]
+  {\large\sffamily\textcolor{muted}{A practical LaTeX + VimTeX desk reference}}
+\end{center}
+
+\begin{tipbox}{The 10-second loop}
+Type notes with snippets and the short formatting triggers. Let the 650 ms save debounce do its work. When you want a checkpoint: \key{Space la} saves and compiles; \key{Space lv} opens the PDF; \key{Space le} shows errors.
+\end{tipbox}
+
+\begin{multicols}{2}
+\sectiontitle{Your key language}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.42\linewidth}X@{}}
+\toprule
+\textbf{Key} & \textbf{Action}\\
+\midrule
+\key{Space} & leader key for commands\\
+\key{jk} & leave Insert mode quickly\\
+\key{Space w} & save current file\\
+\key{Space q} & quit window\\
+\key{Ctrl-h/j/k/l} & move between splits\\
+\key{Space zw} & distraction-free writing\\
+\bottomrule
+\end{tabularx}
+
+\sectiontitle{Compile and inspect}
+\begin{tabularx}{\linewidth}{@{}>{\ttfamily\raggedright\arraybackslash}p{0.34\linewidth}X@{}}
+\toprule
+\textnormal{\textbf{Keys}} & \textnormal{\textbf{Use}}\\
+\midrule
+\key{Space ll} & start/refresh continuous compile\\
+\key{Space la} & save, then compile\\
+\key{Space lv} & view PDF in Skim\\
+\key{Space le} & inspect compiler errors\\
+\key{Space lt} & toggle table of contents\\
+\key{Space lk} & stop compiler\\
+\key{Space lm} & one-shot compile\\
+\key{Space lo} & show compiler output\\
+\key{Space lc} & clean auxiliary files\\
+\key{Space li} & show VimTeX project info\\
+\key{Space ts} & toggle spell checking\\
+\bottomrule
+\end{tabularx}
+
+\warn{Quickfix does not open automatically.} Use \key{Space le} only when you want diagnostics, so your cursor and page stay stable while lecturing.
+
+\sectiontitle{Find things without leaving the file}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.31\linewidth}X@{}}
+\key{Space ff} & find a file\\
+\key{Space fg} & search text across the project\\
+\key{Space fs} & jump through document symbols\\
+\key{Space fb} & choose an open buffer\\
+\key{Space e} & toggle the file tree\\
+\end{tabularx}
+
+\sectiontitle{The fast lecture pattern}
+\begin{enumerate}[label=\textcolor{navy}{\arabic*.},leftmargin=1.5em]
+  \item Open or create a `.tex` file. A new file receives your template automatically.
+  \item Type a trigger such as \cmd{defn}, \cmd{thm}, \cmd{proof}, \cmd{al}, or \cmd{eq}; expand it with your completion key (usually \key{Tab}).
+  \item Use \key{;c} for a fresh bold Claim paragraph, \key{;p} for Proof, and \key{;r} for Remark.
+  \item Press \key{Space la} at a natural pause. If something breaks, press \key{Space le}.
+\end{enumerate}
+
+\columnbreak
+
+\sectiontitle{Formatting while you type}
+\begin{lecturebox}{One-line emphasis}
+In Insert mode:
+
+\begin{tabularx}{\linewidth}{@{}>{\ttfamily\bfseries}p{0.18\linewidth}X@{}}
+\key{;b} & inserts \cmd{\textbackslash textbf\{\}} and places the cursor inside.\\
+\key{;i} & inserts \cmd{\textbackslash emph\{\}} and places the cursor inside.\\
+\key{;c} & starts a new paragraph labeled \textbf{Claim.}\\
+\key{;p} & starts a new paragraph labeled \textbf{Proof.}\\
+\key{;r} & starts a new paragraph labeled \textbf{Remark.}\\
+\key{\textbackslash(} & inserts \cmd{\textbackslash(\textbackslash)} with the cursor inside.\\
+\key{\textbackslash[} & inserts \cmd{\textbackslash[\textbackslash]} with the cursor inside.\\
+\end{tabularx}
+\end{lecturebox}
+
+\end{multicols}
+\newpage
+\begin{multicols}{2}
+
+\sectiontitle{LuaSnip triggers already installed}
+\smalltitle{Statements and proof structure}
+\begin{tabularx}{\linewidth}{@{}>{\ttfamily}p{0.23\linewidth}X@{}}
+\cmd{prb} & problem plus solution\\
+\cmd{prob} & numbered problem\\
+\cmd{sol}, \cmd{ans} & solution or answer block\\
+\cmd{defn} & definition\\
+\cmd{thm}, \cmd{lem}, \cmd{prop}, \cmd{cor} & theorem, lemma, proposition, corollary\\
+\cmd{ex}, \cmd{rem}, \cmd{proof} & example, remark, proof\\
+\end{tabularx}
+
+\smalltitle{Display and layout}
+\begin{tabularx}{\linewidth}{@{}>{\ttfamily}p{0.23\linewidth}X@{}}
+\cmd{al}, \cmd{eq} & align or equation display\\
+\cmd{cases}, \cmd{mat} & cases or matrix\\
+\cmd{enum}, \cmd{item} & numbered or bulleted list\\
+\cmd{sec}, \cmd{ssec} & section or subsection\\
+\end{tabularx}
+
+\smalltitle{Mathematical shorthand}
+\begin{tabularx}{\linewidth}{@{}>{\ttfamily}p{0.31\linewidth}X@{}}
+\cmd{rr}, \cmd{cc}, \cmd{qq}, \cmd{zz}, \cmd{nn} & \(\mathbb{R},\mathbb{C},\mathbb{Q},\mathbb{Z},\mathbb{N}\)\\
+\cmd{abs}, \cmd{norm}, \cmd{ip}, \cmd{set} & absolute value, norm, inner product, set\\
+\cmd{span}, \cmd{rank}, \cmd{ker}, \cmd{im} & common linear/algebra operators\\
+\cmd{lim}, \cmd{int}, \cmd{pd}, \cmd{dv} & limits, integrals, partial/ordinary derivatives\\
+\cmd{prob}, \cmd{cond}, \cmd{ev}, \cmd{var}, \cmd{cov} & probability notation\\
+\end{tabularx}
+
+\sectiontitle{Good source habits}
+\begin{itemize}
+  \item Put one mathematical claim per paragraph. Start it with \key{;c}.
+  \item Use \cmd{align*} for multiple equalities; put `\&` before the alignment point and `\\` between lines.
+  \item Use \cmd{\textbackslash text\{...\}} inside math for words: \(x>0\ \text{if}\ x\ne0\).
+  \item Label important results: \cmd{\textbackslash label\{thm:name\}}; reference them with \cmd{\textbackslash cref\{thm:name\}}.
+  \item Keep scratch explanations in \cmd{\textbackslash textbf\{Claim.\}}, \cmd{\textbf\{Proof.\}}, or \cmd{\textbf\{Idea.\}} rather than burying them in comments.
+\end{itemize}
+
+\begin{tipbox}{Useful emergency commands}
+\begin{tabularx}{\linewidth}{@{}>{\ttfamily}p{0.48\linewidth}X@{}}
+\cmd{:VimtexCompile} & start/refresh compile\\
+\cmd{:VimtexView} & open the PDF\\
+\cmd{:VimtexErrors} & inspect errors\\
+\cmd{:VimtexTocToggle} & show/hide outline\\
+\cmd{:VimtexStop} & stop compilation\\
+\cmd{:VimtexInfo} & inspect project configuration\\
+\end{tabularx}
+\end{tipbox}
+
+\begin{tipbox}{Remember}
+If a shortcut is forgotten: press \key{Space} and wait for which-key/help prompts, or use \cmd{:h vimtex}.
+\end{tipbox}
+
+\end{multicols}
+
+\vfill
+\begin{center}\footnotesize\sffamily\textcolor{muted}{Designed for the existing Math 104/110/113-style template and VimTeX workflow.}\end{center}
+
+\end{document}
