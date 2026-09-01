@@ -22,9 +22,9 @@
 
 % ---------- Metadata ----------
 \newcommand{\studentname}{Keshav Ramamurthy}
-\newcommand{\coursename}{Math 118}
-\newcommand{\lecturenumber}{01}
-\newcommand{\lecturetitle}{Lecture 01}
+\newcommand{\coursename}{Math 113}
+\newcommand{\lecturenumber}{02}
+\newcommand{\lecturetitle}{Lecture 02}
 \newcommand{\lecturedate}{\today}
 
 % ---------- Reusable notation ----------
@@ -91,66 +91,10 @@
 
 \section{Main idea}
 \textit{Write the one-sentence point of today's lecture here.}
-Basic information about everything.
-\par Chapter 0 is preliminaries, inner product spaces
+
 \section{Definitions and notation}
-\begin{definition}[Previous Notes]
-    Recall in $\mathbb{C}$, $$z = r e^{i \theta} = r \left(\cos\theta + i \sin \theta\right)$$
-    Notice this makes multiplication pretty nice in $\mathbb{C}$, as angles combine
-    easily
-
-% Write the definition and one sentence explaining why it matters.
-\end{definition}
-\begin{definition}[Power Series of e (Taylor Series)]
-\label{def:label}
-For $z \in \mathbb{C}$, $e^z$ is defined by $$e^z = \sum_{n = 0}^{\infty}
-\frac{z^n}{n!}$$ 
-$$\sum_{n=0}^{\infty} \frac{(z+w)^n}{n!} = \sum_{n=0}^{\infty}\frac{1}{n!}\left(\sum_{k=0}^{n}\binom{n}{k}z^kw^{n-k}\right)$$
-The $n!$ cancel out and then you can rearrange into(NUMBERING THE LATTICE)
-$$\sum_{k=0}^{\infty}\sum_{n=k}^{\infty} \frac{1}{k!(n-k)! z^kw^{n-k}}$$
-Rearrange $$j = n-k \rightarrow \sum_{k=0}^{\infty}\sum_{j=0}^{\infty}\frac{1}{k!}z^k
-\frac{1}{j!}{w^{j}} = \left(\sum_{k=0}^{\infty}\frac{1}{k!}z^k\right)\left(\sum_{j=0}^{\infty}\frac{1}{j!}w^{j}\right)$$
-\end{definition}
-\begin{definition}[Derivation of De Moivre's in a different way]
-\label{def:label}
-If you look at $$e^{i\theta}=\sum_{n=0}^{\infty} \frac{(i \theta)^n}{n!} $$
-which is 
-$$\left(1 - \frac{\theta^2}{2!} + \frac{\theta^{4}}{4!} + ...\right) + i \left(\theta -
-\frac{\theta^3}{3!}+\frac{\theta^5}{5!} - ...\right) = \cos \theta + i \sin \theta$$
-\end{definition}
-\begin{definition}[Remember These Properties of Conjugation]
-\label{def:label}
-$$\overline{zw} = \overline{z}\cdot \overline{w}, \overline{\left(\frac{z}{w}\right)} =
-\frac{\overline{z}}{\overline{w}}$$
-If $$f(z) = \sum_{n=0}^{\infty} c_n (z-a)^n, c_n a \in \mathbb{R} $$
-then $$f(\overline{z}) = \overline{f(z)}$$
-\end{definition}
-
-\begin{definition}[Vector Space]
-\label{def:label}
-Vector space over a field like real or complex where you can perform addition and
-multiply by scalars, etc...
-\par $\mathbb{C}^{n}$ is basically a vector space over $\mathbb{R}$ of dimension 2n. (but
-only real operations)
-\par $\textbf{Infinite Dimensional Spaces}$ (like the set of all polynomials)
-\par For example, $l^2(\mathbb{N}) = \text{space of infinite sequences } (x_1, x_2, \cdots)$
-such that the sum $\sum_{n=1}^{\infty}|x_n|^2$ converges.
-\par For example, $$l^1(\mathbb{Z}) = \text{doubly infinite, summable sequences}
-\sum_{x=1}^{\infty} |x_i| < \infty, \text{ Show that } l^1(\mathbb{N}) \text{ is a
-subset of } l^2(\mathbb{N})$$
-\par \textbf{Proof: }
-If you look at some $x \in l^1(\mathbb{N})$, we have $\sum_{n=1}^{\infty} |x_i| $
-\par You can just look at the expansion of $C^2 =
-\sum_{a=1}^{\infty}|x_a|\sum_{b=1}^{\infty}|x_b|$ which is just the terms we want plus a lo t
-of extraneous absolute value terms bounding $\sum_{i=1}^{\infty}|x_i^2|$
-converges.
-\par For example, $$L'([a, b]) = f : [a, b] \rightarrow \mathbb{C}\text{ such that } {\int_{a}^{b}|f(x)|dx
-\text {converges }}$$ 
-\par One can basically show $L^2([a, b]) \le L'([a, b])$ like $f(x) =
-\frac{1}{\sqrt{x}}$ which is in $L'([0, 1])$ but not $L^2([0, 1])$
-\par For example, $L^4(\mathbb{R}^2)$ is a function $\mathbb{R}^2 \rightarrow
-\mathbb{C}$ such that $$\int_{-\infty}^{\infty}\infty_{-\infty}^{\infty}|f(x,y)|^4dx
-dy \text { converges} $$ 
+\begin{definition}[First definition]
+Write the definition and one sentence explaining why it matters.
 \end{definition}
 
 \section{Claims, theorems, and proof sketches}
