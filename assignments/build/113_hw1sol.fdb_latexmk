@@ -1,5 +1,5 @@
 # Fdb version 4
-["lualatex"] 1788242881.43605 "113_hw1sol.tex" "build/113_hw1sol.pdf" "113_hw1sol" 1788242882.68181 0
+["lualatex"] 1788284729.18717 "113_hw1sol.tex" "build/113_hw1sol.pdf" "113_hw1sol" 1788284730.2382 0
   "/Users/keshavramamurthy/Downloads/fa26_books/113_hw1.pdf" 1788073995.57219 135267 33da898858ec6dc8f57da0b5cad1180c ""
   "/Users/keshavramamurthy/Library/texlive/2025/texmf-var/luatex-cache/generic/fonts/otl/lmmono10-regular.luc" 1788126254.1357 81837 7091cab214959897276971ec5ae174a1 ""
   "/Users/keshavramamurthy/Library/texlive/2025/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-bold.luc" 1788124354.3771 128410 3f752579a721aabb697cb5411c2b5223 ""
@@ -185,9 +185,9 @@
   "/usr/local/texlive/2025/texmf-dist/tex/luatex/luaotfload/luaotfload.lua" 1740687098 13566 16df94dd2de231b2bca0aaa0190941fe ""
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1758495039 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/luahbtex/lualatex.fmt" 1741450571 5582742 9b17e6cd80d72c3778eef49dea7c0883 ""
-  "113_hw1sol.tex" 1788242880.93405 7086 b850d288fb9af03f46949b0c28d022e7 ""
-  "build/113_hw1sol.aux" 1788242882.5481 403 3df42d5c26483bb7a9ca4067a70e1231 "lualatex"
-  "build/113_hw1sol.out" 1788242882.54873 323 2c8d40366ef4295861059cd0599d787d "lualatex"
+  "113_hw1sol.tex" 1788284728.58585 7173 969435e11dc73391d582ece780c4aa6e ""
+  "build/113_hw1sol.aux" 1788284730.11922 403 badbd2f2fd67de5704837f073bca51d2 "lualatex"
+  "build/113_hw1sol.out" 1788284730.12306 323 2c8d40366ef4295861059cd0599d787d "lualatex"
   (generated)
   "build/113_hw1sol.aux"
   "build/113_hw1sol.log"

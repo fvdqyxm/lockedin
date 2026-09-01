@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.21.0 (TeX Live 2025)  (format=lualatex 2025.3.8)  31 AUG 2026 23:08
+This is LuaHBTeX, Version 1.21.0 (TeX Live 2025)  (format=lualatex 2025.3.8)  1 SEP 2026 10:45
  restricted system commands enabled.
  file:line:error style messages enabled.
 **113_hw1sol.tex
@@ -689,7 +689,9 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (
 
 [9]
 
-[10] (./build/113_hw1sol.aux)
+[10]
+
+[11] (./build/113_hw1sol.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -699,19 +701,19 @@ Package rerunfilecheck Info: File `113_hw1sol.out' has not changed.
 )
 
 Here is how much of LuaTeX's memory you used:
- 17902 strings out of 475506
+ 17903 strings out of 475506
  125240,953878 words of node,token memory allocated
  634 words of node memory still in use:
    7 hlist, 2 vlist, 2 rule, 1 local_par, 4 glue, 4 kern, 1 penalty, 1 margin_kern, 4 glyph, 18 attribute, 61 glue_spec, 18 attribute_list, 1 write nodes
-   avail lists: 2:316,3:118,4:34,5:216,6:42,7:2816,8:41,9:332,10:6,11:106
+   avail lists: 2:314,3:105,4:34,5:174,6:40,7:2691,8:41,9:322,10:6,11:126
  40552 multiletter control sequences out of 65536+600000
  51 fonts using 3578743 bytes
  79i,17n,89p,1006b,489s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmmono10-regular.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman12-bold.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on 113_hw1sol.pdf (10 pages, 196241 bytes).
+Output written on 113_hw1sol.pdf (11 pages, 196728 bytes).
 
-PDF statistics: 161 PDF objects out of 1000 (max. 8388607)
- 114 compressed objects within 2 object streams
- 24 named destinations out of 1000 (max. 131072)
+PDF statistics: 167 PDF objects out of 1000 (max. 8388607)
+ 119 compressed objects within 2 object streams
+ 25 named destinations out of 1000 (max. 131072)
  17 words of extra memory for PDF output out of 10000 (max. 100000000)
 

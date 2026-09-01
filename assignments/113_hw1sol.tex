@@ -130,12 +130,12 @@ $a \ne c$, so it is not associative.
 \begin{solution}
 % Write your proof or calculation here.
 We first find $\phi(a + b) = -(a + b) = -a - b = \phi(a) + \phi(b)$ which establishes
-$\phi$ as a homophorphism
+$\phi$ as a homomorphism
 \par To prove that the function $\phi(a) = -a$ is injective, we see that $$\phi(a) =
 \phi(b) \iff -a = -b \iff a = b$$
-\par To prove surjectivity, we see that $$\forall x \in \mathbb{R},  \phi(-x)\in \mathbb{Z} \text{ and } \phi(-x) = x$$ and if
-$x \in \mathbb{R} \iff -x \in \mathbb{R}$
-Thus, it satisfies the homophorphism condition, injectivity, surjectivity making it an
+\par To prove surjectivity, we see that $$\forall x \in \mathbb{Z},  \phi(-x)\in \mathbb{Z} \text{ and } \phi(-x) = x$$ and if
+$x \in \mathbb{Z} \iff -x \in \mathbb{Z}$
+Thus, it satisfies the homomorphism condition, injectivity, surjectivity making it an
 isomorphism
 \end{solution}
 \newpage \subsection*{Problem 7}
@@ -144,25 +144,25 @@ isomorphism
 \begin{solution}
 Suppose we have a binary structure $(S, *)$ and there is an isomorphism $\phi : S
 \rightarrow S' $ mapping $(S, *)$ to $(S', {*}^{'})$. %\par For sake of contradiction, let's assume that the binary operator
-${*}^{'}$ does not have associativity.
-\par Subject to the conditions of homophorism, we have that $\phi(a * b) = \phi(a) *^{'}
+% ${*}^{'}$ does not have associativity.
+\par Subject to the conditions of homomorphism, we have that $\phi(a * b) = \phi(a) *^{'}
 \phi(b)$, and along with this, we're given the condition of associativity and
-homophorphism for $(S, *)$
+homomorphism for $(S, *)$
 which yields $$(a * b) * c = a * (b * c) \rightarrow \phi((a * b) * c) = \phi(a * (b *
 c))$$
 The LHS is 
 $$\phi((a * b) * c) = ((\phi(a) * \phi(b)) *^{'} \phi(c) $$
 and the RHS is 
 $$\phi(a * (b * c)) = \phi(a) *^{'} (\phi(b) *  \phi(c))$$
- We now apply the homophorphism again on two variables, namely $\phi(a * b) = \phi(a)
+ We now apply the homomorphism again on two variables, namely $\phi(a * b) = \phi(a)
 *^{'} \phi(b)$
 \par Substituting yields 
 $$(\phi(a) *^{'}\phi(b))*^{'} \phi(c)= \phi(a) *^{'} (\phi(b) *^{'} \phi(c))$$
 which are equal, because the original LHS and RHS were identical
-\par To conclude, the last property of isomorphism is surjectivity, and so for $$x', y', z'
-\in S^{'}, \exists x, y, z \in S^{'} : \phi(x) = x', \phi(y) = y', \phi(z) = z'$$
-and thus, finally we have 
-$$(x' *^{'} y') *^{'} z' = x' *^{'} (y *^{'} z) \qed$$
+\par To conclude, the last property of isomorphism is surjectivity, and so notice for arbitrary $$a', b', c'
+\in S^{'}, \exists a, b, c \in S : \phi(a) = a', \phi(b) = b', \phi(c) = c'$$
+and so we can substitute the equation above using this mapping.
+$$(x' *^{'} y') *^{'} z' = x' *^{'} (y^{'} *^{'} z^{'}) \text{ proving associativity} \qed$$
 % Write your proof or calculation here.
 \end{solution}
 \section{Practice problems}
