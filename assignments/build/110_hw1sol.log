@@ -1,8 +1,8 @@
-This is LuaHBTeX, Version 1.21.0 (TeX Live 2025)  (format=lualatex 2025.3.8)  30 AUG 2026 20:33
+This is LuaHBTeX, Version 1.21.0 (TeX Live 2025)  (format=lualatex 2025.3.8)  31 AUG 2026 19:54
  restricted system commands enabled.
  file:line:error style messages enabled.
-**104_hw1sol.tex
-(./104_hw1sol.tex
+**110_hw1sol.tex
+(./110_hw1sol.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
 Lua module: luaotfload 2024-12-03 v3.29 Lua based OpenType font support
@@ -446,8 +446,8 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 \Hy@SectionHShift=\skip77
 )
 \c@problem=\count321
- (./build/104_hw1sol.aux)
-\openout1 = 104_hw1sol.aux
+ (./build/110_hw1sol.aux)
+\openout1 = 110_hw1sol.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 66.
 LaTeX Font Info:    ... okay on input line 66.
@@ -608,94 +608,74 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
 Package hyperref Info: Link coloring OFF on input line 66.
- (./build/104_hw1sol.out) (./build/104_hw1sol.out)
+ (./build/110_hw1sol.out) (./build/110_hw1sol.out)
 \@outlinefile=\write4
 
-\openout4 = 104_hw1sol.out
-</Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf, id=4, 614.295pt x 794.97pt>
-File: /Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf Graphic file (type pdf)
-<use /Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf>
-Package luatex.def Info: /Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf  used on input line 68.
+\openout4 = 110_hw1sol.out
+</Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf, id=4, 614.295pt x 794.97pt>
+File: /Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf Graphic file (type pdf)
+<use /Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf>
+Package luatex.def Info: /Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf  used on input line 68.
 (luatex.def)             Requested size: 614.29349pt x 794.96806pt.
-</Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf, id=6, page=1, 614.295pt x 794.97pt>
-File: /Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf Graphic file (type pdf)
-<use /Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf, page 1>
-Package luatex.def Info: /Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf , page1 used on input line 68.
+</Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf, id=6, page=1, 614.295pt x 794.97pt>
+File: /Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf Graphic file (type pdf)
+<use /Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf, page 1>
+Package luatex.def Info: /Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf , page1 used on input line 68.
 (luatex.def)             Requested size: 614.29349pt x 794.96806pt.
-File: /Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf Graphic file (type pdf)
-<use /Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf, page 1>
-Package luatex.def Info: /Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf , page1 used on input line 68.
+File: /Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf Graphic file (type pdf)
+<use /Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf, page 1>
+Package luatex.def Info: /Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf , page1 used on input line 68.
 (luatex.def)             Requested size: 614.58406pt x 795.3441pt.
 
 
 [1{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
-File: /Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf Graphic file (type pdf)
-<use /Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf, page 1>
-Package luatex.def Info: /Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf , page1 used on input line 68.
+File: /Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf Graphic file (type pdf)
+<use /Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf, page 1>
+Package luatex.def Info: /Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf , page1 used on input line 68.
 (luatex.def)             Requested size: 614.58406pt x 795.3441pt.
-File: /Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf Graphic file (type pdf)
-<use /Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf, page 1>
-Package luatex.def Info: /Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf , page1 used on input line 68.
+File: /Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf Graphic file (type pdf)
+<use /Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf, page 1>
+Package luatex.def Info: /Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf , page1 used on input line 68.
 (luatex.def)             Requested size: 614.58406pt x 795.3441pt.
 
 
-File: /Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf Graphic file (type pdf)
-<use /Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf, page 1>
-Package luatex.def Info: /Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf , page1 used on input line 68.
+File: /Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf Graphic file (type pdf)
+<use /Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf, page 1>
+Package luatex.def Info: /Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf , page1 used on input line 68.
 (luatex.def)             Requested size: 614.58406pt x 795.3441pt.
 [2
 
-</Users/keshavramamurthy/Downloads/fa26_books/104_hw1.pdf>]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 72.
- (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-) (/usr/local/texlive/2025/texmf-dist/tex/latex/microtype/mt-msa.cfg
-File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 72.
- (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) (/usr/local/texlive/2025/texmf-dist/tex/latex/microtype/mt-msb.cfg
-File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-) (/usr/local/texlive/2025/texmf-dist/tex/latex/microtype/mt-cmr.cfg
-File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
-)
+</Users/keshavramamurthy/Downloads/fa26_books/Math110.Fall2026.Homework.pdf>]
 
 [3
 
 ]
 
-[4]
-
-[5]
-
-[6]
-
-[7] (./build/104_hw1sol.aux)
+[4] (./build/110_hw1sol.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-Package rerunfilecheck Info: File `104_hw1sol.out' has not changed.
+Package rerunfilecheck Info: File `110_hw1sol.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 )
 
 Here is how much of LuaTeX's memory you used:
- 17837 strings out of 475506
+ 17639 strings out of 475506
  125240,953878 words of node,token memory allocated
- 692 words of node memory still in use:
-   8 hlist, 2 vlist, 2 rule, 1 local_par, 5 glue, 5 kern, 1 penalty, 3 glyph, 30 attribute, 61 glue_spec, 30 attribute_list, 1 write nodes
-   avail lists: 2:364,3:159,4:35,5:231,6:44,7:3035,8:56,9:546,10:6,11:110
- 40497 multiletter control sequences out of 65536+600000
- 47 fonts using 3057591 bytes
+ 598 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 1 local_par, 5 glue, 5 kern, 1 penalty, 3 glyph, 10 attribute, 60 glue_spec, 10 attribute_list, 1 write nodes
+   avail lists: 2:284,3:76,4:24,5:82,6:37,7:634,9:188,10:6,11:38
+ 40325 multiletter control sequences out of 65536+600000
+ 18 fonts using 1118495 bytes
  79i,17n,89p,1006b,489s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman12-bold.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on 104_hw1sol.pdf (7 pages, 199581 bytes).
+</usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman12-bold.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf>
+Output written on 110_hw1sol.pdf (4 pages, 142780 bytes).
 
-PDF statistics: 149 PDF objects out of 1000 (max. 8388607)
- 99 compressed objects within 1 object stream
- 14 named destinations out of 1000 (max. 131072)
+PDF statistics: 108 PDF objects out of 1000 (max. 8388607)
+ 69 compressed objects within 1 object stream
+ 13 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 100000000)
 
