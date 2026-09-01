@@ -4,6 +4,7 @@ set -Eeuo pipefail
 REPO_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 ASSIGNMENTS_DIR="$REPO_ROOT/assignments"
 COMMIT_MESSAGE="${1:-Sync assignment PDFs}"
+BRANCH="$(git -C "$REPO_ROOT" branch --show-current)"
 
 if [[ ! -d "$ASSIGNMENTS_DIR" ]]; then
   printf 'Missing assignments directory: %s\n' "$ASSIGNMENTS_DIR" >&2
@@ -22,4 +23,5 @@ if git -C "$REPO_ROOT" diff --cached --quiet; then
 fi
 
 git -C "$REPO_ROOT" commit -m "$COMMIT_MESSAGE"
+git -C "$REPO_ROOT" pull --rebase origin "$BRANCH"
 git -C "$REPO_ROOT" push origin HEAD
