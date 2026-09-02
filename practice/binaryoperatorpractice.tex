@@ -1,0 +1,147 @@
+% !TEX program = lualatex
+\documentclass[11pt]{article}
+
+% A clean, Unicode-friendly homework and course-notes template.
+\usepackage{fontspec}
+\usepackage{microtype}
+\usepackage{mathtools, amssymb, amsfonts, amsthm, bm}
+\usepackage{enumitem}
+\usepackage{booktabs, array, xcolor}
+\usepackage{geometry, fancyhdr, setspace}
+\usepackage{listings}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+% ---------- Page and paragraph rhythm ----------
+\geometry{margin=1in, headheight=14pt}
+\setstretch{1.15}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em plus 0.12em minus 0.08em}
+\setlength{\abovedisplayskip}{0.85em plus 0.2em minus 0.1em}
+\setlength{\belowdisplayskip}{0.85em plus 0.2em minus 0.1em}
+\setlength{\abovedisplayshortskip}{0.55em plus 0.15em minus 0.08em}
+\setlength{\belowdisplayshortskip}{0.55em plus 0.15em minus 0.08em}
+\allowdisplaybreaks[3]
+\setlist{leftmargin=*, topsep=0.35em, itemsep=0.15em, parsep=0pt, partopsep=0pt}
+
+% ---------- Document metadata ----------
+\newcommand{\studentname}{Your Name}
+\newcommand{\coursename}{Course Name}
+\newcommand{\assignment}{Homework / Notes}
+\newcommand{\term}{Fall 2026}
+
+% ---------- Numbered mathematical statements ----------
+\newtheoremstyle{notestyle}
+  {0.9em}{0.9em}{\itshape}{}{}{\bfseries}{.5em}{}
+\theoremstyle{notestyle}
+\newtheorem{problem}{Problem}[section]
+\newtheorem{exercise}[problem]{Exercise}
+\newtheorem{theorem}[problem]{Theorem}
+\newtheorem{lemma}[problem]{Lemma}
+\newtheorem{proposition}[problem]{Proposition}
+\newtheorem{corollary}[problem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[problem]{Definition}
+\newtheorem{example}[problem]{Example}
+\newtheorem{remark}[problem]{Remark}
+
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+\newenvironment{answer}{\begin{proof}[Answer]}{\end{proof}}
+\renewcommand{\qedsymbol}{$\square$}
+
+% ---------- Core notation ----------
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\given}{\,\middle\vert\,}
+\newcommand{\indep}{\perp\!\!\!\perp}
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\deriv}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+\newcommand{\pderiv}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\lto}{\longrightarrow}
+\newcommand{\st}{\text{ such that }}
+
+% ---------- Algebra, linear algebra, and analysis operators ----------
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ker}{ker}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\spec}{spec}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\newcommand{\Fourier}{\mathcal{F}}
+\newcommand{\Laplace}{\mathcal{L}}
+
+% ---------- Code ----------
+\definecolor{codegray}{gray}{0.94}
+\lstset{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{codegray},
+  frame=single,
+  breaklines=true,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false
+}
+
+% ---------- Header ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\coursename}
+\fancyhead[C]{\assignment}
+\fancyhead[R]{\studentname}
+\fancyfoot[C]{\thepage}
+
+\title{\assignment}
+\author{\studentname}
+\date{\term}
+
+\begin{document}
+\maketitle
+
+% Suggested workflow:
+%   \begin{problem}[A short title]
+%   State the problem here.
+%   \end{problem}
+%   \begin{solution}
+%   Write the proof or calculation here.
+%   \end{solution}
+
+\section{Notes}
+\begin{problem}[State whether the following are commutative]
+\label{prob:label}
+$*$ defined on $\mathbb{Z} $ by letting $(a * b) = a - b.$
+We first see that $a * b$ takes a unique value, which is obvious. \par Then,
+we see that $a, b \in \mathbb{Z} \rightarrow a - b \in \mathbb{Z}$, so it is k
+\par 
+\end{problem}
+\end{document}
+
