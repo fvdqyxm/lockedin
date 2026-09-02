@@ -89,10 +89,41 @@
 \begin{document}
 \maketitle
 
-\section{Main idea}
-\textit{Write the one-sentence point of today's lecture here.}
-
-\section{Definitions and notation}
+\section{Markov Chain}
+Markov Chain: Current state is enough information 
+$$\mathbb{P}(X_{t+1}=a_{t+1} | X_{t} = a_t, X_{t-1} = a_{t-1}, \cdots, X_{0} = a_0) =
+P(X_{t + 1} = a_{t + 1} | X_t = a_{t})$$
+Random walk with absorbing states is not too hard, just solve lots of equations
+\subsection{Reflecting Random walk on a line graph}
+Suppose we have a random walk $X_t$ takes values on $S = {0, 1, 2, \cdots, N}.$ such that $$P(i, i + 1) = p,
+P(i, i - 1) = 1 - p, P(N, N - 1) = P(0, 1) = 1 \text{ and } 0 < p < 1$$
+In this case, at the previously absorbing states 0 and 1, they "reflect" so we don't get
+stuck and with probability 1 we always return to any state
+\subsection{Infinite Line Graph}
+Consider the previous example except $S = \mathbb{Z}.$ \par Let $X_t$ describe the
+position at time t of the random walk.
+\par In this random walk, do we visit any state infinitely many times?
+% \begin{answer}
+\par \textbf{Answer:} Yes, if and only if $p = 1 - p = \frac{1}{2}$ and the walk is symmetric.
+\par \textbf{Extension: } How does this work in $\mathbb{Z}^2$ or $\mathbb{Z}^3$ ??
+\par \textbf{Answer to Extension: } $\mathbb{Z}^2$ if symmetric, $\mathbb{Z}^3$ hell
+no!(transient random walk)
+\subsection{Random walk over a circle}
+The transition matrix is 
+\[
+P=
+\begin{pmatrix}
+0 & p & 0 & \cdots & 0 & q\\
+q & 0 & p & \ddots & \vdots & 0\\
+0 & q & 0 & \ddots & 0 & \vdots\\
+\vdots & \ddots & \ddots & \ddots & p & 0\\
+0 & \cdots & 0 & q & 0 & p\\
+p & 0 & \cdots & 0 & q & 0
+\end{pmatrix}_{(N+1)\times(N+1)},
+\qquad p+q=1.
+\]
+% \end{answer}
+\section{definitions and notation}
 \begin{definition}[First definition]
 Write the definition and one sentence explaining why it matters.
 \end{definition}
