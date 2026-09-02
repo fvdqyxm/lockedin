@@ -128,6 +128,22 @@ How do we verify this?
     \par The real step is finding $N$ with equation $$\left|
     \frac{3n+1}{7n+4}-\frac{3}{7}\right| < \epsilon$$
 \end{proof}
+\begin{theorem}[Uniqueness of the limit]
+\label{thm:label}
+"Any sequence has a unique limit"
+\par Let $(s_n)\subset R.$ If $\lim_{n\rightarrow\infty}=s\in\mathbb{R}\text{ and }
+\lim_{n\rightarrow \infty}{s_n}=t\in \mathbb{R} \text{ then } s = t$
+\end{theorem}
+\begin{proof}
+    Establish
+    $$\lim s_n = s\rightarrow \exists N_1 > 0 \text{ such that } n > N_1 \implies |s_n -
+    s| < \frac{\epsilon}{2}$$
+    \par Establish again $$\lim s_n = s\rightarrow \exists N_2 > 0 \text{ such that } n
+    > N_2 \implies |s_n - s| < \frac{\epsilon}{2}$$ 
+    Then $$\left|s-t\right| \le |s - s_n| + |s_n - t| <
+    \frac{\epsilon}{2}+\frac{\epsilon}{2}  =\epsilon$$
+    Take $N = \max {N_1, N_2}$ Note that $N > N_1$ and $N > N_2$
+\end{proof}
 \section{Main idea}
 \textit{Write the one-sentence point of today's lecture here.}
 
