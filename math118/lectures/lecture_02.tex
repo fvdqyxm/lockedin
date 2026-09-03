@@ -241,11 +241,25 @@ In physics,usually the innter product is defined to be by linear in y.
 \begin{theorem}[Cauchy Schwartz]
 \label{thm:label}
 Prove that $$|\langle u, v\rangle | \le ||u ||  \cdot ||v||$$
-
+Show cauchy, pythag, corrolaries
 \end{theorem}
-\begin{proof}
+% \begin{proof}
     
-\end{proof}
+% \end{proof}
+\begin{definition}[Orthogonality]
+\label{def:label}
+Vectors $e_1, e_2, \cdots, e_n$ are orthogonal if $\langle e_j, e_k \rangle = S_{jk} =
+\begin{cases}
+1, & j=k,\\
+0, & j\ne k.
+\end{cases}$
+Recall that for an orthonormal basis, $e_1, e_2, \cdots, e_n$
+is that you can compute the coefficients with an inner product 
+$$x = \sum_{j=1}^{n} \alpha_j e_j = \langle \sum_{j} \alpha_j e_j, e_k \rangle =
+\sum_{j} \alpha_j \langle e_j, e_k \rangle$$
+You can do Gram - Schmidt orthogonalization to create a new orthonormal basis given
+linearly independent vectors, and the orthogonal vectors will have the same span.
+\end{definition}
 \section{Definitions and notation}
 \begin{definition}[First definition]
 Write the definition and one sentence explaining why it matters.
