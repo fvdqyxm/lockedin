@@ -5,6 +5,7 @@ LaTeX lecture notes and homework for Fall 2026. Click any PDF link below to read
 ## Notes index
 
 ### Math 104 — Real Analysis
+
 | Lecture | PDF |
 |---------|-----|
 | Lecture 01 | [PDF](math104/lectures/lecture_01.pdf) |
@@ -14,6 +15,8 @@ LaTeX lecture notes and homework for Fall 2026. Click any PDF link below to read
 | HW 1 | [PDF](math104/homework/hw01.pdf) | [.tex](math104/homework/hw01_sol.tex) / [PDF](math104/homework/hw01_sol.pdf) |
 
 ### Math 110 — Abstract Linear Algebra
+
+
 | Homework | Assignment | My solutions |
 |----------|------------|--------------|
 | HW 1 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw01_sol.tex) / [PDF](math110/homework/hw01_sol.pdf) |
@@ -31,6 +34,7 @@ LaTeX lecture notes and homework for Fall 2026. Click any PDF link below to read
 | HW 13 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw13_sol.tex) / [PDF](math110/homework/hw13_sol.pdf) |
 
 ### Math 113 — Abstract Algebra
+
 | Lecture | PDF |
 |---------|-----|
 | Lecture 02 | [PDF](math113/lectures/lecture_02.pdf) |
@@ -40,6 +44,7 @@ LaTeX lecture notes and homework for Fall 2026. Click any PDF link below to read
 | HW 1 | [PDF](math113/homework/hw01.pdf) | [.tex](math113/homework/hw01_sol.tex) / [PDF](math113/homework/hw01_sol.pdf) |
 
 ### Math 118 — Fourier Analysis
+
 | Lecture | PDF |
 |---------|-----|
 | Lecture 01 | [PDF](math118/lectures/lecture_01.pdf) |
@@ -50,6 +55,7 @@ LaTeX lecture notes and homework for Fall 2026. Click any PDF link below to read
 | HW 1 | [PDF](math118/homework/hw01.pdf) | [.tex](math118/homework/hw01_sol.tex) / [PDF](math118/homework/hw01_sol.pdf) |
 
 ### Stat 150 — Stochastic Processes
+
 | Lecture | PDF |
 |---------|-----|
 | Lecture 01 | [PDF](stat150/lectures/lecture_01.pdf) |
