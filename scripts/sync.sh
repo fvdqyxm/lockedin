@@ -10,7 +10,7 @@ set -Eeuo pipefail
 #   ./sync.sh "Math 118 lec 3"   # custom commit message
 #   ./sync.sh --all              # force-rebuild everything, then commit & push
 
-REPO_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 COMMIT_MESSAGE="Build and sync notes"
 FORCE_ALL=0
 

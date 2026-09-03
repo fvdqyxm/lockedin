@@ -1,53 +1,89 @@
 # fa26_books
 
-LaTeX lecture notes and homework for Fall 2026.
+LaTeX lecture notes and homework for Fall 2026. Click any PDF link below to read it right in your browser.
 
-## Courses
+## Notes index
 
-| Folder        | Course          | Textbook (repo root)                  |
-|---------------|-----------------|---------------------------------------|
-| `math104/`    | Math 104 — Real Analysis            | `math104_textbook.pdf`                |
-| `math110/`    | Math 110 — Abstract Linear Algebra  | `math110_textbook.pdf`                |
-| `math113/`    | Math 113 — Abstract Algebra         | `math113_textbook.pdf`                |
-| `math118/`    | Math 118 — Fourier Analysis         | `math118_textbook.pdf`                |
-| `stat150/`    | Stat 150 — Stochastic Processes     | `stat150_textbook_essentials.pdf`, `stat150_textbook_other.pdf` |
+### Math 104 — Real Analysis
+| Lecture | PDF |
+|---------|-----|
+| Lecture 01 | [PDF](math104/lectures/lecture_01.pdf) |
+
+| Homework | Assignment | My solutions |
+|----------|------------|--------------|
+| HW 1 | [PDF](math104/homework/hw01.pdf) | [.tex](math104/homework/hw01_sol.tex) / [PDF](math104/homework/hw01_sol.pdf) |
+
+### Math 110 — Abstract Linear Algebra
+| Homework | Assignment | My solutions |
+|----------|------------|--------------|
+| HW 1 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw01_sol.tex) / [PDF](math110/homework/hw01_sol.pdf) |
+| HW 2 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw02_sol.tex) / [PDF](math110/homework/hw02_sol.pdf) |
+| HW 3 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw03_sol.tex) / [PDF](math110/homework/hw03_sol.pdf) |
+| HW 4 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw04_sol.tex) / [PDF](math110/homework/hw04_sol.pdf) |
+| HW 5 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw05_sol.tex) / [PDF](math110/homework/hw05_sol.pdf) |
+| HW 6 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw06_sol.tex) / [PDF](math110/homework/hw06_sol.pdf) |
+| HW 7 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw07_sol.tex) / [PDF](math110/homework/hw07_sol.pdf) |
+| HW 8 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw08_sol.tex) / [PDF](math110/homework/hw08_sol.pdf) |
+| HW 9 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw09_sol.tex) / [PDF](math110/homework/hw09_sol.pdf) |
+| HW 10 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw10_sol.tex) / [PDF](math110/homework/hw10_sol.pdf) |
+| HW 11 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw11_sol.tex) / [PDF](math110/homework/hw11_sol.pdf) |
+| HW 12 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw12_sol.tex) / [PDF](math110/homework/hw12_sol.pdf) |
+| HW 13 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw13_sol.tex) / [PDF](math110/homework/hw13_sol.pdf) |
+
+### Math 113 — Abstract Algebra
+| Lecture | PDF |
+|---------|-----|
+| Lecture 02 | [PDF](math113/lectures/lecture_02.pdf) |
+
+| Homework | Assignment | My solutions |
+|----------|------------|--------------|
+| HW 1 | [PDF](math113/homework/hw01.pdf) | [.tex](math113/homework/hw01_sol.tex) / [PDF](math113/homework/hw01_sol.pdf) |
+
+### Math 118 — Fourier Analysis
+| Lecture | PDF |
+|---------|-----|
+| Lecture 01 | [PDF](math118/lectures/lecture_01.pdf) |
+| Lecture 02 | [PDF](math118/lectures/lecture_02.pdf) |
+
+| Homework | Assignment | My solutions |
+|----------|------------|--------------|
+| HW 1 | [PDF](math118/homework/hw01.pdf) | [.tex](math118/homework/hw01_sol.tex) / [PDF](math118/homework/hw01_sol.pdf) |
+
+### Stat 150 — Stochastic Processes
+| Lecture | PDF |
+|---------|-----|
+| Lecture 01 | [PDF](stat150/lectures/lecture_01.pdf) |
+
+---
 
 ## Layout
 
 ```
 fa26_books/
-├── math*_textbook.pdf        # reference textbooks live at the root
+├── math*_textbook.pdf        # textbooks at the root
 ├── math104/
-│   ├── lectures/             # lecture_NN.tex  + compiled lecture_NN.pdf
-│   └── homework/             # hwNN.pdf (assignment) + hwNN_sol.tex / hwNN_sol.pdf (my solutions)
-├── math110/  ... math113/  math118/  stat150/   # same shape
-├── reference/                # LaTeX/vimtex cheatsheet
+│   ├── lectures/             # lecture_NN.tex + lecture_NN.pdf
+│   └── homework/             # hwNN.pdf (assignment) + hwNN_sol.tex / .pdf (my solutions)
+├── math110/  math113/  math118/  stat150/   # same shape
 ├── practice/                 # extra practice problems
-├── new_lecture_note.sh       # scaffold a new lecture note
-└── sync.sh                   # build all notes + commit & push
+├── reference/                # LaTeX/vimtex cheatsheet
+└── scripts/
+    ├── new_lecture_note.sh   # scaffold a new lecture note
+    └── sync.sh               # build changed notes + commit & push
 ```
-
-Each course folder is split into `lectures/` and `homework/`. My written work is
-the `.tex` source plus the compiled `.pdf` next to it; professor-given assignment
-PDFs sit alongside the solutions in `homework/`.
 
 ## Workflow
 
-Create a new lecture note (course may be a number, slug, or spelled out):
-
+Create a new lecture note:
 ```bash
-./new_lecture_note.sh 118 3          # -> math118/lectures/lecture_03.tex
-./new_lecture_note.sh Math110 4      # -> math110/lectures/lecture_04.tex
-./new_lecture_note.sh stat150 2      # -> stat150/lectures/lecture_02.tex
+./scripts/new_lecture_note.sh 118 3          # → math118/lectures/lecture_03.tex
+./scripts/new_lecture_note.sh Math110 4      # → math110/lectures/lecture_04.tex
+./scripts/new_lecture_note.sh stat150 2      # → stat150/lectures/lecture_02.tex
 ```
 
-Build every `.tex` into a PDF (in place) and push to GitHub:
-
+Build changed notes and push:
 ```bash
-./sync.sh                           # default commit message
-./sync.sh "Math 118 lecture 3"      # custom commit message
+./scripts/sync.sh                    # builds only changed .tex, then commits & pushes
+./scripts/sync.sh "Math 118 lec 3"   # custom commit message
+./scripts/sync.sh --all              # force-rebuild everything
 ```
-
-`sync.sh` runs `latexmk -lualatex` on each source so the PDF lands next to the
-`.tex`, stages everything, commits, and pushes. Intermediate build files
-(`.aux`, `.log`, ...) are gitignored.
