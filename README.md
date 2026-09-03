@@ -38,6 +38,7 @@ LaTeX lecture notes and homework for Fall 2026. Click any PDF link below to read
 | Lecture | PDF |
 |---------|-----|
 | Lecture 02 | [PDF](math113/lectures/lecture_02.pdf) |
+| Lecture 03 | [PDF](math113/lectures/lecture_03.pdf) |
 
 | Homework | Assignment | My solutions |
 |----------|------------|--------------|
