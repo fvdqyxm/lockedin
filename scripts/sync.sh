@@ -120,13 +120,12 @@ generate_readme() {
         local base="${sol_tex##*/}"          # hw01_sol.tex
         local num="${base#hw}"
         num="${num%%_sol.tex}"                # 01
-        local n="${num#0}"; [[ "$n" != "0" ]] && n="${num#"${num%%[!0]*}"}"; [[ -z "$n" ]] && n="$num"
+        local n=$((10#$num))                  # 1, 2, ... 13
         local sol_pdf="${base%.tex}.pdf"      # hw01_sol.pdf
         local assign_pdf="hw${num}.pdf"
-        local assign_link="[PDF]($folder/homework/$assign_pdf)"
-        [[ -f "$course_dir/homework/$assign_pdf" ]] || assign_link="[packet]($folder/homework/hw_packet.pdf)"
-        [[ -f "$course_dir/homework/hw_packet.pdf" ]] && [[ ! -f "$course_dir/homework/$assign_pdf" ]] && assign_link="[packet]($folder/homework/hw_packet.pdf)"
-        [[ -f "$course_dir/homework/$assign_pdf" ]] || [[ -f "$course_dir/homework/hw_packet.pdf" ]] || assign_link="—"
+        local assign_link="—"
+        [[ -f "$course_dir/homework/$assign_pdf" ]] && assign_link="[PDF]($folder/homework/$assign_pdf)"
+        [[ -f "$course_dir/homework/hw_packet.pdf" ]] && assign_link="[packet]($folder/homework/hw_packet.pdf)"
         printf '| HW %s | %s | [.tex](%s/homework/%s) / [PDF](%s/homework/%s) |\n' \
           "$n" "$assign_link" "$folder" "$base" "$folder" "$sol_pdf"
       done < <(find "$course_dir/homework" -maxdepth 1 -name 'hw*_sol.tex' 2>/dev/null | sort)
