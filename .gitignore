@@ -1,11 +1,19 @@
 # macOS metadata
 .DS_Store
 
-# Generated LaTeX build output
-assignments/build/
+# LaTeX build artifacts (anywhere in the repo)
 *.aux
 *.fdb_latexmk
 *.fls
 *.log
 *.out
 *.synctex.gz
+*.synctex(busy)
+*.toc
+*.bbl
+*.bcf
+*.run.xml
+*.nav
+*.snm
+*.vrb
+**/build/
