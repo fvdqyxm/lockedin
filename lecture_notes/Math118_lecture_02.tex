@@ -215,8 +215,13 @@ We have $$B_1 \subseteq B_2 \subseteq B_{\infty}$$
 \par if $x \in B$, then $||x||_1 \le 1$ so $$||x||_2 \le ||x||_1 \le 1$$
 \end{remark}
 \section{Inner Products}
-An inner product is a mapping $\langle ., . \rangle : V x V \rightarrow \mathbb{C}$ such
-that 
+% An inner product is a mapping $\langle ., . \rangle : V x V \rightarrow \mathbb{C}$ such
+% that 
+An inner product is a mapping
+\(
+\langle \cdot,\cdot\rangle : V\times V \to \mathbb{C}
+\)
+such that
 \begin{enumerate}
     \item $\langle u, u\rangle > u \text{ if } x \ne 0$
     \item $\langle v, u\rangle = \overline{\langle u, v \rangle}$
@@ -230,6 +235,9 @@ that
         w, v\rangle$
 \end{enumerate}
 Geometrically: $$\langle u, v \rangle = ||u|| \cdot ||v|| \cdot \cos \theta$$
+$$|| \alpha u || = \sqrt{\langle \alpha u, \alpha u \rangle } = \sqrt{\alpha
+\overline{\alpha} \langle u, u\rangle} = |\alpha|\sqrt{\langle u, u \rangle}$$
+In physics,usually the innter product is defined to be by linear in y. 
 \section{Definitions and notation}
 \begin{definition}[First definition]
 Write the definition and one sentence explaining why it matters.
