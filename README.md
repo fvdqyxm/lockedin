@@ -60,6 +60,7 @@ LaTeX lecture notes and homework for Fall 2026. Click any PDF link below to read
 | Lecture | PDF |
 |---------|-----|
 | Lecture 01 | [PDF](stat150/lectures/lecture_01.pdf) |
+| Lecture 02 | [PDF](stat150/lectures/lecture_02.pdf) |
 
 ---
 
