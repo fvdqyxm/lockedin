@@ -136,6 +136,8 @@ In Insert mode:
 \begin{tabularx}{\linewidth}{@{}>{\ttfamily}p{0.23\linewidth}X@{}}
 \cmd{prb} & problem plus solution\\
 \cmd{prob} & numbered problem\\
+\cmd{hw} & \cmd{\textbackslash exercise\{\#.\#\}} header + solution (solutions.tex)\\
+\cmd{chb} & chapter banner (solutions.tex)\\
 \cmd{sol}, \cmd{ans} & solution or answer block\\
 \cmd{defn} & definition\\
 \cmd{thm}, \cmd{lem}, \cmd{prop}, \cmd{cor} & theorem, lemma, proposition, corollary\\
@@ -156,11 +158,12 @@ In Insert mode:
 \cmd{abs}, \cmd{norm}, \cmd{ip}, \cmd{set} & absolute value, norm, inner product, set\\
 \cmd{span}, \cmd{rank}, \cmd{ker}, \cmd{im} & common linear/algebra operators\\
 \cmd{lim}, \cmd{int}, \cmd{pd}, \cmd{dv} & limits, integrals, partial/ordinary derivatives\\
-\cmd{prob}, \cmd{cond}, \cmd{ev}, \cmd{var}, \cmd{cov} & probability notation\\
+\cmd{pset}, \cmd{cond}, \cmd{ev}, \cmd{var}, \cmd{cov} & probability notation\\
 \end{tabularx}
 
 \sectiontitle{Good source habits}
 \begin{itemize}
+  \item Each course folder keeps one growing \cmd{solutions.tex} with a banner per textbook chapter. Jump to the chapter (Toc: \key{Space lt}), type \cmd{hw}, press \key{Tab}, and write.
   \item Put one mathematical claim per paragraph. Start it with \key{;c}.
   \item Use \cmd{align*} for multiple equalities; put `\&` before the alignment point and `\\` between lines.
   \item Use \cmd{\textbackslash text\{...\}} inside math for words: \(x>0\ \text{if}\ x\ne0\).

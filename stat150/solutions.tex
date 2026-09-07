@@ -1,0 +1,287 @@
+% !TEX program = lualatex
+% ============================================================
+%  Stat 150 — Comprehensive Solutions
+%  Primary: Durrett, Essentials of Stochastic Processes (3rd ed.)
+%  Secondary: Pinsky & Karlin, An Introduction to
+%             Stochastic Modeling (4th ed.)
+%  Keshav Ramamurthy — Fall 2026
+% ------------------------------------------------------------
+%  HOW TO USE (one growing document, one banner per chapter,
+%  two parts: Part I Durrett, Part II Pinsky--Karlin)
+%
+%    Find the chapter banner below and type directly under it:
+%
+%        \exercise{1.4.2}
+%        \begin{solution}
+%          your write-up ...
+%        \end{solution}
+%
+%    Restate a problem first (optional, renders a gold box):
+%
+%        \begin{problem}[short title]
+%          statement ...
+%        \end{problem}
+%
+%    Structure inside a solution:  claim / idea / proofsketch
+%    environments, plus defn, thm, lem, prop, cor, ex, rem
+%    (numbered within the current chapter).
+%    Cross-reference:   \exref{1.4.2}
+% ============================================================
+\documentclass[11pt]{article}
+
+\usepackage{fontspec}
+\usepackage{microtype}
+\usepackage{mathtools,amssymb,amsfonts,amsthm,bm}
+\usepackage{enumitem}
+\usepackage{booktabs,array,xcolor}
+\usepackage{geometry,fancyhdr,setspace}
+\usepackage{etoolbox}
+\usepackage[most]{tcolorbox}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+% ---------- Page and paragraph rhythm (matches lecture template) ----------
+\geometry{margin=1in,headheight=15pt}
+\setstretch{1.12}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em plus 0.12em minus 0.08em}
+\setlength{\abovedisplayskip}{0.8em plus 0.2em minus 0.1em}
+\setlength{\belowdisplayskip}{0.8em plus 0.2em minus 0.1em}
+\allowdisplaybreaks[3]
+\setlist{leftmargin=*,topsep=0.35em,itemsep=0.15em,parsep=0pt}
+
+% ---------- Palette (matches reference cheatsheet) ----------
+\definecolor{ink}{HTML}{1E293B}
+\definecolor{navy}{HTML}{183B56}
+\definecolor{paperblue}{HTML}{E8F1F8}
+\definecolor{gold}{HTML}{FFF3CD}
+\definecolor{mint}{HTML}{E8F5E9}
+\definecolor{muted}{HTML}{52606D}
+\definecolor{rule}{HTML}{C9D5DF}
+\color{ink}
+
+% ---------- Metadata ----------
+\newcommand{\studentname}{Keshav Ramamurthy}
+\newcommand{\coursename}{Stat 150}
+\newcommand{\courselongname}{Stochastic Processes}
+\newcommand{\textbookname}{Durrett, \emph{Essentials of Stochastic Processes} (3rd ed.)}
+
+% ---------- Core notation (same as ~/.config/nvim/textemplate.tex) ----------
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\given}{\,\middle\vert\,}
+\newcommand{\indep}{\perp\!\!\!\perp}
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\deriv}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+\newcommand{\pderiv}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\lto}{\longrightarrow}
+\newcommand{\st}{\text{ such that }}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ker}{ker}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\spec}{spec}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+% ---------- Course-specific notation (stochastic processes) ----------
+\DeclareMathOperator{\Expo}{Exp}                    % exponential distribution
+\DeclareMathOperator{\Poi}{Poisson}                % Poisson distribution
+\DeclareMathOperator{\Bin}{Binomial}
+\DeclareMathOperator{\Geom}{Geometric}
+\newcommand{\Ex}[1]{\E\!\left[#1\right]}           % E[ ... ]
+\newcommand{\Prb}[1]{\Prob\!\left(#1\right)}       % P( ... )
+\newcommand{\trans}[1]{p_{#1}}                     % transition probability p_ij
+\newcommand{\rate}[1]{\lambda_{#1}}                % generator rate
+
+% ---------- Theorem-like environments (numbered by chapter) ----------
+\newcounter{chap}
+\newtheoremstyle{notestyle}{0.7em}{0.7em}{\itshape}{}{}{\bfseries}{.5em}{}
+\theoremstyle{notestyle}
+\newtheorem{theorem}{Theorem}[chap]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+% ---------- Problem machinery ----------
+% Chapter banner: \chapterbanner{1}{Markov Chains}{Durrett, \S 1.1--1.13}
+\newtcolorbox{chapterbox}[2]{%
+  enhanced,
+  colback=paperblue, colframe=navy, boxrule=0.7pt, arc=2.5pt,
+  left=10pt, right=10pt, top=12pt, bottom=8pt,
+  boxed title style={colback=navy, colframe=navy, arc=2pt, boxrule=0pt,
+    left=8pt, right=8pt, top=3pt, bottom=3pt},
+  attach boxed title to top left={yshift=-2.4mm, xshift=5mm},
+  title={\sffamily\bfseries\color{white}\large Chapter #1\quad #2}}
+\newcommand{\chapterbanner}[3]{%
+  \clearpage
+  \setcounter{chap}{#1}%
+  \setcounter{theorem}{0}%
+  \phantomsection
+  \addcontentsline{toc}{section}{Chapter #1\quad #2}%
+  \begin{chapterbox}{#1}{#2}
+    {\small\sffamily\color{muted}#3\par}
+  \end{chapterbox}
+  \medskip\nopagebreak}
+
+% Exercise header: \exercise{1.4.2}  →  bold header + thin rule, then type
+\newcommand{\exercise}[1]{%
+  \par\goodbreak\medskip\noindent
+  {\sffamily\bfseries\color{navy}Exercise #1}%
+  \par\nobreak\vspace{1.5pt}
+  {\color{rule}\hrule height 0.7pt}\par\nobreak\smallskip\nopagebreak}
+
+% Cross-reference an exercise: \exref{1.4.2}
+\newcommand{\exref}[1]{\textsf{\textbf{Exercise~#1}}}
+
+% Problem statement box: \begin{problem}[short title] ... \end{problem}
+\newtcolorbox{problem}[1][]{%
+  enhanced, breakable,
+  colback=gold!50, colframe=rule, boxrule=0.5pt, arc=2pt,
+  colbacktitle=gold!50, coltitle=navy,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  before skip=8pt, after skip=8pt,
+  title={\sffamily\bfseries Problem\ifstrempty{#1}{}{\ ---\ #1}}}
+
+% Solution / answer blocks (qed square at the end)
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+\newenvironment{answer}{\begin{proof}[Answer]}{\end{proof}}
+\renewcommand{\qedsymbol}{$\square$}
+
+% Quick structure inside solutions
+\newenvironment{claim}{\par\smallskip\noindent\textbf{Claim.}\ }{\par\smallskip}
+\newenvironment{idea}{\par\smallskip\noindent\textit{Idea.}\ }{\par\smallskip}
+\newenvironment{proofsketch}{\par\smallskip\noindent\textbf{Proof sketch.}\ }{\par\smallskip}
+
+% ---------- Header ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\coursename}
+\fancyhead[C]{\courselongname\ — solutions}
+\fancyhead[R]{\studentname}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+
+% ---------- Title ----------
+\begin{center}
+  {\Large\sffamily\bfseries\color{navy}\coursename\ -- \courselongname}\\[3pt]
+  {\sffamily\color{muted} Comprehensive exercise solutions}\\[3pt]
+  {\small\sffamily\color{muted}\textbookname\quad\textbullet\quad Fall 2026\quad\textbullet\quad \studentname}
+\end{center}
+\medskip
+{\color{rule}\hrule height 0.8pt}
+\bigskip
+
+{\small
+\begin{tcolorbox}[colback=paperblue, colframe=rule, boxrule=0.4pt, arc=2pt,
+  left=7pt, right=7pt, top=5pt, bottom=5pt,
+  title={\sffamily\bfseries\color{navy} Adding a solution},
+  colbacktitle=paperblue]
+\sffamily To record a solved exercise, type under its chapter banner:
+\begin{center}
+\texttt{\textbackslash exercise\{1.4.2\}\ \ \textbackslash begin\{solution\}\ ...\ \textbackslash end\{solution\}}
+\end{center}
+Restate the problem first with \texttt{\textbackslash begin\{problem\}[title]...\textbackslash end\{problem\}};
+structure proofs with \texttt{claim}, \texttt{idea}, \texttt{proofsketch}.
+\end{tcolorbox}
+}
+
+\medskip
+\tableofcontents
+
+% =====================================================================
+%  PART I — DURRETT, ESSENTIALS OF STOCHASTIC PROCESSES (3rd ed.)
+% =====================================================================
+\part*{Part I\quad Durrett, \emph{Essentials of Stochastic Processes}}
+\addcontentsline{toc}{part}{Part I — Durrett, Essentials of Stochastic Processes}
+
+% ---------------------------------------------------------------------
+\chapterbanner{1}{Markov Chains}{Durrett, \S 1.1--1.13:\ definitions, multistep transitions, classification of states, stationary distributions, limit behavior, exit distributions and times}
+
+% \exercise{1.1.1}
+% \begin{solution}
+%   ...
+% \end{solution}
+
+% ---------------------------------------------------------------------
+\chapterbanner{2}{Poisson Processes}{Durrett, \S 2.1--2.6:\ exponential distribution, constructing the process, compound Poisson, thinning/superposition/conditioning}
+
+% ---------------------------------------------------------------------
+\chapterbanner{3}{Renewal Processes}{Durrett, \S 3.1--3.5:\ laws of large numbers, queueing applications, age and residual life}
+
+% ---------------------------------------------------------------------
+\chapterbanner{4}{Continuous Time Markov Chains}{Durrett, \S 4.1--4.8:\ generators, transition probabilities, limiting behavior, exit times, Markovian queues}
+
+% ---------------------------------------------------------------------
+\chapterbanner{5}{Martingales}{Durrett, \S 5.1--5.5:\ conditional expectation, gambling strategies and stopping times, applications}
+
+% ---------------------------------------------------------------------
+\chapterbanner{6}{Mathematical Finance}{Durrett, \S 6.1--6.3:\ binomial model, Black--Scholes, options}
+
+% =====================================================================
+%  PART II — PINSKY & KARLIN, AN INTRODUCTION TO STOCHASTIC MODELING
+% =====================================================================
+\part*{Part II\quad Pinsky \& Karlin, \emph{An Introduction to Stochastic Modeling}}
+\addcontentsline{toc}{part}{Part II — Pinsky \& Karlin, An Introduction to Stochastic Modeling}
+
+% ---------------------------------------------------------------------
+\chapterbanner{1}{Introduction}{Pinsky \& Karlin:\ stochastic modeling, probability review}
+
+% ---------------------------------------------------------------------
+\chapterbanner{2}{Conditional Expectation and Related Topics}{Pinsky \& Karlin:\ conditioning, generating functions, martingales}
+
+% ---------------------------------------------------------------------
+\chapterbanner{3}{Markov Chains}{Pinsky \& Karlin:\ discrete-time chains, first-step analysis}
+
+% ---------------------------------------------------------------------
+\chapterbanner{4}{The Long Run Behavior of Markov Chains}{Pinsky \& Karlin:\ stationary and limiting distributions, absorption}
+
+% ---------------------------------------------------------------------
+\chapterbanner{5}{Poisson Processes}{Pinsky \& Karlin:\ the Poisson process and its transformations}
+
+% ---------------------------------------------------------------------
+\chapterbanner{6}{Continuous-Time Markov Chains}{Pinsky \& Karlin:\ birth--death processes, generators, branching processes}
+
+% ---------------------------------------------------------------------
+\chapterbanner{7}{Renewal Processes}{Pinsky \& Karlin:\ renewal theory and applications}
+
+% ---------------------------------------------------------------------
+\chapterbanner{8}{Brownian Motion and Gaussian Processes}{Pinsky \& Karlin:\ Brownian motion, drift, variants}
+
+% ---------------------------------------------------------------------
+\chapterbanner{9}{Queueing Systems}{Pinsky \& Karlin:\ Markovian queues, Little's formula, networks}
+
+\end{document}

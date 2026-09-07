@@ -1,97 +1,107 @@
 # fa26_books
 
-LaTeX lecture notes and homework for Fall 2026. Click any PDF link below to read it right in your browser.
+LaTeX lecture notes, homework write-ups, and comprehensive solutions for Fall 2026.
+Only completed work is indexed; every PDF opens right in your browser.
 
-## Notes index
+**Jump to:** [Math 104](#math104) · [Math 113](#math113) · [Stat 150](#stat150)
 
-### Math 104 — Real Analysis
+**4** lecture notes · **2** homework write-ups
 
-| Lecture | PDF |
-|---------|-----|
-| Lecture 01 | [PDF](math104/lectures/lecture_01.pdf) |
+<a id="math104"></a>
 
-| Homework | Assignment | My solutions |
-|----------|------------|--------------|
-| HW 1 | [PDF](math104/homework/hw01.pdf) | [.tex](math104/homework/hw01_sol.tex) / [PDF](math104/homework/hw01_sol.pdf) |
+## Math 104 — Real Analysis
 
-### Math 110 — Abstract Linear Algebra
+Textbook: Ross, *Elementary Analysis* (2nd ed.)
 
+### Homework
 
-| Homework | Assignment | My solutions |
-|----------|------------|--------------|
-| HW 1 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw01_sol.tex) / [PDF](math110/homework/hw01_sol.pdf) |
-| HW 2 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw02_sol.tex) / [PDF](math110/homework/hw02_sol.pdf) |
-| HW 3 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw03_sol.tex) / [PDF](math110/homework/hw03_sol.pdf) |
-| HW 4 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw04_sol.tex) / [PDF](math110/homework/hw04_sol.pdf) |
-| HW 5 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw05_sol.tex) / [PDF](math110/homework/hw05_sol.pdf) |
-| HW 6 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw06_sol.tex) / [PDF](math110/homework/hw06_sol.pdf) |
-| HW 7 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw07_sol.tex) / [PDF](math110/homework/hw07_sol.pdf) |
-| HW 8 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw08_sol.tex) / [PDF](math110/homework/hw08_sol.pdf) |
-| HW 9 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw09_sol.tex) / [PDF](math110/homework/hw09_sol.pdf) |
-| HW 10 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw10_sol.tex) / [PDF](math110/homework/hw10_sol.pdf) |
-| HW 11 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw11_sol.tex) / [PDF](math110/homework/hw11_sol.pdf) |
-| HW 12 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw12_sol.tex) / [PDF](math110/homework/hw12_sol.pdf) |
-| HW 13 | [packet](math110/homework/hw_packet.pdf) | [.tex](math110/homework/hw13_sol.tex) / [PDF](math110/homework/hw13_sol.pdf) |
+| HW | Assignment | My solutions |
+|----|------------|--------------|
+| 1 | [assignment](math104/homework/hw01.pdf) | [tex](math104/homework/hw01_sol.tex) · [pdf](math104/homework/hw01_sol.pdf) |
 
-### Math 113 — Abstract Algebra
+<a id="math113"></a>
 
-| Lecture | PDF |
-|---------|-----|
-| Lecture 02 | [PDF](math113/lectures/lecture_02.pdf) |
-| Lecture 03 | [PDF](math113/lectures/lecture_03.pdf) |
+## Math 113 — Abstract Algebra
 
-| Homework | Assignment | My solutions |
-|----------|------------|--------------|
-| HW 1 | [PDF](math113/homework/hw01.pdf) | [.tex](math113/homework/hw01_sol.tex) / [PDF](math113/homework/hw01_sol.pdf) |
+Textbook: Fraleigh, *A First Course in Abstract Algebra* (7th ed.)
 
-### Math 118 — Fourier Analysis
+### Lectures
 
-| Lecture | PDF |
-|---------|-----|
-| Lecture 01 | [PDF](math118/lectures/lecture_01.pdf) |
-| Lecture 02 | [PDF](math118/lectures/lecture_02.pdf) |
+| # | Notes |
+|---|-------|
+| 02 | [PDF](math113/lectures/lecture_02.pdf) · [tex](math113/lectures/lecture_02.tex) |
+| 03 | [PDF](math113/lectures/lecture_03.pdf) · [tex](math113/lectures/lecture_03.tex) |
 
-| Homework | Assignment | My solutions |
-|----------|------------|--------------|
-| HW 1 | [PDF](math118/homework/hw01.pdf) | [.tex](math118/homework/hw01_sol.tex) / [PDF](math118/homework/hw01_sol.pdf) |
+### Homework
 
-### Stat 150 — Stochastic Processes
+| HW | Assignment | My solutions |
+|----|------------|--------------|
+| 1 | [assignment](math113/homework/hw01.pdf) | [tex](math113/homework/hw01_sol.tex) · [pdf](math113/homework/hw01_sol.pdf) |
 
-| Lecture | PDF |
-|---------|-----|
-| Lecture 01 | [PDF](stat150/lectures/lecture_01.pdf) |
-| Lecture 02 | [PDF](stat150/lectures/lecture_02.pdf) |
+<a id="stat150"></a>
+
+## Stat 150 — Stochastic Processes
+
+Textbook: Durrett, *Essentials of Stochastic Processes* (3rd ed.)
+
+### Lectures
+
+| # | Notes |
+|---|-------|
+| 01 | [PDF](stat150/lectures/lecture_01.pdf) · [tex](stat150/lectures/lecture_01.tex) |
+| 02 | [PDF](stat150/lectures/lecture_02.pdf) · [tex](stat150/lectures/lecture_02.tex) |
 
 ---
 
-## Layout
+<details>
+<summary>Repository layout</summary>
 
-```
+```text
 fa26_books/
-├── math*_textbook.pdf        # textbooks at the root
-├── math104/
-│   ├── lectures/             # lecture_NN.tex + lecture_NN.pdf
-│   └── homework/             # hwNN.pdf (assignment) + hwNN_sol.tex / .pdf (my solutions)
-├── math110/  math113/  math118/  stat150/   # same shape
-├── practice/                 # extra practice problems
-├── reference/                # LaTeX/vimtex cheatsheet
+├── *_textbook*.pdf          # course textbooks at the root
+├── math104/                 # one folder per course, e.g. math104
+│   ├── lectures/            #   lecture_NN.tex + lecture_NN.pdf
+│   ├── homework/            #   hwNN.pdf (assignment) + hwNN_sol.tex / .pdf
+│   └── solutions.tex        #   comprehensive per-chapter exercise solutions
+├── math110/ math113/ math118/ stat150/    # same shape
+├── practice/                # extra practice problems
+├── reference/               # LaTeX/vimtex cheatsheet
 └── scripts/
-    ├── new_lecture_note.sh   # scaffold a new lecture note
-    └── sync.sh               # build changed notes + commit & push
+    ├── new_lecture_note.sh  # scaffold a new lecture note
+    └── sync.sh              # build changed notes + commit & push
 ```
 
-## Workflow
+</details>
+
+<details>
+<summary>Workflow — scripts and solutions syntax</summary>
 
 Create a new lecture note:
+
 ```bash
 ./scripts/new_lecture_note.sh 118 3          # → math118/lectures/lecture_03.tex
 ./scripts/new_lecture_note.sh Math110 4      # → math110/lectures/lecture_04.tex
 ./scripts/new_lecture_note.sh stat150 2      # → stat150/lectures/lecture_02.tex
 ```
 
+Add a solved textbook exercise (per-course `solutions.tex`):
+
+```latex
+\exercise{8.6}          % header under the right chapter banner
+\begin{solution}
+  ...your write-up...
+\end{solution}
+```
+
+A file appears in the index above only once it has real content —
+scaffolds never show up.
+
 Build changed notes and push:
+
 ```bash
 ./scripts/sync.sh                    # builds only changed .tex, then commits & pushes
 ./scripts/sync.sh "Math 118 lec 3"   # custom commit message
 ./scripts/sync.sh --all              # force-rebuild everything
 ```
+
+</details>

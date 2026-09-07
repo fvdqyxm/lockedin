@@ -1,0 +1,270 @@
+% !TEX program = lualatex
+% ============================================================
+%  Math 110 — Comprehensive Solutions
+%  Axler, Linear Algebra Done Right (4th ed.)
+%  Keshav Ramamurthy — Fall 2026
+% ------------------------------------------------------------
+%  HOW TO USE (one growing document, one banner per chapter)
+%
+%    Find the chapter banner below and type directly under it:
+%
+%        \exercise{2A.5}
+%        \begin{solution}
+%          your write-up ...
+%        \end{solution}
+%
+%    Restate a problem first (optional, renders a gold box):
+%
+%        \begin{problem}[short title]
+%          statement ...
+%        \end{problem}
+%
+%    Structure inside a solution:  claim / idea / proofsketch
+%    environments, plus defn, thm, lem, prop, cor, ex, rem
+%    (numbered within the current chapter).
+%    Cross-reference:   \exref{2A.5}
+% ============================================================
+\documentclass[11pt]{article}
+
+\usepackage{fontspec}
+\usepackage{microtype}
+\usepackage{mathtools,amssymb,amsfonts,amsthm,bm}
+\usepackage{enumitem}
+\usepackage{booktabs,array,xcolor}
+\usepackage{geometry,fancyhdr,setspace}
+\usepackage{etoolbox}
+\usepackage[most]{tcolorbox}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+% ---------- Page and paragraph rhythm (matches lecture template) ----------
+\geometry{margin=1in,headheight=15pt}
+\setstretch{1.12}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em plus 0.12em minus 0.08em}
+\setlength{\abovedisplayskip}{0.8em plus 0.2em minus 0.1em}
+\setlength{\belowdisplayskip}{0.8em plus 0.2em minus 0.1em}
+\allowdisplaybreaks[3]
+\setlist{leftmargin=*,topsep=0.35em,itemsep=0.15em,parsep=0pt}
+
+% ---------- Palette (matches reference cheatsheet) ----------
+\definecolor{ink}{HTML}{1E293B}
+\definecolor{navy}{HTML}{183B56}
+\definecolor{paperblue}{HTML}{E8F1F8}
+\definecolor{gold}{HTML}{FFF3CD}
+\definecolor{mint}{HTML}{E8F5E9}
+\definecolor{muted}{HTML}{52606D}
+\definecolor{rule}{HTML}{C9D5DF}
+\color{ink}
+
+% ---------- Metadata ----------
+\newcommand{\studentname}{Keshav Ramamurthy}
+\newcommand{\coursename}{Math 110}
+\newcommand{\courselongname}{Abstract Linear Algebra}
+\newcommand{\textbookname}{Axler, \emph{Linear Algebra Done Right} (4th ed.)}
+
+% ---------- Core notation (same as ~/.config/nvim/textemplate.tex) ----------
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\given}{\,\middle\vert\,}
+\newcommand{\indep}{\perp\!\!\!\perp}
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\deriv}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+\newcommand{\pderiv}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\lto}{\longrightarrow}
+\newcommand{\st}{\text{ such that }}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ker}{ker}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\spec}{spec}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+% ---------- Course-specific notation (Axler) ----------
+\DeclareMathOperator{\range}{range}
+\newcommand{\id}{\mathrm{I}}                        % identity operator
+\newcommand{\adj}[1]{#1^*}                          % adjoint of an operator
+\newcommand{\lin}[2]{\mathcal{L}(#1,#2)}            % L(V, W)
+\newcommand{\linself}[1]{\mathcal{L}(#1)}           % L(V)
+\newcommand{\eig}[1]{\lambda_{#1}}                  % eigenvalue subscript
+
+% ---------- Theorem-like environments (numbered by chapter) ----------
+\newcounter{chap}
+\newtheoremstyle{notestyle}{0.7em}{0.7em}{\itshape}{}{}{\bfseries}{.5em}{}
+\theoremstyle{notestyle}
+\newtheorem{theorem}{Theorem}[chap]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+% ---------- Problem machinery ----------
+% Chapter banner: \chapterbanner{2}{Finite-Dimensional Vector Spaces}{Axler, 2A--2C}
+\newtcolorbox{chapterbox}[2]{%
+  enhanced,
+  colback=paperblue, colframe=navy, boxrule=0.7pt, arc=2.5pt,
+  left=10pt, right=10pt, top=12pt, bottom=8pt,
+  boxed title style={colback=navy, colframe=navy, arc=2pt, boxrule=0pt,
+    left=8pt, right=8pt, top=3pt, bottom=3pt},
+  attach boxed title to top left={yshift=-2.4mm, xshift=5mm},
+  title={\sffamily\bfseries\color{white}\large Chapter #1\quad #2}}
+\newcommand{\chapterbanner}[3]{%
+  \clearpage
+  \setcounter{chap}{#1}%
+  \setcounter{theorem}{0}%
+  \phantomsection
+  \addcontentsline{toc}{section}{Chapter #1\quad #2}%
+  \begin{chapterbox}{#1}{#2}
+    {\small\sffamily\color{muted}#3\par}
+  \end{chapterbox}
+  \medskip\nopagebreak}
+
+% Exercise header: \exercise{2A.5}  →  bold header + thin rule, then type
+\newcommand{\exercise}[1]{%
+  \par\goodbreak\medskip\noindent
+  {\sffamily\bfseries\color{navy}Exercise #1}%
+  \par\nobreak\vspace{1.5pt}
+  {\color{rule}\hrule height 0.7pt}\par\nobreak\smallskip\nopagebreak}
+
+% Cross-reference an exercise: \exref{2A.5}
+\newcommand{\exref}[1]{\textsf{\textbf{Exercise~#1}}}
+
+% Problem statement box: \begin{problem}[short title] ... \end{problem}
+\newtcolorbox{problem}[1][]{%
+  enhanced, breakable,
+  colback=gold!50, colframe=rule, boxrule=0.5pt, arc=2pt,
+  colbacktitle=gold!50, coltitle=navy,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  before skip=8pt, after skip=8pt,
+  title={\sffamily\bfseries Problem\ifstrempty{#1}{}{\ ---\ #1}}}
+
+% Solution / answer blocks (qed square at the end)
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+\newenvironment{answer}{\begin{proof}[Answer]}{\end{proof}}
+\renewcommand{\qedsymbol}{$\square$}
+
+% Quick structure inside solutions
+\newenvironment{claim}{\par\smallskip\noindent\textbf{Claim.}\ }{\par\smallskip}
+\newenvironment{idea}{\par\smallskip\noindent\textit{Idea.}\ }{\par\smallskip}
+\newenvironment{proofsketch}{\par\smallskip\noindent\textbf{Proof sketch.}\ }{\par\smallskip}
+
+% ---------- Header ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\coursename}
+\fancyhead[C]{\courselongname\ — solutions}
+\fancyhead[R]{\studentname}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+
+% ---------- Title ----------
+\begin{center}
+  {\Large\sffamily\bfseries\color{navy}\coursename\ -- \courselongname}\\[3pt]
+  {\sffamily\color{muted} Comprehensive exercise solutions}\\[3pt]
+  {\small\sffamily\color{muted}\textbookname\quad\textbullet\quad Fall 2026\quad\textbullet\quad \studentname}
+\end{center}
+\medskip
+{\color{rule}\hrule height 0.8pt}
+\bigskip
+
+{\small
+\begin{tcolorbox}[colback=paperblue, colframe=rule, boxrule=0.4pt, arc=2pt,
+  left=7pt, right=7pt, top=5pt, bottom=5pt,
+  title={\sffamily\bfseries\color{navy} Adding a solution},
+  colbacktitle=paperblue]
+\sffamily To record a solved exercise, type under its chapter banner:
+\begin{center}
+\texttt{\textbackslash exercise\{2A.5\}\ \ \textbackslash begin\{solution\}\ ...\ \textbackslash end\{solution\}}
+\end{center}
+Restate the problem first with \texttt{\textbackslash begin\{problem\}[title]...\textbackslash end\{problem\}};
+structure proofs with \texttt{claim}, \texttt{idea}, \texttt{proofsketch}.
+\end{tcolorbox}
+}
+
+\medskip
+\tableofcontents
+
+% =====================================================================
+%  CHAPTER 1 — VECTOR SPACES
+% =====================================================================
+\chapterbanner{1}{Vector Spaces}{Axler, 1A--1C:\ $\R^n$ and $\C^n$; definition of vector space; subspaces}
+
+% \exercise{1A.1}
+% \begin{solution}
+%   ...
+% \end{solution}
+
+% =====================================================================
+%  CHAPTER 2 — FINITE-DIMENSIONAL VECTOR SPACES
+% =====================================================================
+\chapterbanner{2}{Finite-Dimensional Vector Spaces}{Axler, 2A--2C:\ span and linear independence; bases; dimension}
+
+% =====================================================================
+%  CHAPTER 3 — LINEAR MAPS
+% =====================================================================
+\chapterbanner{3}{Linear Maps}{Axler, 3A--3F:\ the vector space of linear maps; null spaces and ranges; matrices; invertibility; products and quotients; duality}
+
+% =====================================================================
+%  CHAPTER 4 — POLYNOMIALS
+% =====================================================================
+\chapterbanner{4}{Polynomials}{Axler:\ zeros, division algorithm, factorization over $\C$ and $\R$}
+
+% =====================================================================
+%  CHAPTER 5 — EIGENVALUES AND EIGENVECTORS
+% =====================================================================
+\chapterbanner{5}{Eigenvalues and Eigenvectors}{Axler, 5A--5E:\ invariant subspaces; minimal polynomial; upper-triangular matrices; diagonalizable operators; commuting operators}
+
+% =====================================================================
+%  CHAPTER 6 — INNER PRODUCT SPACES
+% =====================================================================
+\chapterbanner{6}{Inner Product Spaces}{Axler, 6A--6C:\ inner products and norms; orthonormal bases and Gram--Schmidt; orthogonal complements and minimization}
+
+% =====================================================================
+%  CHAPTER 7 — OPERATORS ON INNER PRODUCT SPACES
+% =====================================================================
+\chapterbanner{7}{Operators on Inner Product Spaces}{Axler, 7A--7F:\ self-adjoint and normal operators; spectral theorem; positive operators; isometries and unitary operators; SVD}
+
+% =====================================================================
+%  CHAPTER 8 — OPERATORS ON COMPLEX VECTOR SPACES
+% =====================================================================
+\chapterbanner{8}{Operators on Complex Vector Spaces}{Axler, 8A--8D:\ generalized eigenvectors and nilpotent operators; generalized eigenspace decomposition; consequences; trace}
+
+% =====================================================================
+%  CHAPTER 9 — MULTILINEAR ALGEBRA AND DETERMINANTS
+% =====================================================================
+\chapterbanner{9}{Multilinear Algebra and Determinants}{Axler, 9A--9D:\ bilinear and quadratic forms; alternating multilinear forms; determinants; tensor products}
+
+\end{document}
