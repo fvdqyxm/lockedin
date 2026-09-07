@@ -5,7 +5,7 @@ Only completed work is indexed; every PDF opens right in your browser.
 
 **Jump to:** [Math 104](#math104) · [Math 113](#math113) · [Stat 150](#stat150)
 
-**4** lecture notes · **2** homework write-ups
+**4** lecture notes · **3** homework write-ups
 
 <a id="math104"></a>
 
@@ -37,6 +37,7 @@ Textbook: Fraleigh, *A First Course in Abstract Algebra* (7th ed.)
 | HW | Assignment | My solutions |
 |----|------------|--------------|
 | 1 | [assignment](math113/homework/hw01.pdf) | [tex](math113/homework/hw01_sol.tex) · [pdf](math113/homework/hw01_sol.pdf) |
+| 2 | — | [tex](math113/homework/hw02_sol.tex) · [pdf](math113/homework/hw02_sol.pdf) |
 
 <a id="stat150"></a>
 
@@ -68,6 +69,7 @@ fa26_books/
 ├── reference/               # LaTeX/vimtex cheatsheet
 └── scripts/
     ├── new_lecture_note.sh  # scaffold a new lecture note
+    ├── new_homework.sh      # scaffold a homework solutions file
     └── sync.sh              # build changed notes + commit & push
 ```
 
@@ -82,6 +84,15 @@ Create a new lecture note:
 ./scripts/new_lecture_note.sh 118 3          # → math118/lectures/lecture_03.tex
 ./scripts/new_lecture_note.sh Math110 4      # → math110/lectures/lecture_04.tex
 ./scripts/new_lecture_note.sh stat150 2      # → stat150/lectures/lecture_02.tex
+```
+
+Create a homework solutions file (problem count auto-detected from the
+assignment PDF; a pasted list becomes the problem headers):
+
+```bash
+./scripts/new_homework.sh 104 2              # → math104/homework/hw02_sol.tex
+./scripts/new_homework.sh 113 4 -            # paste "1. Fraleigh Exercise 4.6" ... then Ctrl-D
+./scripts/new_homework.sh Math110 14 6       # force 6 conventional problem slots
 ```
 
 Add a solved textbook exercise (per-course `solutions.tex`):

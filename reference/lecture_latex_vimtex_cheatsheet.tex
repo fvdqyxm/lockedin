@@ -106,7 +106,7 @@ Type notes with snippets and the short formatting triggers. Let the 650 ms save 
 \begin{enumerate}[label=\textcolor{navy}{\arabic*.},leftmargin=1.5em]
   \item Open or create a `.tex` file. A new file receives your template automatically.
   \item Type a trigger such as \cmd{defn}, \cmd{thm}, \cmd{proof}, \cmd{al}, or \cmd{eq}; expand it with your completion key (usually \key{Tab}).
-  \item Use \key{;c} for a fresh bold Claim paragraph, \key{;p} for Proof, and \key{;r} for Remark.
+  \item Use \key{;c} for a fresh italic Claim paragraph, \key{;p} for Proof, and \key{;r} for Remark. The \cmd{claim} snippet adds a Claim plus a matched proof in one go.
   \item Press \key{Space la} at a natural pause. If something breaks, press \key{Space le}.
 \end{enumerate}
 
@@ -119,9 +119,9 @@ In Insert mode:
 \begin{tabularx}{\linewidth}{@{}>{\ttfamily\bfseries}p{0.18\linewidth}X@{}}
 \key{;b} & inserts \cmd{\textbackslash textbf\{\}} and places the cursor inside.\\
 \key{;i} & inserts \cmd{\textbackslash emph\{\}} and places the cursor inside.\\
-\key{;c} & starts a new paragraph labeled \textbf{Claim.}\\
-\key{;p} & starts a new paragraph labeled \textbf{Proof.}\\
-\key{;r} & starts a new paragraph labeled \textbf{Remark.}\\
+\key{;c} & starts a new paragraph labeled \textit{Claim.}\\
+\key{;p} & starts a new paragraph labeled \textit{Proof.}\\
+\key{;r} & starts a new paragraph labeled \textit{Remark.}\\
 \key{\textbackslash(} & inserts \cmd{\textbackslash(\textbackslash)} with the cursor inside.\\
 \key{\textbackslash[} & inserts \cmd{\textbackslash[\textbackslash]} with the cursor inside.\\
 \end{tabularx}
@@ -137,8 +137,10 @@ In Insert mode:
 \cmd{prb} & problem plus solution\\
 \cmd{prob} & numbered problem\\
 \cmd{hw} & \cmd{\textbackslash exercise\{\#.\#\}} header + solution (solutions.tex)\\
+\cmd{hwp} & auto-numbered \cmd{Problem N} header + solution (homework files)\\
 \cmd{chb} & chapter banner (solutions.tex)\\
 \cmd{sol}, \cmd{ans} & solution or answer block\\
+\cmd{claim} & claim + proof pair (italic labels, auto \cmd{\textbackslash qed})\\
 \cmd{defn} & definition\\
 \cmd{thm}, \cmd{lem}, \cmd{prop}, \cmd{cor} & theorem, lemma, proposition, corollary\\
 \cmd{ex}, \cmd{rem}, \cmd{proof} & example, remark, proof\\
