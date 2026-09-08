@@ -219,7 +219,16 @@ structure proofs with \texttt{claim}, \texttt{idea}, \texttt{proofsketch}.
 %  CHAPTER 1 — INTRODUCTION
 % =====================================================================
 \chapterbanner{1}{Introduction}{Ross, \S\S 1--6:\ natural, rational, and real numbers; the completeness axiom}
-
+\begin{example}[1.1]
+\label{ex:label}
+We proceed via induction.
+Let $a_n = \sum_{i=1}^{n} i^2$.\par  Then $a_1 = 1 = \frac{1}{6}(1)(2)(3)$, so the base case
+    holds.
+    \par Then, we proceed via induction. Suppose $a_i = \frac{1}{6}i(i + 1) (2i + 1)$
+    for $i \in \{1, 2, 3, 4, \cdots, k\}.$ 
+    \par We will show that this implies that $a_{k +
+    1} = frac{1}{6}(k + 1)(k + 2)(2k + 3)$
+\end{example}
 % \exercise{1.1}
 % \begin{solution}
 %   ...

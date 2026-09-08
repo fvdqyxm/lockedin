@@ -3,9 +3,9 @@
 LaTeX lecture notes, homework write-ups, and comprehensive solutions for Fall 2026.
 Only completed work is indexed; every PDF opens right in your browser.
 
-**Jump to:** [Math 104](#math104) · [Math 113](#math113) · [Stat 150](#stat150)
+**Jump to:** [Math 104](#math104) · [Math 113](#math113) · [Math 118](#math118) · [Stat 150](#stat150)
 
-**4** lecture notes · **3** homework write-ups
+**5** lecture notes · **3** homework write-ups
 
 <a id="math104"></a>
 
@@ -38,6 +38,18 @@ Textbook: Fraleigh, *A First Course in Abstract Algebra* (7th ed.)
 |----|------------|--------------|
 | 1 | [assignment](math113/homework/hw01.pdf) | [tex](math113/homework/hw01_sol.tex) · [pdf](math113/homework/hw01_sol.pdf) |
 | 2 | — | [tex](math113/homework/hw02_sol.tex) · [pdf](math113/homework/hw02_sol.pdf) |
+
+<a id="math118"></a>
+
+## Math 118 — Fourier Analysis
+
+Textbook: Boggess & Narcowich, *A First Course in Wavelets with Fourier Analysis* (2nd ed.)
+
+### Lectures
+
+| # | Notes |
+|---|-------|
+| 04 | [PDF](math118/lectures/lecture_04.pdf) · [tex](math118/lectures/lecture_04.tex) |
 
 <a id="stat150"></a>
 
