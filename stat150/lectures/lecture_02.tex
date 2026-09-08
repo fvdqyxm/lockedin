@@ -94,20 +94,21 @@
 \subsection{Classification of States:}
 Understand the behavior of Markov chains. Sometimes they are recurrent, sometimes
 transient, etc.
-\par Notation $i \rightarrow j \text{ denotes j is reachable or "accessible" from i}.$
-% \begin{definition}[Finite Markov Chain]
-% \label{def:label}
-\par If there is a positive probability that in finite steps the Markov Chain starts at $i$
- and ends at $j$.  We can denote this $$\exists n\in \mathbb{Z}^{+} \text{ such that } P_{ij}^{n} = \text{
-probability of jump to j at n steps starting at i} > 0$$
-\begin{definition}[Chapman-Kolmogorov Equation - Discrete Case]
+\par Notation: $i \rightarrow j$ denotes ``$j$ is reachable or accessible from $i$'',
+that is
+$$\exists n\in \mathbb{Z}^{+} \text{ such that } P_{ij}^{n} = \text{
+probability of jump to j at n steps starting from i} > 0$$
+\par Write $i \leftrightarrow j$ if $i \rightarrow j$ \emph{and} $j \rightarrow i$
+(they \textbf{communicate}). Communication is an equivalence relation, so it splits
+the state space into \textbf{communication classes}; the chain is
+\textbf{irreducible} if there is only one class, the whole state space.
+\begin{definition}[Chapman--Kolmogorov Equation -- Discrete Case]
 \label{def:label}
-Given $i \leftrightarrow j$ and $j \leftrightarrow k$ to find reachability between i and
-k.
-Basically a matrix product to consider reachability between $i$ and $k$ by considering
-an intermediate in some amount of steps.
-$$P_{ik}^{m + n} = \sum P_{ir}^{m}P_{rk}^{n}$$
-
+To travel from $i$ to $k$ in $m + n$ steps, the chain passes through some
+intermediate state $r$ at time $m$; summing over all intermediates,
+$$P_{ik}^{m + n} = \sum_{r} P_{ir}^{m}P_{rk}^{n}$$
+In matrix form this is exactly $P^{m+n} = P^{m} P^{n}$: multi-step transition
+matrices compose by ordinary matrix multiplication.
 \end{definition}
 Notation:
 \begin{enumerate}
@@ -115,56 +116,59 @@ Notation:
         chain $(x_n)_{n \in \mathbb{N}}$
     \item Denote $T_y = \min\{n \ge 1 : X_n = y\}$  time of the first return to y. (y at
         time 0, return back).
-    \item $$\mathbb{P}_{yy} = \mathbb{P}_{y}(T_y < \infty) =
-        \sum_{n=1}^{\infty}\mathbb{P}_y(T_y = n)$$  denotes probability if we
-        start at y we return in a finite number of steps.
+    \item $$\rho_{yy} = \mathbb{P}_{y}(T_y < \infty) =
+    \sum_{n=1}^{\infty}\mathbb{P}_y(T_y = n)$$  is the probability that, starting at
+    y, we return in a finite number of steps. (Durrett writes this $\rho_{yy}$,
+    ``rho'', rather than $P_{yy}$, to avoid confusion with the transition
+    probabilities $P(i,j)$.)
 \end{enumerate}
+\begin{definition}[Recurrent and Transient States]
+\label{def:recurrent-transient}
+A state $y$ is \textbf{recurrent} if $\rho_{yy} = 1$ and \textbf{transient} if
+$\rho_{yy} < 1$.
+\end{definition}
+\par Why this dichotomy is the whole story: by the strong Markov property, each
+return to $y$ ``restarts'' the chain, so successive returns behave like
+independent trials with success probability $\rho_{yy}$. The probability of a
+$k$th return is $(\rho_{yy})^{k}$, the probability of exactly $k$ returns is
+$(\rho_{yy})^{k}(1 - \rho_{yy})$, and the expected number of returns is
+$\rho_{yy}/(1 - \rho_{yy})$. The chain returns to $y$ infinitely often with
+probability 1 \emph{exactly when} $\rho_{yy} = 1$ -- there is no middle ground.
+(This is Durrett \S1.3, and it is where the ``kth return is $(\rho_{yy})^{k}$''
+claim from lecture comes from.)
 \begin{definition}[Strong Markov Property]
 \label{def:label}
-Formalizes the memoryless nature of Markov Chains to show results like kth return is
-given by $(P_{yy})^{k}$ by this property.
+The memoryless property survives stopping at \emph{random} times: stopped at a
+stopping time and restarted, the chain is again a Markov chain with the same
+transitions, independent of the past. This is what powers results like ``the
+probability of a $k$th return is $(\rho_{yy})^{k}$.''
 \end{definition}
 \begin{definition}[Stopping Time]
 \label{def:label}
-T is a stopping time if the occurence/non-occurence of event ${\tau  = n} $ i.e "We stop
-at time T" and determined by some of $X_0,X_1,\cdots,X_n.$
-% \end{definition}
+A random time $T$ (often written $\tau$) is a stopping time if for every $n$ the
+event $\{\tau = n\}$ (``we stop at time $n$'') is determined by
+$X_0, X_1, \cdots, X_n$ only -- no peeking at the future. Examples: the first
+return time $T_y$; the first time the chain enters a set $A$ of states.
 \end{definition}
 \newpage
 \textbf{1.2 Durrett: Strong Markov Chain Properties}
-Let $(X_t)_{n \in \mathbb{N}} $ be a Markov Chain.\par  Let $\tau $ be a stopping time, and
-$E$ an event prior to $\tau$ (relevant to $X_0,X_1,\cdots,X_n$)
-\par Then, we have  $$\forall i, j \in S , \mathbb{P}(X_{\tau + k} = j\mid X_{\tau} = i, E) = \mathbb{P}(X_{\tau+k}=j \mid X_{\tau} = i)$$
-If you define $(Y_n) \coloneq x_{\tau + n},  \forall n \ge 0$ is a markov chain.
-\par \textbf{Sketch of Proof: } We  have to eventually show that $$\mathbb{P}(X_{\tau +
-1} = z \mid X_{\tau} = y, \tau  = n) = P_{yz} = P(y,z)$$
-% \label{ex:label}
-% Example
-% \end{example}
-% \end{definition}
-% \section{Definitions and notation}
-% \begin{definition}[First definition]
-% Write the definition and one sentence explaining why it matters.
-% \end{definition}
-
-\section{Claims, theorems, and proof sketches}
-\begin{claim}
-State the claim in one precise sentence.
-\end{claim}
-
-\begin{proofsketch}
-Record the key idea, the first useful equation, and the step that still needs checking.
-\end{proofsketch}
-
-\section{Examples and calculations}
-\begin{example}[Lecture example]
-Write the setup, the calculation, and the conclusion.
-\end{example}
+Let $(X_t)_{t \in \mathbb{N}}$ be a Markov chain, $\tau$ a stopping time, and $E$ an
+event determined by the history up to $\tau$. Then for all $i, j \in S$ and $k \ge 1$,
+$$\mathbb{P}(X_{\tau + k} = j \mid X_{\tau} = i, E) = \mathbb{P}(X_{\tau + k} = j \mid X_{\tau} = i),$$
+and the shifted chain $(Y_n) \coloneqq X_{\tau + n}$, $n \ge 0$, is itself a Markov
+chain with the same transition matrix.
+\par \textbf{Sketch of Proof: } condition on $\{\tau = n\}$ (allowed, because
+$\{\tau = n\}$ is determined by $X_0, \dots, X_n$) and apply the ordinary Markov
+property. We eventually show
+$$\mathbb{P}(X_{\tau + 1} = z \mid X_{\tau} = y, \tau = n) = P_{yz} = P(y,z),$$
+then sum over $n$ to drop the conditioning on the particular stopping time.
 
 \section{Questions and follow-up}
 \begin{itemize}
-  \item What is still unclear?
-  \item Which exercise or reading should I revisit?
+  \item Connect the lectures: for the symmetric walk on $\mathbb{Z}$ (recurrent),
+    what is $\rho_{yy}$, and why can the expected return time still be infinite?
+  \item Redo Durrett's \S1.3 computation showing transience when $p \neq
+    \frac{1}{2}$.
   \item TODO:
 \end{itemize}
 

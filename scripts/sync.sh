@@ -9,6 +9,9 @@ set -Eeuo pipefail
 # untouched lecture scaffolds, empty homework solutions, and unstarted
 # solutions.tex files are detected by content and left out of the index.
 #
+# After the notes repo is synced, the nvim config repo (~/.config/nvim) is
+# committed and pushed too, so editor changes travel with the notes.
+#
 # Usage:
 #   ./sync.sh                    # build changed files + commit & push
 #   ./sync.sh "Math 118 lec 3"   # custom commit message
@@ -42,7 +45,10 @@ if [[ "$FORCE_ALL" -eq 1 ]]; then
     -type f -name '*.tex' -print | sort)
 else
   # Modified tracked files (unstaged or staged) that are .tex.
+  # Skip paths that no longer exist on disk (deleted or renamed-away files):
+  # latexmk would fail on them and abort the whole sync.
   while IFS= read -r f; do
+    [[ -f "$REPO_ROOT/$f" ]] || continue
     TEX_FILES+=("$f")
   done < <(git diff --name-only HEAD -- '*.tex' | sort)
   # Untracked (new) .tex files not yet in git.
@@ -181,9 +187,14 @@ generate_readme() {
       num="${num%%_sol.tex}"               # 01
       local n=$((10#$num))                 # 1, 2, ...
       local sol_pdf="${base%.tex}.pdf"     # hw01_sol.pdf
-      local assign_pdf="hw${num}.pdf"
+      # Assignment PDFs on disk use mixed naming (hw02.pdf, hw2.pdf, HW2.pdf);
+      # try each variant before giving up on the link.
+      local assign_pdf="" cand
+      for cand in "hw${num}.pdf" "hw$((10#$num)).pdf" "HW${num}.pdf" "HW$((10#$num)).pdf"; do
+        [[ -f "$course_dir/homework/$cand" ]] && assign_pdf="$cand" && break
+      done
       local assign_link="—"
-      [[ -f "$course_dir/homework/$assign_pdf" ]] && assign_link="[assignment]($folder/homework/$assign_pdf)"
+      [[ -n "$assign_pdf" ]] && assign_link="[assignment]($folder/homework/$assign_pdf)"
       [[ -f "$course_dir/homework/hw_packet.pdf" ]] && assign_link="[packet]($folder/homework/hw_packet.pdf)"
       local row="| $n | $assign_link | [tex]($folder/homework/$base)"
       [[ -f "$course_dir/homework/$sol_pdf" ]] && row="$row · [pdf]($folder/homework/$sol_pdf)"
@@ -250,7 +261,7 @@ generate_readme() {
     printf '└── scripts/\n'
     printf '    ├── new_lecture_note.sh  # scaffold a new lecture note\n'
     printf '    ├── new_homework.sh      # scaffold a homework solutions file\n'
-    printf '    └── sync.sh              # build changed notes + commit & push\n'
+    printf '    └── sync.sh              # build changed notes + commit & push (also syncs the nvim config repo)\n'
     printf '```\n\n</details>\n\n'
 
     printf '<details>\n<summary>Workflow — scripts and solutions syntax</summary>\n\n'
@@ -281,7 +292,9 @@ generate_readme() {
     printf './scripts/sync.sh                    # builds only changed .tex, then commits & pushes\n'
     printf './scripts/sync.sh "Math 118 lec 3"   # custom commit message\n'
     printf './scripts/sync.sh --all              # force-rebuild everything\n'
-    printf '```\n\n</details>\n'
+    printf '```\n\n'
+    printf 'Every `sync.sh` run also commits and pushes the nvim config repo\n'
+    printf '(`~/.config/nvim`), so editor changes travel with the notes.\n\n</details>\n'
   } > "$out"
 }
 
@@ -292,19 +305,41 @@ generate_readme
 git add -A
 
 if git diff --cached --quiet; then
-  printf '\nNothing new to commit.\n'
-  exit 0
+  printf '\nNothing new to commit in the notes repo.\n'
+else
+  printf '\nStaged changes:\n'
+  git diff --cached --stat
+
+  BRANCH="$(git branch --show-current)"
+  git commit -m "$COMMIT_MESSAGE"
+  if git remote get-url origin >/dev/null 2>&1; then
+    git pull --rebase origin "$BRANCH"
+    git push origin HEAD
+    printf '\nPushed to origin/%s\n' "$BRANCH"
+  else
+    printf '\nNo origin remote; committed locally only.\n'
+  fi
 fi
 
-printf '\nStaged changes:\n'
-git diff --cached --stat
+# ---------- Also sync the nvim config repo ----------
+NVIM_REPO="$HOME/.config/nvim"
 
-BRANCH="$(git branch --show-current)"
-git commit -m "$COMMIT_MESSAGE"
-if git remote get-url origin >/dev/null 2>&1; then
-  git pull --rebase origin "$BRANCH"
-  git push origin HEAD
-  printf '\nPushed to origin/%s\n' "$BRANCH"
+if ! git -C "$NVIM_REPO" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  printf '\nnvim config: not a git repo; skipping.\n'
+elif git -C "$NVIM_REPO" diff --quiet >/dev/null 2>&1 \
+  && git -C "$NVIM_REPO" diff --cached --quiet >/dev/null 2>&1 \
+  && [[ -z "$(git -C "$NVIM_REPO" ls-files --others --exclude-standard)" ]]; then
+  printf '\nnvim config: nothing to sync.\n'
 else
-  printf '\nNo origin remote; committed locally only.\n'
+  printf '\nSyncing nvim config repo (%s)...\n' "$NVIM_REPO"
+  git -C "$NVIM_REPO" add -A
+  git -C "$NVIM_REPO" commit -m "$COMMIT_MESSAGE"
+  if git -C "$NVIM_REPO" remote get-url origin >/dev/null 2>&1; then
+    NVIM_BRANCH="$(git -C "$NVIM_REPO" branch --show-current)"
+    git -C "$NVIM_REPO" pull --rebase origin "$NVIM_BRANCH"
+    git -C "$NVIM_REPO" push origin HEAD
+    printf 'Pushed nvim config to origin/%s\n' "$NVIM_BRANCH"
+  else
+    printf 'nvim config: no origin remote; committed locally only.\n'
+  fi
 fi

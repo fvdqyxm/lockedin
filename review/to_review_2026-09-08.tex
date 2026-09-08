@@ -1,0 +1,286 @@
+% !TEX program = lualatex
+\documentclass[11pt]{article}
+
+\usepackage{fontspec}
+\usepackage{microtype}
+\usepackage{mathtools,amssymb,amsfonts,amsthm}
+\usepackage{enumitem}
+\usepackage{booktabs,array,xcolor}
+\usepackage{geometry,fancyhdr,setspace}
+\usepackage[hidelinks]{hyperref}
+
+\geometry{margin=1in,headheight=15pt}
+\setstretch{1.12}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em plus 0.12em minus 0.08em}
+\setlist{leftmargin=*,topsep=0.35em,itemsep=0.15em,parsep=0pt}
+
+% Checkbox lists for actionable items
+\newlist{todo}{itemize}{2}
+\setlist[todo,1]{label={$\square$},leftmargin=1.6em,topsep=0.35em,itemsep=0.2em,parsep=0pt}
+\setlist[todo,2]{label={$\circ$},leftmargin=1.8em,topsep=0.25em,itemsep=0.15em,parsep=0pt}
+
+\newcommand{\studentname}{Keshav Ramamurthy}
+\newcommand{\docdate}{September 8, 2026}
+\newcommand{\dd}{\,\mathrm{d}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{To Review -- A+ Plan}
+\fancyhead[R]{\docdate}
+\fancyfoot[C]{\thepage}
+
+\title{\vspace{-1.5em}\textbf{To Review -- A+ Plan}\\\large \docdate}
+\author{\studentname}
+\date{\docdate}
+
+\begin{document}
+\maketitle
+
+Built from all lecture notes and homework assignments on file as of \docdate.
+For each course: where the course is, the textbook work that directly anchors the
+lectures and active homework, and the extra moves that turn understanding into an
+A+.
+
+\section*{The system (all five courses)}
+\begin{todo}
+  \item \textbf{Same-day proof pass:} within 24h of each lecture, re-derive every
+  proof in the notes from scratch on paper. Anything not reproducible becomes a
+  textbook section to re-read (listed below).
+  \item \textbf{Problem quota:} 3--5 textbook exercises per course per week
+  \emph{beyond} graded homework. Log solved ones in the course
+  \texttt{solutions.tex}, then run \texttt{./scripts/sync.sh}.
+  \item \textbf{Homework early:} finish each HW two days before the deadline; spend
+  the last day office-hoursing anything shaky.
+  \item \textbf{Pre-read the next section} (listed per course) so every lecture is
+  your second exposure, not your first.
+\end{todo}
+
+\section*{Math 104 -- Ross, Elementary Analysis (2nd ed.)}
+\textbf{Where the course is:} Lectures 01--02 (sequences, the $\epsilon$--$N$
+definition of convergence, uniqueness of limits, the $\epsilon$--$N$ proof
+technique). HW1 was due Sep 6 (induction, irrationality, triangle-inequality
+equalities); HW2 due Sep 13 (sup/inf, diameter, Archimedean property +
+well-ordering, sequence limits, $\epsilon$--$N$ proofs).
+
+\subsection*{Do now}
+\begin{todo}
+  \item \S1 The Natural Numbers -- mathematical induction and well-ordering
+    (HW1 P1, P2, P5; HW2 P2).
+  \item \S2 Some Set Notation -- interval and bounded-set language for HW2 P3.
+  \item \S3 The Set $\mathbb{R}$ of Real Numbers -- order, absolute value,
+    triangle inequality (HW1 P4, P5).
+  \item \S4 The Completeness Axiom -- sup/inf and the Archimedean property
+    (HW2 P1, P2, P3).
+  \item \S7 Limits of Sequences -- the $\epsilon$--$N$ definition; reprove
+    uniqueness of limits yourself (Lecture 01).
+  \item \S8 A Discussion about Proofs -- the $\epsilon$--$N$ technique is all of
+    Lecture 02; drill Exercises 8.1--8.6 (especially 8.2: determine the limit,
+    then prove it).
+  \item \S9 Limit Theorems for Sequences -- HW2 P4 lets you use these; do
+    Exercises 9.1--9.3.
+\end{todo}
+
+\subsection*{A+ edge}
+\begin{todo}
+  \item Skim \S5 (the symbols $+\infty$, $-\infty$; Lecture 01's limit
+    notation). Skip \S6 (optional construction of $\mathbb{R}$).
+  \item Pre-read \S10 Monotone Sequences and Cauchy Sequences -- next lecture
+    territory.
+  \item For each $\epsilon$--$N$ proof, practice choosing $N$ \emph{before}
+    writing scratch work, then verify -- that is exam format.
+\end{todo}
+
+\section*{Math 110 -- Axler, Linear Algebra Done Right (4th ed.)}
+\textbf{Where the course is:} no lecture notes for this course -- the homework
+packet drives the mapping. HW1 (suggested Sep 4): sets, fields, vector spaces,
+subspaces. HW2 (suggested Sep 11): linear independence, span, bases, dimension.
+
+\subsection*{Do now}
+\begin{todo}
+  \item \S1A $\mathbb{R}^n$ and $\mathbb{C}^n$, including the Digression on
+    Fields (p.~10) -- HW1 P3 (no zero divisors in a field), P7
+    ($\mathbb{F}_2$).
+  \item \S1B Definition of Vector Space -- HW1 P4 ($av = 0$ forces $a = 0$ or
+    $v = 0$).
+  \item \S1C Subspaces (with sums and direct sums) -- HW1 P5, P6.
+  \item \S2A Span and Linear Independence -- HW2 P1 (LADR \S2A Ex 11), P2
+    ($\mathbb{F}^\infty$).
+  \item \S2B Bases -- HW2 P3 (LADR \S2B Ex 5).
+  \item \S2C Dimension -- HW2 P4 (subspaces of $\mathbb{F}^2$), P5 (LADR
+    \S2C Ex 12, $\dim(U + W)$).
+\end{todo}
+
+\subsection*{A+ edge}
+\begin{todo}
+  \item Work every unassigned exercise in \S1A--\S1C and \S2A--\S2C: Axler's are
+    short, and later HWs (isomorphisms, quotients, duality) build on fluency
+    here.
+  \item Pre-read \S3A--\S3B (linear maps, null spaces, ranges) -- that is HW3
+    territory (packet p.~3).
+  \item In $\mathbb{F}^\infty$/$\mathbb{F}_2$ problems, write the field
+    explicitly every time -- most lost points here are field-of-scalars
+    mistakes.
+\end{todo}
+
+\section*{Math 113 -- Fraleigh, A First Course in Abstract Algebra (7th ed.)}
+\textbf{Where the course is:} Lecture 02 = \S4 Groups (axioms, cancellation, unique
+solutions of $ax = b$, unique inverses, $(ab)^{-1} = b^{-1}a^{-1}$); Lecture 03 =
+\S5 Subgroups (subgroup test, order, $V_4$, $GL_n$/$SL_n$, cyclic subgroups
+$\langle a \rangle$). HW1 was due 9/1 (\S0, \S2, \S3); HW2 due \textbf{today by
+2PM} (\S4, \S5).
+
+\subsection*{Do now}
+\begin{todo}
+  \item \S0 Sets and Relations -- HW1: 0.6, 0.16, 0.30; practice 0.5--0.36.
+  \item \S2 Binary Operations -- HW1: 2.2, 2.8; practice 2.3--2.37.
+  \item \S3 Isomorphic Binary Structures -- HW1: 3.2, 3.30; practice 3.3--3.33.
+  \item \S4 Groups -- Lecture 02 material; HW2: 4.6, 4.10, 4.18, 4.32; practice
+    4.1--4.33.
+  \item \S5 Subgroups -- Lecture 03 material; HW2: 5.2, 5.8, 5.16, 5.50;
+    practice 5.1--5.57.
+\end{todo}
+
+\subsection*{A+ edge}
+\begin{todo}
+  \item Turn HW2 in \emph{today} (due 2PM on Gradescope).
+  \item Redo the Lecture 02/03 proofs blind: cancellation, unique solution of
+    $ax = b$, unique inverses, subgroup test, $SL_n \le GL_n$, $\langle a
+    \rangle$ is a subgroup containing every subgroup that contains $a$.
+  \item Pre-read \S6 Cyclic Groups -- Lecture 03 ended right at generation and
+    cyclic subgroups.
+  \item Odd-numbered exercises have solutions in the back of the book -- use
+    them to check, never to copy.
+\end{todo}
+
+\section*{Math 118 -- Boggess \& Narcowich, A First Course in Wavelets with
+Fourier Analysis (2nd ed.)}
+\textbf{Where the course is:} Lecture 01 = complex preliminaries + the spaces
+$\ell^2$, $L^2$ (\S0.3); Lecture 02 = norms, inner products, Cauchy--Schwarz
+(proofs now written out in the notes), orthogonality (\S0.2, \S0.4, \S0.5);
+Lecture 03 = orthogonal complements \emph{and projections} (\S0.5.2), linear
+operators $T : \mathbb{C}^N \to V$, functionals and the dual space, convolution,
+Green's functions (\S0.6). HW1 due \textbf{tomorrow, Sep 9}: reverse triangle
+inequality for norms + B\&N Chapter 0 exercises \#1, 3, 9, 10, 11, 17, 23
+(pp.~34--37).
+
+\subsection*{Do now}
+\begin{todo}
+  \item \S0.2 Definition of Inner Product -- HW1 \#1 is literally verifying
+    Definition 0.1.
+  \item \S0.3 The Space $L^2$ -- 0.3.1 (definitions of $\ell^2$ and $L^2$;
+    Lecture 01's $\ell^1 \subset \ell^2$ and $L^1$ vs $L^2$ examples) and
+    \textbf{0.3.2 Convergence in $L^2$ versus uniform convergence} -- the
+    biggest nuance of the course so far.
+  \item \S0.4 Schwarz and Triangle Inequalities -- read alongside the proofs
+    section at the end of the Lecture 02 notes.
+  \item \S0.5.1 Orthogonality -- orthonormal sets; HW1 \#23 (orthonormal
+    $\Rightarrow$ independent) and \#17.
+  \item \S0.5.2 Orthogonal Projections -- now fully in the Lecture 03 notes
+    ($P(u) = \sum_n \langle u, e_n\rangle e_n$, best approximation,
+    $V = V_0 \oplus V_0^\perp$); HW1 \#9, \#10, \#11 are orthogonal-complement
+    computations.
+  \item \S0.6.1 Linear Operators -- Lecture 03's operators, the range-of-$T$
+    proposition, functionals, and the dual space.
+  \item Finish HW1 (due tomorrow).
+\end{todo}
+
+\subsection*{A+ edge}
+\begin{todo}
+  \item Chapter 0 exercises beyond the HW (pp.~34--38): \#2, \#4, \#5 (verify
+    the $\ell^2$/$L^2$ inner products) and especially \#6, \#7, \#8 --
+    sequences converging in $L^2$ but not uniformly or pointwise. These nail
+    the ``continuous vector spaces'' nuance.
+  \item Work through the \textbf{Topics to review} list at the bottom of the
+    Lecture 03 notes (Green's function derivation: continuity + jump condition;
+    verifying $u(x) = \int_0^1 G(x,y)f(y)\dd y$ solves the BVP). Green's
+    functions are professor-added material -- the notes are the only source.
+  \item Pre-read \S0.6.2 Adjoints (likely next lecture) and \S0.7 Least Squares
+    (it is the payoff of orthogonal projections).
+\end{todo}
+
+\section*{Stat 150 -- Durrett, Essentials of Stochastic Processes (3rd ed.)}
+\textbf{Where the course is:} Lecture 01 = Markov property, transition matrices,
+random walks (reflecting, on $\mathbb{Z}$, on a circle) with a first look at
+recurrence/transience; Lecture 02 = classification of states (accessibility,
+communication classes, Chapman--Kolmogorov), first return times $T_y$, return
+probabilities $\rho_{yy}$, recurrent vs transient, strong Markov property,
+stopping times. No homework assigned yet.
+
+\subsection*{Do now}
+\begin{todo}
+  \item \S1.1 Markov Chain Examples -- map each walk from Lecture 01 onto one
+    of Durrett's examples (gambler's ruin, Ehrenfest urn, weather).
+  \item \S1.2 Multi-Step Transition Probabilities -- Chapman--Kolmogorov and
+    the Markov/strong Markov properties (the ``1.2 Durrett'' block in the
+    Lecture 02 notes).
+  \item \S1.3 Classification of States -- $\rho_{yy}$, recurrent vs transient;
+    the geometric-returns argument is now written out in the Lecture 02 notes.
+  \item \S1.4 Stationary Distributions, especially \S1.4.1 Doubly Stochastic
+    Chains -- the circle-walk matrix from Lecture 01 is the canonical example.
+\end{todo}
+
+\subsection*{A+ edge}
+\begin{todo}
+  \item Redo two computations yourself: transience of the $\mathbb{Z}$ walk
+    when $p \neq \frac{1}{2}$ (\S1.3), and why the symmetric walk still has
+    infinite expected return time.
+  \item A few classification exercises from \S1.13.
+  \item Pre-read \S1.6 Limit Behavior -- where classification starts paying off.
+\end{todo}
+
+\section*{Date-sensitive items this week}
+\begin{todo}
+  \item \textbf{Tue 9/8, 2PM:} Math 113 HW2 (Fraleigh \S4--\S5).
+  \item \textbf{Wed 9/9, 11:59PM:} Math 118 HW1 (norms + B\&N Ch.~0 exercises).
+  \item \textbf{Sun 9/13, 11:59PM:} Math 104 HW2 (sup/inf, Archimedean,
+    $\epsilon$--$N$).
+  \item \textbf{Fri 9/11 (suggested):} Math 110 HW2 (span, bases, dimension).
+\end{todo}
+
+\appendix
+\section*{Prompt to regenerate this plan}
+\begin{verbatim}
+CONTEXT: ~/Downloads/fa26_books holds my Fall 2026 LaTeX notes: per-course
+folders (math104, math110, math113, math118, stat150) with lectures/*.tex and
+homework/ (assignments + my solutions), plus textbooks at the repo root:
+math104 = Ross, Elementary Analysis 2e; math110 = Axler, Linear Algebra Done
+Right 4e; math113 = Fraleigh, A First Course in Abstract Algebra 7e; math118 =
+Boggess & Narcowich, A First Course in Wavelets with Fourier Analysis 2e;
+stat150 = Durrett, Essentials of Stochastic Processes 3e. Scripts: sync.sh
+builds changed .tex with latexmk/lualatex and commits/pushes - I run it myself;
+do not commit.
+
+TASK: regenerate my per-course "To Review - A+ plan" for today's date.
+
+1. Read every <course>/lectures/*.tex (including the newest) and every
+   assignment PDF in <course>/homework/ (use pdftotext; assignments list exact
+   textbook exercises and due dates). For math110 there are no lectures: the
+   homework packet hw_packet.pdf drives the mapping; treat the two most recent
+   HWs as active and ask me if unclear.
+2. Map each lecture's topics and each homework problem to EXACT textbook
+   sections: extract each textbook's table of contents with pdftotext and match
+   - never guess section numbers. If a lecture topic is professor-added
+   material not in the book (e.g., Green's functions in math118), say so and
+   point at the lecture notes instead.
+3. Filter by dates: homework past due is no longer "active" but its sections
+   stay on the review list.
+4. Write review/to_review_YYYY-MM-DD.tex (lualatex article, 11pt, enumitem
+   checkbox lists - copy the preamble from review/to_review_2026-09-08.tex).
+   One section per course: where the course is (lectures + active HW with due
+   dates), a "Do now" checklist of exact sections with associated exercises
+   (HW practice lists + recommended extras from those sections), and an "A+
+   edge" checklist (extra problems, proofs to redo blind, next sections to
+   pre-read). Include a date-sensitive deadlines section and end with this
+   prompt verbatim in an appendix so it can be reused.
+5. Build it: latexmk -lualatex -interaction=nonstopmode -halt-on-error -cd
+   review/to_review_YYYY-MM-DD.tex
+6. If any lecture file still has placeholder scaffold text or notation that
+   mismatches the textbook (like P_yy vs Durrett's rho_yy), flag it and offer
+   to fix it the way stat150 lectures 01-02 and math118 lecture_03 were
+   upgraded.
+7. Do not commit or push. Reply with the PDF path and a per-course summary of
+   what changed since the previous review document.
+\end{verbatim}
+
+\end{document}

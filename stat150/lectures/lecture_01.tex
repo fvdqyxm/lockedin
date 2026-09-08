@@ -93,12 +93,20 @@
 Markov Chain: Current state is enough information 
 $$\mathbb{P}(X_{t+1}=a_{t+1} | X_{t} = a_t, X_{t-1} = a_{t-1}, \cdots, X_{0} = a_0) =
 P(X_{t + 1} = a_{t + 1} | X_t = a_{t})$$
+\par Notation: the \textbf{transition matrix} $P$ has entries $P(i, j) =
+\mathbb{P}(X_{t+1} = j \mid X_t = i)$, and every row sums to 1. If $\mu_t$ is the
+row vector of probabilities of $X_t$, then $\mu_{t+1} = \mu_t P$, so $\mu_t =
+\mu_0 P^t$: matrix powers carry the multi-step behavior.
 Random walk with absorbing states is not too hard, just solve lots of equations
 \subsection{Reflecting Random walk on a line graph}
 Suppose we have a random walk $X_t$ takes values on $S = {0, 1, 2, \cdots, N}.$ such that $$P(i, i + 1) = p,
 P(i, i - 1) = 1 - p, P(N, N - 1) = P(0, 1) = 1 \text{ and } 0 < p < 1$$
 In this case, at the previously absorbing states 0 and 1, they "reflect" so we don't get
 stuck and with probability 1 we always return to any state
+\par Why: the state space is finite and every state can be reached from every other
+state, so nothing can get stuck or escape -- on a finite state space such a chain
+returns to each state infinitely often with probability 1 (\textbf{recurrent}; this
+gets made precise in the next lecture).
 \subsection{Infinite Line Graph}
 Consider the previous example except $S = \mathbb{Z}.$ \par Let $X_t$ describe the
 position at time t of the random walk.
@@ -108,6 +116,14 @@ position at time t of the random walk.
 \par \textbf{Extension: } How does this work in $\mathbb{Z}^2$ or $\mathbb{Z}^3$ ??
 \par \textbf{Answer to Extension: } $\mathbb{Z}^2$ if symmetric, $\mathbb{Z}^3$ hell
 no!(transient random walk)
+\par Intuition for both answers: if $p \ne \frac{1}{2}$ the walk \emph{drifts} --
+it runs away toward $+\infty$ or $-\infty$ faster than it can come back, so every
+state is visited only finitely many times (\textbf{transient}). The symmetric walk
+$p = \frac{1}{2}$ has no drift, so it returns to every state infinitely often --
+though the expected time to return is infinite. The trichotomy
+$\mathbb{Z}$/$\mathbb{Z}^2$/$\mathbb{Z}^3$ for the symmetric walk is
+\textbf{P\'olya's theorem}: recurrent in dimensions 1 and 2, transient in dimension
+$\ge 3$ (Durrett computes the transience when $p \neq \frac{1}{2}$ in \S1.3).
 \subsection{Random walk over a circle}
 The transition matrix is 
 \[
@@ -122,30 +138,18 @@ p & 0 & \cdots & 0 & q & 0
 \end{pmatrix}_{(N+1)\times(N+1)},
 \qquad p+q=1.
 \]
-% \end{answer}
-\section{definitions and notation}
-\begin{definition}[First definition]
-Write the definition and one sentence explaining why it matters.
-\end{definition}
-
-\section{Claims, theorems, and proof sketches}
-\begin{claim}
-State the claim in one precise sentence.
-\end{claim}
-
-\begin{proofsketch}
-Record the key idea, the first useful equation, and the step that still needs checking.
-\end{proofsketch}
-
-\section{Examples and calculations}
-\begin{example}[Lecture example]
-Write the setup, the calculation, and the conclusion.
-\end{example}
+\par Two things worth checking on this matrix: every \emph{column} also sums to 1
+(it is \textbf{doubly stochastic}; Durrett \S1.4.1), so the uniform distribution
+$(\frac{1}{N+1}, \dots, \frac{1}{N+1})$ is \emph{stationary}: $\mu P = \mu$. And
+with $p, q > 0$ every state reaches every other state around the circle, so the
+chain is irreducible.
 
 \section{Questions and follow-up}
 \begin{itemize}
-  \item What is still unclear?
-  \item Which exercise or reading should I revisit?
+  \item Which of the examples in Durrett \S1.1 (gambler's ruin, Ehrenfest urn,
+    branching) are random walks in disguise?
+  \item Why exactly does drift $p \neq \frac{1}{2}$ make the walk on $\mathbb{Z}$
+    transient? (Durrett \S1.3 does this computation -- redo it.)
   \item TODO: 
 \end{itemize}
 

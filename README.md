@@ -5,7 +5,7 @@ Only completed work is indexed; every PDF opens right in your browser.
 
 **Jump to:** [Math 104](#math104) · [Math 113](#math113) · [Math 118](#math118) · [Stat 150](#stat150)
 
-**5** lecture notes · **3** homework write-ups
+**6** lecture notes · **3** homework write-ups
 
 <a id="math104"></a>
 
@@ -31,13 +31,14 @@ Textbook: Fraleigh, *A First Course in Abstract Algebra* (7th ed.)
 |---|-------|
 | 02 | [PDF](math113/lectures/lecture_02.pdf) · [tex](math113/lectures/lecture_02.tex) |
 | 03 | [PDF](math113/lectures/lecture_03.pdf) · [tex](math113/lectures/lecture_03.tex) |
+| 04 | [PDF](math113/lectures/lecture_04.pdf) · [tex](math113/lectures/lecture_04.tex) |
 
 ### Homework
 
 | HW | Assignment | My solutions |
 |----|------------|--------------|
 | 1 | [assignment](math113/homework/hw01.pdf) | [tex](math113/homework/hw01_sol.tex) · [pdf](math113/homework/hw01_sol.pdf) |
-| 2 | — | [tex](math113/homework/hw02_sol.tex) · [pdf](math113/homework/hw02_sol.pdf) |
+| 2 | [assignment](math113/homework/hw2.pdf) | [tex](math113/homework/hw02_sol.tex) · [pdf](math113/homework/hw02_sol.pdf) |
 
 <a id="math118"></a>
 
@@ -49,7 +50,7 @@ Textbook: Boggess & Narcowich, *A First Course in Wavelets with Fourier Analysis
 
 | # | Notes |
 |---|-------|
-| 04 | [PDF](math118/lectures/lecture_04.pdf) · [tex](math118/lectures/lecture_04.tex) |
+| 03 | [PDF](math118/lectures/lecture_03.pdf) · [tex](math118/lectures/lecture_03.tex) |
 
 <a id="stat150"></a>
 
@@ -82,7 +83,7 @@ fa26_books/
 └── scripts/
     ├── new_lecture_note.sh  # scaffold a new lecture note
     ├── new_homework.sh      # scaffold a homework solutions file
-    └── sync.sh              # build changed notes + commit & push
+    └── sync.sh              # build changed notes + commit & push (also syncs the nvim config repo)
 ```
 
 </details>
@@ -126,5 +127,8 @@ Build changed notes and push:
 ./scripts/sync.sh "Math 118 lec 3"   # custom commit message
 ./scripts/sync.sh --all              # force-rebuild everything
 ```
+
+Every `sync.sh` run also commits and pushes the nvim config repo
+(`~/.config/nvim`), so editor changes travel with the notes.
 
 </details>

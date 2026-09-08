@@ -238,14 +238,13 @@ Geometrically: $$\langle u, v \rangle = ||u|| \cdot ||v|| \cdot \cos \theta$$
 $$|| \alpha u || = \sqrt{\langle \alpha u, \alpha u \rangle } = \sqrt{\alpha
 \overline{\alpha} \langle u, u\rangle} = |\alpha|\sqrt{\langle u, u \rangle}$$
 In physics,usually the innter product is defined to be by linear in y. 
-\begin{theorem}[Cauchy Schwartz]
-\label{thm:label}
-Prove that $$|\langle u, v\rangle | \le ||u ||  \cdot ||v||$$
-Show cauchy, pythag, corrolaries
+\begin{theorem}[Cauchy--Schwarz]
+\label{thm:cauchy-schwarz}
+For all $u, v \in V$:
+$$|\langle u, v\rangle | \le ||u ||  \cdot ||v||$$
+The proof -- along with Pythagoras and the corollaries (triangle inequality, induced
+norm, angles) -- is written out in the dedicated section at the end of these notes.
 \end{theorem}
-% \begin{proof}
-    
-% \end{proof}
 \begin{definition}[Orthogonality]
 \label{def:label}
 Vectors $e_1, e_2, \cdots, e_n$ are orthogonal if $\langle e_j, e_k \rangle = S_{jk} =
@@ -265,14 +264,129 @@ linearly independent vectors, and the orthogonal vectors will have the same span
 Write the definition and one sentence explaining why it matters.
 \end{definition}
 
-\section{Claims, theorems, and proof sketches}
-\begin{claim}
-State the claim in one precise sentence.
-\end{claim}
+\section{Proofs: Cauchy--Schwarz, Pythagoras, and Corollaries}
+This section is the dedicated write-up of the material flagged under the
+Cauchy--Schwarz theorem: the Cauchy--Schwarz proof, Pythagoras, and the corollaries
+(triangle inequality, induced norm, angles). Textbook reference: Boggess \&
+Narcowich, \S0.4--0.5.
 
-\begin{proofsketch}
-Record the key idea, the first useful equation, and the step that still needs checking.
-\end{proofsketch}
+\subsection{Cauchy--Schwarz inequality}
+\begin{theorem}[Cauchy--Schwarz, full statement]
+\label{thm:cs-full}
+For all $u, v$ in an inner product space $V$ (real or complex),
+$$|\langle u, v\rangle| \le ||u|| \cdot ||v||.$$
+Equality holds if and only if $u$ and $v$ are linearly dependent. Moreover,
+$\langle u, v\rangle = ||u|| \cdot ||v||$ if and only if one of $u, v$ is a
+nonnegative multiple of the other.
+\end{theorem}
+
+\begin{idea}
+Make $\langle u, v\rangle$ real and nonnegative by rotating $u$ by a phase, then
+expand $||e^{-i\phi}u - tv||^2 \ge 0$ as a quadratic in $t$ and read the inequality
+off its discriminant.
+\end{idea}
+
+\begin{proof}
+If $v = 0$ or $\langle u, v\rangle = 0$ the inequality is immediate, so assume
+$v \ne 0$ and $\langle u, v\rangle \ne 0$. Write
+$\langle u, v\rangle = |\langle u, v\rangle| e^{i\phi}$. By linearity in the first
+argument,
+$$\langle e^{-i\phi}u, v\rangle = e^{-i\phi}\langle u, v\rangle =
+|\langle u, v\rangle| \ge 0,$$
+which is real. Hence for every real $t$,
+\begin{align*}
+0 \le ||e^{-i\phi}u - tv||^2
+&= \langle e^{-i\phi}u - tv,\ e^{-i\phi}u - tv\rangle \\
+&= ||u||^2 - t\,\langle e^{-i\phi}u, v\rangle - t\,\langle v, e^{-i\phi}u\rangle + t^2||v||^2 \\
+&= ||u||^2 - 2t\,|\langle u, v\rangle| + t^2||v||^2,
+\end{align*}
+because $\langle v, e^{-i\phi}u\rangle = \overline{\langle e^{-i\phi}u, v\rangle}
+= |\langle u, v\rangle|$ is real too. The last line is a quadratic in $t$ that is
+nonnegative for every real $t$; since its leading coefficient $||v||^2$ is
+positive, its discriminant must be nonpositive:
+$$4|\langle u, v\rangle|^2 - 4||u||^2||v||^2 \le 0
+\qquad\Longrightarrow\qquad |\langle u, v\rangle| \le ||u|| \cdot ||v||.$$
+Equality means the discriminant vanishes, so the quadratic has the real double root
+$t_0 = |\langle u, v\rangle|/||v||^2 \ge 0$; then $||e^{-i\phi}u - t_0v||^2 = 0$,
+i.e.\ $e^{-i\phi}u = t_0v$, so $u$ and $v$ are linearly dependent. Conversely, if
+$u = \alpha v$ then $|\langle u, v\rangle| = |\alpha|\,||v||^2 = ||u|| \cdot
+||v||$. Finally, $\langle u, v\rangle = ||u|| \cdot ||v||$ (real and positive, so
+$\phi = 0$) holds exactly when $u = t_0v$ with $t_0 \ge 0$: one is a nonnegative
+multiple of the other.
+\end{proof}
+
+\subsection{Pythagorean theorem}
+\begin{theorem}[Pythagoras]
+\label{thm:pythagoras}
+If $\langle u, v\rangle = 0$, then
+$$||u + v||^2 = ||u||^2 + ||v||^2.$$
+More generally, if $e_1, \dots, e_N$ are orthonormal and $v = \sum_{j=1}^{N}
+\alpha_j e_j$, then
+$$||v||^2 = \sum_{j=1}^{N} |\alpha_j|^2.$$
+\end{theorem}
+
+\begin{proof}
+Expand and use conjugate symmetry:
+$$||u + v||^2 = \langle u + v, u + v\rangle = ||u||^2 + \langle u, v\rangle +
+\langle v, u\rangle + ||v||^2 = ||u||^2 + 2\operatorname{Re}\langle u, v\rangle +
+||v||^2.$$
+If $\langle u, v\rangle = 0$ both cross terms vanish, which is the first claim.
+For the general version,
+$$||\sum_{j=1}^{N}\alpha_j e_j||^2 = \sum_{j,k=1}^{N}\alpha_j\overline{\alpha_k}
+\langle e_j, e_k\rangle = \sum_{j,k=1}^{N}\alpha_j\overline{\alpha_k}\,\delta_{jk}
+= \sum_{j=1}^{N}|\alpha_j|^2.$$
+This identity is what becomes Parseval's equation later in the course.
+\end{proof}
+
+\subsection{Corollaries}
+\begin{corollary}[Triangle inequality]
+\label{cor:triangle}
+For all $u, v \in V$,
+$$||u + v|| \le ||u|| + ||v||.$$
+\end{corollary}
+
+\begin{proof}
+Using the expansion from the Pythagoras proof and then Cauchy--Schwarz,
+$$||u + v||^2 = ||u||^2 + 2\operatorname{Re}\langle u, v\rangle + ||v||^2
+\le ||u||^2 + 2|\langle u, v\rangle| + ||v||^2
+\le ||u||^2 + 2||u|| \cdot ||v|| + ||v||^2 = (||u|| + ||v||)^2.$$
+Both sides are nonnegative, so taking square roots gives the inequality.
+\end{proof}
+
+\begin{remark}[Every inner product induces a norm]
+This closes the loop with the norm definition at the top of the lecture:
+$||u|| = \sqrt{\langle u, u\rangle}$ is a genuine norm. Positive definiteness is
+axiom 1 of the inner product, homogeneity was checked in the Inner Products section
+($||\alpha u|| = |\alpha|\,||u||$), and the triangle inequality is exactly
+\cref{cor:triangle}. On $\mathbb{C}^n$ with the standard inner product, this
+induced norm is the two-norm.
+\end{remark}
+
+\begin{remark}[Angles are well defined]
+For nonzero vectors, Cauchy--Schwarz gives
+$|\langle u, v\rangle|/(||u|| \cdot ||v||) \le 1$, so in a real inner product
+space we can define the angle $\theta$ between $u$ and $v$ by
+$$\cos\theta = \frac{\langle u, v\rangle}{||u|| \cdot ||v||}.$$
+This is what justifies the geometric formula
+$\langle u, v\rangle = ||u|| \cdot ||v|| \cdot \cos\theta$ from earlier in the
+lecture; orthogonality ($\langle u, v\rangle = 0$) is exactly $\theta = \pi/2$.
+In a complex space, use $\operatorname{Re}\langle u, v\rangle$ in the cosine.
+\end{remark}
+
+\begin{example}[Cauchy--Schwarz in the standard spaces]
+\begin{itemize}
+    \item On $\mathbb{C}^n$ with the standard inner product:
+    $$\Bigl|\sum_{j=1}^{n} x_j\overline{y_j}\Bigr| \le
+    \Bigl(\sum_{j=1}^{n}|x_j|^2\Bigr)^{1/2}
+    \Bigl(\sum_{j=1}^{n}|y_j|^2\Bigr)^{1/2}.$$
+    \item On $L^2[a,b]$, where $\langle f, g\rangle = \int_a^b f(t)\overline{g(t)}\dd t$:
+    $$\Bigl|\int_a^b f(t)\overline{g(t)}\dd t\Bigr| \le
+    \Bigl(\int_a^b |f(t)|^2\dd t\Bigr)^{1/2}
+    \Bigl(\int_a^b |g(t)|^2\dd t\Bigr)^{1/2}.$$
+    This integral version is the workhorse inequality for the rest of the course
+    (Fourier series, convergence in $L^2$, Parseval).
+\end{itemize}
+\end{example}
 
 \section{Examples and calculations}
 \begin{example}[Lecture example]
