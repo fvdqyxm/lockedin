@@ -273,6 +273,121 @@ $\varphi([j]) = \varphi([k])$ gives $j \equiv k \pmod n$, i.e. $[j] = [k]$.
 elements of $G$ are exactly $e, a, \dots, a^{n - 1}$, so $|G| = n =
 \operatorname{ord}(a)$.
 \end{proof}
+\begin{theorem}[Order of a Power]
+\label{thm:order-of-power}
+Let $G = \langle a \rangle$ be cyclic with $\operatorname{ord}(a) = n$. Then
+for any $s \in \mathbb{Z}^{+}$, the subgroup $\langle a^{s} \rangle$ has order
+$$\operatorname{ord}(a^{s}) = \left|\langle a^{s} \rangle\right| =
+\frac{n}{\gcd(s, n)}.$$
+\end{theorem}
+\begin{proof}
+Write $d = \gcd(s, n)$ and factor $s = d s'$, $n = d n'$. Then
+$\gcd(s', n') = 1$: any common divisor of $s'$ and $n'$ would turn $d$ into a
+larger common divisor of $s$ and $n$.
+\par From the classification proof we have the key fact (take $j = 0$ in
+$a^{i} = a^{j} \iff i \equiv j \pmod n$):
+$$a^{j} = e \iff n \mid j.$$
+\par Now $(a^{s})^{k} = a^{sk} = e \iff n \mid sk$. Divide through by $d$:
+$$n \mid sk \iff d n' \mid d s' k \iff n' \mid s' k.$$
+Since $\gcd(s', n') = 1$, Bézout (the GCD remark above) gives $x, y \in
+\mathbb{Z}$ with $x s' + y n' = 1$. Multiplying by $k$:
+$$k = x s' k + y n' k,$$
+and if $n' \mid s' k$ then $n'$ divides both terms on the right, so
+$n' \mid k$; conversely $n' \mid k$ trivially gives $n' \mid s' k$. Hence
+$$(a^{s})^{k} = e \iff n' \mid k.$$
+\par So the exponents that kill $a^{s}$ are exactly the multiples of
+$n' = n/d$, and the least positive one — which is $\operatorname{ord}(a^{s})$
+by definition, picked out by well-ordering as always — is
+$$\operatorname{ord}(a^{s}) = n' = \frac{n}{d} = \frac{n}{\gcd(s, n)}.
+\qquad \blacksquare$$
+\end{proof}
+\begin{theorem}[Same Subgroup from Two Powers]
+\label{thm:same-subgroup}
+Let $G = \langle a \rangle$ be cyclic with $\operatorname{ord}(a) = n$. Then
+for $s, t \in \mathbb{Z}^{+}$,
+$$\langle a^{s} \rangle = \langle a^{t} \rangle \iff
+\gcd(s, n) = \gcd(t, n).$$
+\end{theorem}
+\begin{proof}
+\textbf{($\Leftarrow$)} Suppose $\gcd(s, n) = \gcd(t, n) = d$. We first claim
+$$\langle a^{s} \rangle = \langle a^{d} \rangle$$
+(and likewise $\langle a^{t} \rangle = \langle a^{d} \rangle$, which finishes
+this direction).
+\par $\langle a^{s} \rangle \subseteq \langle a^{d} \rangle$: since
+$d \mid s$, write $s = d s'$; then $a^{s} = (a^{d})^{s'} \in \langle a^{d}
+\rangle$, and $\langle a^{s} \rangle$ is the smallest subgroup containing
+$a^{s}$ (cyclic-subgroup theorem, Lecture 03).
+\par $\langle a^{d} \rangle \subseteq \langle a^{s} \rangle$: by Bézout,
+$d = x s + y n$ for some $x, y \in \mathbb{Z}$, so
+$$a^{d} = a^{xs + yn} = (a^{s})^{x} * (a^{n})^{y} = (a^{s})^{x} * e
+= (a^{s})^{x} \in \langle a^{s} \rangle.$$
+\par \textbf{($\Rightarrow$)} Suppose $\langle a^{s} \rangle = \langle a^{t}
+\rangle$. Equal sets have equal cardinality, so by the Order of a Power
+theorem
+$$\frac{n}{\gcd(s, n)} = \left|\langle a^{s} \rangle\right| =
+\left|\langle a^{t} \rangle\right| = \frac{n}{\gcd(t, n)},$$
+and canceling $n$: $\gcd(s, n) = \gcd(t, n)$.
+\end{proof}
+\begin{corollary}[Subgroups of a Finite Cyclic Group]
+\label{cor:subgroups-of-cyclic}
+A cyclic group of order $n$ has exactly one subgroup of each order $d$
+dividing $n$ — and no other subgroups. The subgroup of order $d$ is
+$\langle a^{n/d} \rangle$.
+\end{corollary}
+\begin{proof}
+Every $H \le \langle a \rangle$ is $\langle a^{m} \rangle$ for some
+$m \in \mathbb{Z}^{+}$ (subgroup theorem; $\{e\} = \langle a^{n} \rangle$),
+and by the ($\Leftarrow$) direction
+$\langle a^{m} \rangle = \langle a^{\gcd(m, n)} \rangle$, which has order
+$n/\gcd(m, n)$ where $\gcd(m, n)$ divides $n$. As the divisor
+$d' = \gcd(m, n)$ runs over all divisors of $n$, so does the order
+$n/d'$: every subgroup is $\langle a^{d'} \rangle$ for some $d' \mid n$, of
+order $n / d'$, and the subgroup of order $d$ is $\langle a^{n/d} \rangle$
+(since $\gcd(n/d, n) = n/d$, its order is $n/(n/d) = d$).
+\par Uniqueness: if $\langle a^{d_1} \rangle = \langle a^{d_2} \rangle$ with
+$d_1, d_2 \mid n$, then by the ($\Rightarrow$) direction
+$\gcd(d_1, n) = \gcd(d_2, n)$, i.e. $d_1 = d_2$.
+\end{proof}
+\begin{example}[The Complete Picture for $\operatorname{ord}(a) = 12$]
+\label{ex:order-12}
+Let $\operatorname{ord}(a) = 12$. The two theorems give the entire subgroup
+lattice at a glance:
+$$
+\begin{array}{c|c|c|c}
+s & \gcd(s, 12) & \operatorname{ord}(a^{s}) = \frac{12}{\gcd(s, 12)} &
+\langle a^{s} \rangle \\ \hline
+1, 5, 7, 11 & 1 & 12 & G \text{ itself} \\
+2, 10 & 2 & 6 & \{e, a^{2}, a^{4}, \dots, a^{10}\} \\
+3, 9 & 3 & 4 & \{e, a^{3}, a^{6}, a^{9}\} \\
+4, 8 & 4 & 3 & \{e, a^{4}, a^{8}\} \\
+6 & 6 & 2 & \{e, a^{6}\} \\
+12 & 12 & 1 & \{e\}
+\end{array}
+$$
+Each row is a single subgroup — six subgroups for the six divisors of $12$,
+exactly as the corollary predicts — and two powers generate the same subgroup
+precisely when they sit in the same row, i.e. share their gcd with $12$.
+\par Reading the first row: $a^{s}$ is a \textbf{generator} of $G$ iff
+$\gcd(s, 12) = 1$, so $G = \langle a \rangle = \langle a^{5} \rangle =
+\langle a^{7} \rangle = \langle a^{11} \rangle$ — all four generators.
+\end{example}
+\begin{example}[$\langle a^{8} \rangle = \langle a^{4} \rangle$ in Detail]
+\label{ex:a8-equals-a4}
+Still with $n = 12$: since $\gcd(8, 12) = 4 = \gcd(4, 12)$, the theorem says
+$\langle a^{8} \rangle = \langle a^{4} \rangle$. Check it by hand:
+$$\langle a^{8} \rangle = \{e, a^{8}, (a^{8})^{2}\} = \{e, a^{8}, a^{16}\}
+= \{e, a^{8}, a^{4}\},$$
+using $a^{16} = a^{4}$ because $16 \equiv 4 \pmod{12}$; and next
+$(a^{8})^{3} = a^{24} = (a^{12})^{2} = e$ stops the list. So both subgroups
+are $\{e, a^{4}, a^{8}\}$, of order $12/\gcd(\cdot, 12) = 12/4 = 3$, and no
+smaller power of $a^{8}$ gives $e$ ($a^{8} \ne e$ and $(a^{8})^{2} = a^{4}
+\ne e$) — the formula $\operatorname{ord}(a^{8}) = 3$ confirmed directly.
+\par In additive notation, i.e. inside $\langle \mathbb{Z}_{12}, +
+\rangle$ with $a \leftrightarrow [1]$ (via the classification theorem):
+$\langle [8] \rangle = \{[0], [8], [4]\} = \langle [4] \rangle$ — repeatedly
+adding 8 mod 12 walks $[0] \to [8] \to [4] \to [0]$, the same triangle as
+adding 4, just traversed in a different order.
+\end{example}
 
 
 

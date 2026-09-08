@@ -5,9 +5,10 @@ set -Eeuo pipefail
 # Compiled PDFs land next to their .tex files so they show up on GitHub.
 # Intermediate build files are gitignored.
 #
-# The README is regenerated as a clickable index of COMPLETED work only:
-# untouched lecture scaffolds, empty homework solutions, and unstarted
-# solutions.tex files are detected by content and left out of the index.
+# The README is regenerated as a clickable index: every lecture and homework
+# file on disk is listed (unwritten ones are marked, not hidden — a lecture
+# counts as written as soon as its body differs from the generator template);
+# solutions.tex files appear once they have real content.
 #
 # After the notes repo is synced, the nvim config repo (~/.config/nvim) is
 # committed and pushed too, so editor changes travel with the notes.
@@ -64,6 +65,10 @@ if [[ ${#TEX_FILES[@]} -gt 0 ]]; then
     full="$REPO_ROOT/$tex"
     if latexmk -lualatex -interaction=nonstopmode -halt-on-error -cd "$full" >/tmp/sync_build.log 2>&1; then
       printf '  ok    %s\n' "$tex"
+    elif latexmk -lualatex -interaction=nonstopmode -halt-on-error -g -cd "$full" >/tmp/sync_build.log 2>&1; then
+      # -g forces a run: recovers from a stale error remembered by a previous
+      # (e.g. editor) build of an unchanged file.
+      printf '  ok    %s (forced retry)\n' "$tex"
     else
       printf '  FAIL  %s\n' "$tex" >&2
       tail -n 20 /tmp/sync_build.log >&2
@@ -80,12 +85,12 @@ else
   printf 'No .tex files changed since last commit.\n'
 fi
 
-# ---------- Regenerate README.md as a clickable index of COMPLETED work ----------
-# Only finished documents are listed:
-#   • lectures whose .tex no longer contains the scaffold placeholder
-#   • homework solution files with real write-up content
-#   • solutions.tex files with at least one uncommented \exercise{...}
-# Scaffolds and unstarted files stay on disk but never appear in the index.
+# ---------- Regenerate README.md as a clickable index ----------
+# Every lecture on disk is listed with clickable PDF/tex links; unwritten
+# scaffolds are marked "not yet written" instead of hidden. The index
+# regenerates on every sync, and lecture numbering just keeps iterating
+# (lecture_05, lecture_10, ...), so rows sort numerically.
+# Homework solution files and solutions.tex appear only with real content.
 generate_readme() {
   local out="$REPO_ROOT/README.md"
 
@@ -125,9 +130,20 @@ generate_readme() {
     grep -Eq '^[[:space:]]*\\(exercise\{|begin\{problem\})' "$1"
   }
 
-  # A lecture note is still a scaffold while its placeholder text survives.
+  # The untouched scaffold body, extracted from the generator itself (the
+  # template's document body contains no shell variables, so it compares raw).
+  local template_body
+  template_body="$(sed -n '/\\begin{document}/,/\\end{document}/p' \
+    "$REPO_ROOT/scripts/new_lecture_note.sh" \
+    | sed -E 's/^[ \t]+//;s/[ \t]+$//' | grep -v '^$')"
+
+  # A lecture is an unwritten scaffold ONLY if its document body is still the
+  # untouched template (modulo whitespace). Notes that kept leftover
+  # placeholder sections — even commented-out ones — count as written.
   lecture_is_scaffold() {
-    grep -q 'Write the one-sentence point of today' "$1"
+    diff <(printf '%s\n' "$template_body") \
+         <(sed -n '/\\begin{document}/,/\\end{document}/p' "$1" \
+           | sed -E 's/^[ \t]+//;s/[ \t]+$//' | grep -v '^$') >/dev/null 2>&1
   }
 
   plural() {
@@ -135,7 +151,7 @@ generate_readme() {
   }
 
   local nav="" body=""
-  local total_lec=0 total_hw=0 total_sol=0
+  local total_lec=0 total_scaf=0 total_hw=0 total_sol=0
 
   for entry in "${courses[@]}"; do
     IFS='|' read -r folder label longname textbook <<<"$entry"
@@ -152,22 +168,27 @@ generate_readme() {
       total_sol=$((total_sol + 1))
     fi
 
-    # Lectures: skip untouched scaffolds.
-    local lec_rows="" n_lec=0
-    while IFS= read -r pdf; do
-      [[ -n "$pdf" ]] || continue
-      local base="${pdf##*/}"
-      local num="${base#lecture_}"
-      num="${num%.pdf}"
+    # Lectures: list EVERY lecture on disk (.tex or .pdf), clickable, with
+    # unwritten scaffolds marked rather than hidden. Numbers iterate
+    # indefinitely, so collect the union of tex/pdf numbers and sort
+    # numerically (02 < 10) rather than lexicographically.
+    local lec_rows="" n_lec=0 n_scaf=0
+    while IFS= read -r num; do
+      [[ -n "$num" ]] || continue
       local tex="lecture_${num}.tex"
+      local pdf="lecture_${num}.pdf"
+      local notes=""
+      [[ -f "$course_dir/lectures/$pdf" ]] && notes="[PDF]($folder/lectures/$pdf)"
+      [[ -f "$course_dir/lectures/$tex" ]] && notes="${notes:+$notes · }[tex]($folder/lectures/$tex)"
       if [[ -f "$course_dir/lectures/$tex" ]] && lecture_is_scaffold "$course_dir/lectures/$tex"; then
-        continue
+        notes="${notes:+$notes · }*not yet written*"
+        n_scaf=$((n_scaf + 1))
+      else
+        n_lec=$((n_lec + 1))
       fi
-      local row="| $num | [PDF]($folder/lectures/$base)"
-      [[ -f "$course_dir/lectures/$tex" ]] && row="$row · [tex]($folder/lectures/$tex)"
-      lec_rows+="$row |"$'\n'
-      n_lec=$((n_lec + 1))
-    done < <(find "$course_dir/lectures" -maxdepth 1 -name 'lecture_*.pdf' 2>/dev/null | sort)
+      lec_rows+="| $num | $notes |"$'\n'
+    done < <(find "$course_dir/lectures" -maxdepth 1 \( -name 'lecture_*.tex' -o -name 'lecture_*.pdf' \) 2>/dev/null \
+             | sed -E 's@.*/lecture_([0-9]+)\.(tex|pdf)$@\1@' | sort -u | sort -n)
 
     if [[ -n "$lec_rows" ]]; then
       section+="### Lectures"$'\n\n'
@@ -175,55 +196,82 @@ generate_readme() {
       section+='|---|-------|'$'\n'
       section+="$lec_rows"$'\n'
       total_lec=$((total_lec + n_lec))
+      total_scaf=$((total_scaf + n_scaf))
     fi
 
-    # Homework: only files with actual written solutions.
-    local hw_rows="" n_hw=0
-    while IFS= read -r sol_tex; do
-      [[ -n "$sol_tex" ]] || continue
-      hw_is_done "$sol_tex" || continue
-      local base="${sol_tex##*/}"          # hw01_sol.tex
-      local num="${base#hw}"
-      num="${num%%_sol.tex}"               # 01
-      local n=$((10#$num))                 # 1, 2, ...
-      local sol_pdf="${base%.tex}.pdf"     # hw01_sol.pdf
-      # Assignment PDFs on disk use mixed naming (hw02.pdf, hw2.pdf, HW2.pdf);
-      # try each variant before giving up on the link.
-      local assign_pdf="" cand
-      for cand in "hw${num}.pdf" "hw$((10#$num)).pdf" "HW${num}.pdf" "HW$((10#$num)).pdf"; do
+    # Homework: index EVERY homework on disk — solution files (hwNN_sol.tex)
+    # and bare assignment PDFs alike. Unwritten solution scaffolds are marked
+    # rather than hidden. Numbers iterate (hw03, hw10, ...), so collect the
+    # union of numbers and sort numerically.
+    local hw_rows="" n_hw_done=0
+    while IFS= read -r n; do
+      [[ -n "$n" ]] || continue
+      local num
+      printf -v num '%02d' "$n"
+      # solution file (padded or bare numbering)
+      local cand sol_tex="" assign_pdf=""
+      for cand in "hw${num}_sol.tex" "hw${n}_sol.tex"; do
+        [[ -f "$course_dir/homework/$cand" ]] && sol_tex="$cand" && break
+      done
+      # assignment pdf (mixed naming on disk: hw02.pdf, hw2.pdf, HW2.pdf)
+      for cand in "hw${num}.pdf" "hw${n}.pdf" "HW${num}.pdf" "HW${n}.pdf"; do
         [[ -f "$course_dir/homework/$cand" ]] && assign_pdf="$cand" && break
       done
       local assign_link="—"
       [[ -n "$assign_pdf" ]] && assign_link="[assignment]($folder/homework/$assign_pdf)"
       [[ -f "$course_dir/homework/hw_packet.pdf" ]] && assign_link="[packet]($folder/homework/hw_packet.pdf)"
-      local row="| $n | $assign_link | [tex]($folder/homework/$base)"
-      [[ -f "$course_dir/homework/$sol_pdf" ]] && row="$row · [pdf]($folder/homework/$sol_pdf)"
-      hw_rows+="$row |"$'\n'
-      n_hw=$((n_hw + 1))
-    done < <(find "$course_dir/homework" -maxdepth 1 -name 'hw*_sol.tex' 2>/dev/null | sort)
+      local sol_links="—" written=0
+      if [[ -n "$sol_tex" ]]; then
+        sol_links="[tex]($folder/homework/$sol_tex)"
+        local sol_pdf="${sol_tex%.tex}.pdf"
+        [[ -f "$course_dir/homework/$sol_pdf" ]] && sol_links="$sol_links · [pdf]($folder/homework/$sol_pdf)"
+        if hw_is_done "$course_dir/homework/$sol_tex"; then
+          written=1
+        else
+          sol_links="$sol_links · *not yet written*"
+        fi
+      fi
+      (( written )) && n_hw_done=$((n_hw_done + 1))
+      hw_rows+="| $n | $assign_link | $sol_links |"$'\n'
+    done < <(find "$course_dir/homework" -maxdepth 1 \
+               \( -name 'hw*_sol.tex' \
+                  -o \( -name 'hw[0-9]*.pdf' ! -name '*_sol.pdf' \) \
+                  -o \( -name 'HW[0-9]*.pdf' ! -name '*_sol.pdf' \) \) 2>/dev/null \
+             | sed -E -e 's@.*/hw0*([0-9]+)_sol\.tex$@\1@' \
+                      -e 's@.*/[hH][wW]0*([0-9]+)\.pdf$@\1@' \
+             | sort -u | sort -n)
 
     if [[ -n "$hw_rows" ]]; then
       section+="### Homework"$'\n\n'
       section+='| HW | Assignment | My solutions |'$'\n'
       section+='|----|------------|--------------|'$'\n'
       section+="$hw_rows"$'\n'
-      total_hw=$((total_hw + n_hw))
+      total_hw=$((total_hw + n_hw_done))
     fi
 
-    # Course appears at all only when something is finished.
+    # Course appears whenever anything exists on disk for it.
     [[ -n "$section" ]] || continue
 
     nav+="${nav:+ · }[$label](#$folder)"
     body+="<a id=\"$folder\"></a>"$'\n\n'
     body+="## $label — $longname"$'\n\n'
-    body+="Textbook: $textbook"$'\n\n'
+    # Textbook: cite it, and link every root <course>_textbook*.pdf so the
+    # book itself is clickable from the README.
+    local tb_links="" tb
+    for tb in "$REPO_ROOT"/${folder}_textbook*.pdf; do
+      [[ -f "$tb" ]] || continue
+      local tb_base="${tb##*/}"
+      tb_links="${tb_links:+$tb_links · }[PDF](${tb_base})"
+    done
+    body+="Textbook: $textbook${tb_links:+ · $tb_links}"$'\n\n'
     body+="$section"
   done
 
   {
     printf '# fa26_books\n\n'
     printf 'LaTeX lecture notes, homework write-ups, and comprehensive solutions for Fall 2026.\n'
-    printf 'Only completed work is indexed; every PDF opens right in your browser.\n\n'
+    printf 'Every lecture and homework is indexed — unwritten files are\n'
+    printf 'marked — and every PDF opens right in your browser.\n\n'
 
     if [[ -n "$nav" ]]; then
       printf '**Jump to:** %s\n\n' "$nav"
@@ -231,6 +279,7 @@ generate_readme() {
 
     local -a stats=()
     (( total_lec > 0 )) && stats+=("**${total_lec}** $(plural "$total_lec" "lecture note")")
+    (( total_scaf > 0 )) && stats+=("**${total_scaf}** $(plural "$total_scaf" "unstarted scaffold")")
     (( total_hw  > 0 )) && stats+=("**${total_hw}** $(plural "$total_hw" "homework write-up")")
     (( total_sol > 0 )) && stats+=("**${total_sol}** $(plural "$total_sol" "solution manual")")
     if (( ${#stats[@]} > 0 )); then
@@ -239,10 +288,33 @@ generate_readme() {
       printf '%s\n\n' "${stats_line% · }"
     fi
 
+    # Latest review plan (dated filenames sort chronologically).
+    local latest_review_pdf rv_links
+    latest_review_pdf="$(find "$REPO_ROOT/review" -maxdepth 1 -name 'to_review_*.pdf' 2>/dev/null | sort | tail -n 1)"
+    if [[ -n "$latest_review_pdf" ]]; then
+      local rv_base="${latest_review_pdf##*/}"
+      local rv_tex="${rv_base%.pdf}.tex"
+      rv_links="[PDF](review/$rv_base)"
+      [[ -f "$REPO_ROOT/review/$rv_tex" ]] && rv_links="$rv_links · [tex](review/$rv_tex)"
+      printf '**Latest review plan:** %s\n\n' "$rv_links"
+    fi
+
     if [[ -z "$body" ]]; then
-      printf '_Nothing finished yet — scaffolds and work in progress are not indexed._\n'
+      printf '_Nothing on disk yet — create files with the scripts and they appear here._\n'
     else
       printf '%s' "$body"
+    fi
+
+    # One-off extras: practice problems and reference sheets.
+    local extras="" x
+    while IFS= read -r x; do
+      [[ -n "$x" ]] || continue
+      local xb="${x##*/}"
+      local xd="$(dirname "$x")"; xd="${xd##*/}"
+      extras+="- [${xb%.pdf}]($xd/$xb)"$'\n'
+    done < <(find "$REPO_ROOT/practice" "$REPO_ROOT/reference" -maxdepth 1 -name '*.pdf' 2>/dev/null | sort)
+    if [[ -n "$extras" ]]; then
+      printf '## Practice & reference\n\n%s\n' "$extras"
     fi
 
     printf -- '---\n\n'
@@ -258,6 +330,7 @@ generate_readme() {
     printf '├── math110/ math113/ math118/ stat150/    # same shape\n'
     printf '├── practice/                # extra practice problems\n'
     printf '├── reference/               # LaTeX/vimtex cheatsheet\n'
+    printf '├── review/                  # dated to-review study plans\n'
     printf '└── scripts/\n'
     printf '    ├── new_lecture_note.sh  # scaffold a new lecture note\n'
     printf '    ├── new_homework.sh      # scaffold a homework solutions file\n'
@@ -285,8 +358,9 @@ generate_readme() {
     printf '  ...your write-up...\n'
     printf '\\end{solution}\n'
     printf '```\n\n'
-    printf 'A file appears in the index above only once it has real content —\n'
-    printf 'scaffolds never show up.\n\n'
+    printf 'Every `lecture_NN` and `hwNN_sol.tex` shows up in the index as soon as\n'
+    printf 'it exists on disk (unwritten ones are marked); `solutions.tex` appears\n'
+    printf 'once it has real content. The index regenerates on every sync.\n\n'
     printf 'Build changed notes and push:\n\n'
     printf '```bash\n'
     printf './scripts/sync.sh                    # builds only changed .tex, then commits & pushes\n'
@@ -304,21 +378,30 @@ generate_readme
 # ---------- Stage, commit, push ----------
 git add -A
 
+committed=0
 if git diff --cached --quiet; then
   printf '\nNothing new to commit in the notes repo.\n'
 else
   printf '\nStaged changes:\n'
   git diff --cached --stat
-
-  BRANCH="$(git branch --show-current)"
   git commit -m "$COMMIT_MESSAGE"
-  if git remote get-url origin >/dev/null 2>&1; then
-    git pull --rebase origin "$BRANCH"
-    git push origin HEAD
-    printf '\nPushed to origin/%s\n' "$BRANCH"
-  else
-    printf '\nNo origin remote; committed locally only.\n'
+  committed=1
+fi
+
+# Push everything committed — including commits a previous run left unpushed
+# (e.g. a failed push). With nothing to push git just says up-to-date.
+BRANCH="$(git branch --show-current)"
+if git remote get-url origin >/dev/null 2>&1; then
+  if ! git pull --rebase origin "$BRANCH"; then
+    printf '\nNotes repo: git pull --rebase hit a conflict.\n' >&2
+    printf 'Fix it with: git status  (edit the files)  git add -A  git rebase --continue\n' >&2
+    printf 'then re-run sync.sh — it will finish the push.\n' >&2
+    exit 1
   fi
+  git push origin HEAD
+  printf '\nPushed to origin/%s\n' "$BRANCH"
+elif (( committed )); then
+  printf '\nNo origin remote; committed locally only.\n'
 fi
 
 # ---------- Also sync the nvim config repo ----------
@@ -326,20 +409,29 @@ NVIM_REPO="$HOME/.config/nvim"
 
 if ! git -C "$NVIM_REPO" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   printf '\nnvim config: not a git repo; skipping.\n'
-elif git -C "$NVIM_REPO" diff --quiet >/dev/null 2>&1 \
-  && git -C "$NVIM_REPO" diff --cached --quiet >/dev/null 2>&1 \
-  && [[ -z "$(git -C "$NVIM_REPO" ls-files --others --exclude-standard)" ]]; then
-  printf '\nnvim config: nothing to sync.\n'
 else
-  printf '\nSyncing nvim config repo (%s)...\n' "$NVIM_REPO"
-  git -C "$NVIM_REPO" add -A
-  git -C "$NVIM_REPO" commit -m "$COMMIT_MESSAGE"
+  nvim_committed=0
+  if git -C "$NVIM_REPO" diff --quiet >/dev/null 2>&1 \
+    && git -C "$NVIM_REPO" diff --cached --quiet >/dev/null 2>&1 \
+    && [[ -z "$(git -C "$NVIM_REPO" ls-files --others --exclude-standard)" ]]; then
+    printf '\nnvim config: no new changes.\n'
+  else
+    printf '\nSyncing nvim config repo (%s)...\n' "$NVIM_REPO"
+    git -C "$NVIM_REPO" add -A
+    git -C "$NVIM_REPO" commit -m "$COMMIT_MESSAGE"
+    nvim_committed=1
+  fi
   if git -C "$NVIM_REPO" remote get-url origin >/dev/null 2>&1; then
     NVIM_BRANCH="$(git -C "$NVIM_REPO" branch --show-current)"
-    git -C "$NVIM_REPO" pull --rebase origin "$NVIM_BRANCH"
+    if ! git -C "$NVIM_REPO" pull --rebase origin "$NVIM_BRANCH"; then
+      printf '\nnvim config: git pull --rebase hit a conflict.\n' >&2
+      printf 'Fix it in %s: git status  (edit)  git add -A  git rebase --continue\n' "$NVIM_REPO" >&2
+      printf 'then re-run sync.sh — it will finish the push.\n' >&2
+      exit 1
+    fi
     git -C "$NVIM_REPO" push origin HEAD
     printf 'Pushed nvim config to origin/%s\n' "$NVIM_BRANCH"
-  else
+  elif (( nvim_committed )); then
     printf 'nvim config: no origin remote; committed locally only.\n'
   fi
 fi

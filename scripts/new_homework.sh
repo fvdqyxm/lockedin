@@ -406,4 +406,5 @@ printf 'Created %s\n' "$target"
 printf 'Scaffolded %d problem slot(s) (%s).\n' "$problem_count" "$problem_source"
 printf 'Open it with: nvim %q\n' "$target"
 printf 'Build + push with: ./sync.sh\n'
-printf 'Note: it stays out of the README index until it has real solution content.\n'
+printf 'Note: it appears in the README index right away, marked *not yet written*\n'
+printf 'until the Solutions section has real content.\n'
