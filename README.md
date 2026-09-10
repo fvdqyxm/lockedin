@@ -6,7 +6,7 @@ marked — and every PDF opens right in your browser.
 
 **Jump to:** [Math 104](#math104) · [Math 110](#math110) · [Math 113](#math113) · [Math 118](#math118) · [Stat 150](#stat150)
 
-**10** lecture notes · **3** homework write-ups
+**11** lecture notes · **4** homework write-ups
 
 **Latest review plan:** [PDF](review/to_review_2026-09-08.pdf) · [tex](review/to_review_2026-09-08.tex)
 
@@ -93,7 +93,7 @@ Textbook: Boggess & Narcowich, *A First Course in Wavelets with Fourier Analysis
 
 | HW | Assignment | My solutions |
 |----|------------|--------------|
-| 1 | [assignment](math118/homework/hw01.pdf) | [tex](math118/homework/hw01_sol.tex) · [pdf](math118/homework/hw01_sol.pdf) · *not yet written* |
+| 1 | [assignment](math118/homework/hw01.pdf) | [tex](math118/homework/hw01_sol.tex) · [pdf](math118/homework/hw01_sol.pdf) |
 
 <a id="stat150"></a>
 
@@ -107,6 +107,7 @@ Textbook: Durrett, *Essentials of Stochastic Processes* (3rd ed.) · [PDF](stat1
 |---|-------|
 | 01 | [PDF](stat150/lectures/lecture_01.pdf) · [tex](stat150/lectures/lecture_01.tex) |
 | 02 | [PDF](stat150/lectures/lecture_02.pdf) · [tex](stat150/lectures/lecture_02.tex) |
+| 03 | [PDF](stat150/lectures/lecture_03.pdf) · [tex](stat150/lectures/lecture_03.tex) |
 
 ## Practice & reference
 

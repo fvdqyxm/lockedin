@@ -70,34 +70,160 @@
 \section*{Solutions}
 \subsubsection*{Problem 1}
 \begin{solution}
+    By the triangle inequality,
+    \[\norm{u} = \norm{(u - v) + v} \le \norm{u - v} + \norm{v}\]
+    and, since $\norm{v - u} = \norm{u - v}$ by absolute homogeneity,
+    \[\norm{v} = \norm{(v - u) + u} \le \norm{u - v} + \norm{u}.\]
+    Rearranging these two gives
+    \[-\norm{u - v} \le \norm{u} - \norm{v} \le \norm{u - v},\]
+    which is what we wanted.
 % Write your proof, calculation, or argument here.
-\end{solution}
+\end{solution} 
 \subsubsection*{Problem 2}
 \begin{solution}
+    Since commutativity holds over addition and multiplication,
+    \[\langle u, v\rangle = \sum_{i=1}^n u_i \overline{v_i}
+    = \overline{\sum_{i=1}^n v_i \overline{u_i}} = \overline{\langle v, u\rangle}.\]
+    Linearity on the first term and on the second term:
+    \begin{align}
+    \langle au+bw,v\rangle
+    &=\sum_{i=1}^n (au_i+bw_i)\overline{v_i}
+    =a\langle u,v\rangle+b\langle w,v\rangle,\\
+    \langle u,av+bw\rangle
+    &=\sum_{i=1}^n u_i\left(\overline{a}\,\overline{v_i}+\overline{b}\,\overline{w_i}\right)
+    =\overline{a}\langle u,v\rangle+\overline{b}\langle u,w\rangle.
+    \end{align}
+    And for positive definiteness, $\langle u, u\rangle = \sum_{i=1}^n \abs{u_i}^2 \ge 0$, which is 0 only when $u = 0$.
+
+    So this is an inner product on $\C^n$.
 % Write your proof, calculation, or argument here.
 \end{solution}
 \subsubsection*{Problem 3}
 \begin{solution}
+    With $v_2 = -\frac{1}{2}v_1$,
+\begin{align}
+\langle V,V\rangle
+&=
+(\overline{v_1},\overline{v_2})
+\begin{pmatrix}
+1 & 2\\
+2 & 4
+\end{pmatrix}
+\begin{pmatrix}
+v_1\\
+v_2
+\end{pmatrix}
+=
+(\overline{v_1},\overline{v_2})
+\begin{pmatrix}
+v_1+2v_2\\
+2v_1+4v_2
+\end{pmatrix}\\
+&=
+(\overline{v_1},\overline{v_2})
+\begin{pmatrix}
+0\\
+0
+\end{pmatrix}
+=0.
+\end{align}
+So $\langle V, V\rangle = 0$ whenever $v_1 + 2v_2 = 0$, for example $V = \binom{2}{-1} \ne 0$.
+So positive definiteness fails, and this is not an inner product.
 % Write your proof, calculation, or argument here.
 \end{solution}
 \subsubsection*{Problem 4}
 \begin{solution}
-% Write your proof, calculation, or argument here.
+Compute the null space:
+\begin{align}
+\mathbf{x}\cdot
+\begin{pmatrix}
+1\\
+-2\\
+1
+\end{pmatrix}
+&=0\\
+x-2y+z&=0\\
+x&=2y-z
+\end{align}
+
+Thus,
+\[
+\begin{pmatrix}
+x\\
+y\\
+z
+\end{pmatrix}
+=
+y\begin{pmatrix}
+2\\
+1\\
+0
+\end{pmatrix}
++
+z\begin{pmatrix}
+-1\\
+0\\
+1
+\end{pmatrix}.
+\]
+
+Therefore,
+\[
+W^\perp
+=
+\operatorname{span}
+\left\{
+\begin{pmatrix}
+2\\
+1\\
+0
+\end{pmatrix},
+\begin{pmatrix}
+-1\\
+0\\
+1
+\end{pmatrix}
+\right\}.
+\]
 \end{solution}
 \subsubsection*{Problem 5}
 \begin{solution}
+Since $f(t) = 1$ on $[0,1]$,
+\[\langle f, g\rangle = \int_0^1 g(t)\,dt,\]
+which is 0 exactly when $g$ has average value 0 on $[0,1]$ (the average is just $\frac{1}{1-0}$ times this integral).
+
+So $f^\perp$ is the set of functions with average value zero.
 % Write your proof, calculation, or argument here.
 \end{solution}
+
 \subsubsection*{Problem 6}
 \begin{solution}
+    Integrating by parts and using $\int_0^\pi f(t)\cos(t)\,dt = 0$,
+    \begin{align}
+    \langle f',\sin(t)\rangle
+    &=\left[f(t)\sin(t)\right]_0^\pi-\int_0^\pi f(t)\cos(t)\,dt\\
+    &=0-0=0,
+    \end{align}
+    since $\sin(0) = \sin(\pi) = 0$.
+
+    So $f'$ is orthogonal to $\sin(t)$ in $L^2[0,\pi]$.
 % Write your proof, calculation, or argument here.
 \end{solution}
+
 \subsubsection*{Problem 7}
 \begin{solution}
-% Write your proof, calculation, or argument here.
+Suppose $\ip{u_0}{v} = \ip{u_1}{v}$ for all $v \in V$.
+Take $v = u_0 - u_1$ and subtract, using linearity:
+\[\ip{u_0 - u_1}{u_0 - u_1}
+= \ip{u_0}{u_0 - u_1} - \ip{u_1}{u_0 - u_1} = 0.\]
+By positive definiteness this only happens when $u_0 - u_1 = 0$, so $\boxed{u_0 = u_1}$.
 \end{solution}
 \subsubsection*{Problem 8}
 \begin{solution}
-% Write your proof, calculation, or argument here.
+Let $\set{u_1, \dots, u_n}$ be orthonormal, so $\ip{u_i}{u_j} = 0$ for $i \ne j$ and $\ip{u_j}{u_j} = 1$.
+If $c_1 u_1 + \cdots + c_n u_n = 0$, take the inner product with $u_j$ and use linearity:
+\[0 = \sum_{i=1}^n c_i\, \ip{u_i}{u_j} = c_j.\]
+So every $c_j = 0$ and the vectors are linearly independent.
+An infinite set counts as linearly independent when every finite subset is, and any finite subset of the orthonormal set is orthonormal, so it is linearly independent.
 \end{solution}
 \end{document}
