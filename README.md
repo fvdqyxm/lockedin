@@ -6,7 +6,7 @@ marked — and every PDF opens right in your browser.
 
 **Jump to:** [Math 104](#math104) · [Math 110](#math110) · [Math 113](#math113) · [Math 118](#math118) · [Stat 150](#stat150)
 
-**11** lecture notes · **4** homework write-ups
+**12** lecture notes · **5** homework write-ups
 
 **Latest review plan:** [PDF](review/to_review_2026-09-08.pdf) · [tex](review/to_review_2026-09-08.tex)
 
@@ -28,7 +28,7 @@ Textbook: Ross, *Elementary Analysis* (2nd ed.) · [PDF](math104_textbook.pdf)
 | HW | Assignment | My solutions |
 |----|------------|--------------|
 | 1 | [assignment](math104/homework/hw01.pdf) | [tex](math104/homework/hw01_sol.tex) · [pdf](math104/homework/hw01_sol.pdf) |
-| 2 | [assignment](math104/homework/hw02.pdf) | [tex](math104/homework/hw02_sol.tex) · [pdf](math104/homework/hw02_sol.pdf) · *not yet written* |
+| 2 | [assignment](math104/homework/hw02.pdf) | [tex](math104/homework/hw02_sol.tex) · [pdf](math104/homework/hw02_sol.pdf) |
 
 <a id="math110"></a>
 
@@ -88,6 +88,7 @@ Textbook: Boggess & Narcowich, *A First Course in Wavelets with Fourier Analysis
 | 01 | [PDF](math118/lectures/lecture_01.pdf) · [tex](math118/lectures/lecture_01.tex) |
 | 02 | [PDF](math118/lectures/lecture_02.pdf) · [tex](math118/lectures/lecture_02.tex) |
 | 03 | [PDF](math118/lectures/lecture_03.pdf) · [tex](math118/lectures/lecture_03.tex) |
+| 04 | [PDF](math118/lectures/lecture_04.pdf) · [tex](math118/lectures/lecture_04.tex) |
 
 ### Homework
 
