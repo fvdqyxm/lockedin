@@ -220,15 +220,23 @@ structure proofs with \texttt{claim}, \texttt{idea}, \texttt{proofsketch}.
 % =====================================================================
 \chapterbanner{1}{Introduction}{Ross, \S\S 1--6:\ natural, rational, and real numbers; the completeness axiom}
 \begin{example}[1.1]
-\label{ex:label}
 We proceed via induction.
 Let $a_n = \sum_{i=1}^{n} i^2$.\par  Then $a_1 = 1 = \frac{1}{6}(1)(2)(3)$, so the base case
     holds.
     \par Then, we proceed via induction. Suppose $a_i = \frac{1}{6}i(i + 1) (2i + 1)$
     for $i \in \{1, 2, 3, 4, \cdots, k\}.$ 
     \par We will show that this implies that $a_{k +
-    1} = frac{1}{6}(k + 1)(k + 2)(2k + 3)$
+    1} = \frac{1}{6}(k + 1)(k + 2)(2k + 3)$
+    \par We add $a_{k + 1} = a_{k} + (k + 1)^2 = \frac{1}{6} (k)(k+1)(2k+1) + (k+1)^2$
+    This is from our inductive hypothesis, and yields $$a_{k+1} = (k +
+    1)\left(\frac{1}{6}(k)(2k + 1) + k + 1\right)$$
+    Pulling out $\frac{1}{6}$ yields $\frac{1}{6}(k + 1)(k(2k + 1) + 6k + 6)$
+    And the second term of that polynomial is $$2k^2 + 7k + 6 = 2k^2 + 4k + 3k + 6 = (2k
+    +3)(k + 2)$$
+    satisfying our inductive hypothesis.
 \end{example}
+% REST OF CHAPTER ONE IS EASY, SO CONTINUING TO CHAPTER 2 FOR 104
+
 % \exercise{1.1}
 % \begin{solution}
 %   ...
@@ -238,7 +246,26 @@ Let $a_n = \sum_{i=1}^{n} i^2$.\par  Then $a_1 = 1 = \frac{1}{6}(1)(2)(3)$, so t
 %  CHAPTER 2 — SEQUENCES
 % =====================================================================
 \chapterbanner{2}{Sequences}{Ross, \S\S 7--16:\ limits of sequences, limit theorems, monotone/Cauchy, subsequences, limsup/liminf, series}
+\begin{example}[2.2]
+Show that $\sqrt[3]{2}, \sqrt[7]{5}, \sqrt[4]{13}$ are not rational.
+\par For the first for sake of contradiction set $\sqrt[3]{2} = \frac{p}{q}$ for $p, q \in \mathbb{Z}^{+}, \gcd(p, q)
+= 1.$
+Then, cubing both sides, we have $2 = \frac{p^3}{q^3} \rightarrow p^3 = 2q^3.$
+\par However, since the rhs is divisible by 2, we have $2 \mid p \rightarrow p = 2p', p'
+\in \Z^{+}.$
+\par Substituting this in yields $$(2p')^3 = 2q^3 \rightarrow 4(p')^3 = q^3$$
+So the analogous idea implies $2 \mid q$. However this is a contradiction, as $\gcd(p,
+q) = 1$ but we found 2 divides both $p$ and $q$.
 
+\par We can show the others analogously.
+\end{example}
+\begin{example}[2.3]
+Show that $\sqrt{2 + \sqrt2}$ is not rational.
+Suppose for sake of contradiction we set $\sqrt{2 + \sqrt{2}} = \frac{p}{q}$ again, we assume $p, q \in \Z^{+}$ and $\gcd(p, q) = 1$.
+Squaring, we immediately have a contradiction because $$2 + \sqrt2 = \frac{p^2}{q^2}
+\rightarrow \sqrt{2} = \frac{p^2}{q^2} - 2$$
+and the lhs is irrational but the rhs is rational.
+\end{example}
 % \exercise{7.1}
 % \begin{solution}
 %   ...
@@ -249,7 +276,58 @@ Let $a_n = \sum_{i=1}^{n} i^2$.\par  Then $a_1 = 1 = \frac{1}{6}(1)(2)(3)$, so t
 % =====================================================================
 \chapterbanner{3}{Continuity}{Ross, \S\S 17--22:\ continuous functions, properties, uniform continuity, limits of functions}
 
+\begin{example}[3.1]
+For the set $\N$, we have: (for arbitrary $a, b, c \in \N$)
+\begin{itemize}
+    \item a1: associativity holds $(a + b) + c = a+(b+c)$
+    \item a2: commutativity holds. $a + b = b + a$
+    \item a3: identity exists (0)
+
+\end{itemize}
+
+We continue and we see the existence of a multiplicative inverse, namely for
+$a \in \N$, $\exists a^{-1} \text{ s.t. } aa^{-1} = 1$ does not hold. For example
+consider $a = 2$ and $a^{-1} = \frac{1}{2} \notin \N$.
+$\Z$ similarly does not have a multiplicative inverse for all $a \in \Z$.
+\end{example}
+\begin{example}[3.2]
+Commutativity of addition is shown in the proof $(vi)$ to show $b^{-1} * ab = ab *
+b^{-1} = a$
+\par It's shown in part $(ii)$, while adding $0$ at the beginning and then while
+adding to the rhs adding it to the right side (which is commutativity) then cancelling
+the zero out.
+\par Shown in $(iii)$, where $0 \cdot b = b \cdot 0 = 0.$
+\end{example}
+\begin{example}[3.3]
+We wish to show that $ac= bc$ and $c \ne 0$ implies $a = b.$
+We have $$ac + (-ac) = bc + (-ac) \rightarrow 0 = c(b - a)$$
+Then we write $$c^{-1} \cdot 0 = b - a \rightarrow 0 = b - a$$
+Adding $a$ on both sides yields $a = b$.
+
+ To show $ab = 0$ implies $a = 0$ or $b = 0$ for $a, b \in \R$
+\par We proceed by contradiction. Suppose $a \ne 0, b \ne 0.$
+Notice we can write $$a^{-1} (ab) b^{-1} = a^{-1} \cdot 0 \cdot b^{-1}$$
+So the lhs is 1 but the rhs is 0, a contradiction.
+\end{example}
+\begin{example}[3.4]
+To show $0 < 1$ we can suppose for sake of contradiction $0 \ge 1$
+Then, we'd have $-1 \ge 0$, adding $-1$ to both sides
+Multiplying both sides by $(-1)$ we'd have $$(-1)(-1) \le 0 \rightarrow 1 \le 0.$$
+Even though we used less than or equal to, obviously $0 \ne 1$ by definition, so we have
+a contradiction.
+Given the ordering properties, we wish to show if $0 < a$, then $0 < a^{-1}.$
+% We have $a a^{-1} = 1 \rightarrow a^{-1} = \frac{1}{a}.$
+\par Suppose for sake of contradiction $a^{-1} \le 0.$ Then we have, multiplying a on both
+sides $$a \cdot a^{-1} \le a \cdot 0 \rightarrow 1 \le 0$$ which is a contradiction.
+\par To prove $0 < a < b$ implies $0 < b^{-1} < a^{-1}$, we go in multiple steps.
+\par We know that $a^{-1}$ and $b^{-1}$ are positive, we just wish to establish order.
+We multiply $0 < a < b$ by the constant $a^{-1}$ to get $0 < a a^{-1} < ba^{-1}.$
+\par Then multiply by $b^{-1}$ to it to get $$0 < b^{-1} a a^{-1} < b a^{-1}b^{-1}
+\rightarrow 0 < b^{-1} < a^{-1}$$
+% \par To show that $0 
+\end{example}
 % =====================================================================
+%
 %  CHAPTER 4 — SEQUENCES AND SERIES OF FUNCTIONS
 % =====================================================================
 \chapterbanner{4}{Sequences and Series of Functions}{Ross, \S\S 23--27:\ power series, uniform convergence, term-by-term calculus}

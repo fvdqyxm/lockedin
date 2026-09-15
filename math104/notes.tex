@@ -1,0 +1,443 @@
+% !TEX program = lualatex
+% Math 104 — chapter-by-chapter notes scaffold
+% ============================================================
+%  Math 104 — Chapter-by-Chapter Reading Notes
+%  Ross, \emph{Elementary Analysis} (2nd ed.)
+%  Keshav Ramamurthy — Fall 2026
+% ------------------------------------------------------------
+%  HOW TO USE (one growing document, one banner per chapter)
+%
+%    Find the chapter banner and the section heading below it,
+%    then type your notes directly underneath:
+%
+%        Big idea: every Cauchy sequence converges iff ...
+%
+%    Structure the important ideas with the note environments
+%    (numbered within the current chapter):
+%
+%        \begin{definition} ... \end{definition}
+%        \begin{theorem} ... \end{theorem}
+%        \begin{example}  ... \end{example}
+%        \begin{remark}   ... \end{remark}
+%        \begin{idea}     ... \end{idea}
+%
+%    Add a missing section:  \notesec{§1.4}{Title}
+%    Add a chapter:          \chapterbanner{1}{Chapter 1}{Title}{description}
+% ============================================================
+\documentclass[11pt]{article}
+
+\usepackage{fontspec}
+\usepackage{microtype}
+\usepackage{mathtools,amssymb,amsfonts,amsthm,bm}
+\usepackage{enumitem}
+\usepackage{booktabs,array,xcolor}
+\usepackage{geometry,fancyhdr,setspace}
+\usepackage{etoolbox}
+\usepackage[most]{tcolorbox}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+% ---------- Page and paragraph rhythm (matches lecture/solutions templates) ----------
+\geometry{margin=1in,headheight=15pt}
+\setstretch{1.12}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em plus 0.12em minus 0.08em}
+\setlength{\abovedisplayskip}{0.8em plus 0.2em minus 0.1em}
+\setlength{\belowdisplayskip}{0.8em plus 0.2em minus 0.1em}
+\allowdisplaybreaks[3]
+\setlist{leftmargin=*,topsep=0.35em,itemsep=0.15em,parsep=0pt}
+
+% ---------- Palette (matches reference cheatsheet) ----------
+\definecolor{ink}{HTML}{1E293B}
+\definecolor{navy}{HTML}{183B56}
+\definecolor{paperblue}{HTML}{E8F1F8}
+\definecolor{gold}{HTML}{FFF3CD}
+\definecolor{mint}{HTML}{E8F5E9}
+\definecolor{muted}{HTML}{52606D}
+\definecolor{rule}{HTML}{C9D5DF}
+\color{ink}
+
+% ---------- Metadata ----------
+\newcommand{\studentname}{Keshav Ramamurthy}
+\newcommand{\coursename}{Math 104}
+\newcommand{\courselongname}{Real Analysis}
+\newcommand{\textbookname}{Ross, \emph{Elementary Analysis} (2nd ed.)}
+\newcommand{\term}{Fall 2026}
+
+% ---------- Core notation (same as ~/.config/nvim/textemplate.tex) ----------
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\given}{\,\middle\vert\,}
+\newcommand{\indep}{\perp\!\!\!\perp}
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\deriv}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+\newcommand{\pderiv}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\lto}{\longrightarrow}
+\newcommand{\st}{\text{ such that }}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ker}{ker}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\spec}{spec}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+% ---------- Note environments (numbered by chapter) ----------
+\newcounter{chap}
+\newtheoremstyle{notestyle}{0.7em}{0.7em}{\itshape}{}{}{\bfseries}{.5em}{}
+\theoremstyle{notestyle}
+\newtheorem{theorem}{Theorem}[chap]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+% ---------- Note machinery ----------
+% Chapter banner: \chapterbanner{1}{Chapter 1}{Groups and Subgroups}{Fraleigh: ...}
+\newtcolorbox{chapterbox}[2]{%
+  enhanced,
+  colback=paperblue, colframe=navy, boxrule=0.7pt, arc=2.5pt,
+  left=10pt, right=10pt, top=12pt, bottom=8pt,
+  boxed title style={colback=navy, colframe=navy, arc=2pt, boxrule=0pt,
+    left=8pt, right=8pt, top=3pt, bottom=3pt},
+  attach boxed title to top left={yshift=-2.4mm, xshift=5mm},
+  title={\sffamily\bfseries\color{white}\large #1\quad #2}}
+\newcommand{\chapterbanner}[4]{%
+  \clearpage
+  \setcounter{chap}{#1}%
+  \setcounter{theorem}{0}%
+  \phantomsection
+  \addcontentsline{toc}{section}{#2\quad #3}%
+  \begin{chapterbox}{#2}{#3}
+    {\small\sffamily\color{muted}#4\par}
+  \end{chapterbox}
+  \medskip\nopagebreak}
+
+% Section heading: \notesec{§1.4}{Title}  →  navy heading + thin rule
+\newcommand{\notesec}[2]{%
+  \par\goodbreak\medskip\nopagebreak
+  {\sffamily\bfseries\color{navy}#1\quad #2}%
+  \par\nobreak\vspace{1.5pt}
+  {\color{rule}\hrule height 0.6pt}\par\nobreak\smallskip\nopagebreak
+  \phantomsection
+  \addcontentsline{toc}{subsection}{#1\quad #2}}
+
+% Quick structure inside notes
+\newenvironment{claim}{\par\smallskip\noindent\textit{Claim.}\ }{\par\smallskip}
+\newenvironment{idea}{\par\smallskip\noindent\textit{Idea.}\ }{\par\smallskip}
+\newenvironment{proofsketch}{\par\smallskip\noindent\textit{Proof sketch.}\ }{\par\smallskip}
+
+% ---------- Header ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\coursename}
+\fancyhead[C]{\courselongname\ — chapter notes}
+\fancyhead[R]{\studentname}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+
+% ---------- Title ----------
+\begin{center}
+  {\Large\sffamily\bfseries\color{navy}\coursename\ -- \courselongname}\\[3pt]
+  {\sffamily\color{muted} Chapter-by-chapter notes on the important ideas}\\[3pt]
+  {\small\sffamily\color{muted}\textbookname\quad\textbullet\quad \term\quad\textbullet\quad \studentname}
+\end{center}
+\medskip
+{\color{rule}\hrule height 0.8pt}
+\bigskip
+
+{\small
+\begin{tcolorbox}[colback=paperblue, colframe=rule, boxrule=0.4pt, arc=2pt,
+  left=7pt, right=7pt, top=5pt, bottom=5pt,
+  title={\sffamily\bfseries\color{navy} Taking notes},
+  colbacktitle=paperblue]
+\sffamily Find the chapter banner, then type under the section heading as you read:
+\begin{center}
+\texttt{\textbackslash notesec\{1A\}\{Span and Linear Independence\}}
+\end{center}
+Record big ideas with \texttt{idea}, definitions with \texttt{definition}, theorems with
+\texttt{theorem}, \texttt{lemma}, \texttt{proposition}, examples with \texttt{example}, and
+warnings with \texttt{remark} --- all numbered within the chapter.
+Add a missing section by copying a \texttt{\textbackslash notesec} slot;
+add a chapter with \texttt{\textbackslash chapterbanner}.
+\end{tcolorbox}
+}
+
+\medskip
+\tableofcontents
+
+\chapterbanner{1}{Part I}{Introduction}{Ross:\ the natural numbers, the rationals and their gaps, the reals, the completeness axiom}
+
+\notesec{§1}{The Set \(\N\) of Natural Numbers}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§2}{The Set \(\Q\) of Rational Numbers}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§3}{The Set \(\R\) of Real Numbers}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§4}{The Completeness Axiom}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§5}{The Symbols \(+\infty\) and \(-\infty\)}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§6}{* A Development of \(\R\)}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\chapterbanner{2}{Part II}{Sequences}{Ross:\ limits, limit theorems, monotone and Cauchy sequences, subsequences, \(\limsup\) and \(\liminf\), series, convergence tests}
+
+\notesec{§7}{Limits of Sequences}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§8}{A Discussion about Proofs}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§9}{Limit Theorems for Sequences}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§10}{Monotone Sequences and Cauchy Sequences}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§11}{Subsequences}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§12}{\(\limsup\)'s and \(\liminf\)'s}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§13}{* Some Topological Concepts in Metric Spaces}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§14}{Series}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§15}{Alternating Series and Integral Tests}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§16}{* Decimal Expansions of Real Numbers}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\chapterbanner{3}{Part III}{Continuity}{Ross:\ continuous functions, the IVT and extreme values, uniform continuity, limits of functions}
+
+\notesec{§17}{Continuous Functions}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§18}{Properties of Continuous Functions}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§19}{Uniform Continuity}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§20}{Limits of Functions}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§21}{* More on Metric Spaces:\ Continuity}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§22}{* More on Metric Spaces:\ Connectedness}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\chapterbanner{4}{Part IV}{Sequences and Series of Functions}{Ross:\ power series, uniform convergence, the Weierstrass \(M\)-test, term-by-term calculus, approximation}
+
+\notesec{§23}{Power Series}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§24}{Uniform Convergence}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§25}{More on Uniform Convergence}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§26}{Differentiation and Integration of Power Series}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§27}{* Weierstrass's Approximation Theorem}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\chapterbanner{5}{Part V}{Differentiation}{Ross:\ derivative rules, the chain rule, the Mean Value Theorem, L'Hospital's rule, Taylor's theorem}
+
+\notesec{§28}{Basic Properties of the Derivative}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§29}{The Mean Value Theorem}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§30}{* L'Hospital's Rule}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§31}{Taylor's Theorem}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\chapterbanner{6}{Part VI}{Integration}{Ross:\ the Riemann integral, its properties, the Fundamental Theorem of Calculus}
+
+\notesec{§32}{The Riemann Integral}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§33}{Properties of the Riemann Integral}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§34}{Fundamental Theorem of Calculus}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§35}{* Riemann--Stieltjes Integrals}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§36}{* Improper Integrals}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\chapterbanner{7}{Part VII}{Capstone}{Ross:\ a discussion of exponents and logarithms, continuous nowhere-differentiable functions}
+
+\notesec{§37}{* A Discussion of Exponents and Logarithms}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{§38}{* Continuous Nowhere-Differentiable Functions}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\end{document}

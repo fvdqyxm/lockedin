@@ -1,8 +1,8 @@
 # fa26_books
 
-LaTeX lecture notes, homework write-ups, and comprehensive solutions for Fall 2026.
-Every lecture and homework is indexed — unwritten files are
-marked — and every PDF opens right in your browser.
+LaTeX lecture notes, homework write-ups, chapter notes, and comprehensive solutions for Fall 2026.
+Every lecture, homework, notes, and solutions file is indexed — unwritten
+files are marked — and every PDF opens right in your browser.
 
 **Jump to:** [Math 104](#math104) · [Math 110](#math110) · [Math 113](#math113) · [Math 118](#math118) · [Stat 150](#stat150)
 
@@ -15,6 +15,10 @@ marked — and every PDF opens right in your browser.
 ## Math 104 — Real Analysis
 
 Textbook: Ross, *Elementary Analysis* (2nd ed.) · [PDF](math104_textbook.pdf)
+
+Comprehensive solutions: [tex](math104/solutions.tex) · [pdf](math104/solutions.pdf) · *not yet written*
+
+Chapter notes: [tex](math104/notes.tex) · [pdf](math104/notes.pdf) · *not yet written*
 
 ### Lectures
 
@@ -35,6 +39,10 @@ Textbook: Ross, *Elementary Analysis* (2nd ed.) · [PDF](math104_textbook.pdf)
 ## Math 110 — Abstract Linear Algebra
 
 Textbook: Axler, *Linear Algebra Done Right* (4th ed.) · [PDF](math110_textbook.pdf)
+
+Comprehensive solutions: [tex](math110/solutions.tex) · [pdf](math110/solutions.pdf) · *not yet written*
+
+Chapter notes: [tex](math110/notes.tex) · [pdf](math110/notes.pdf) · *not yet written*
 
 ### Homework
 
@@ -60,6 +68,10 @@ Textbook: Axler, *Linear Algebra Done Right* (4th ed.) · [PDF](math110_textbook
 
 Textbook: Fraleigh, *A First Course in Abstract Algebra* (7th ed.) · [PDF](math113_textbook.pdf)
 
+Comprehensive solutions: [tex](math113/solutions.tex) · [pdf](math113/solutions.pdf) · *not yet written*
+
+Chapter notes: [tex](math113/notes.tex) · [pdf](math113/notes.pdf) · *not yet written*
+
 ### Lectures
 
 | # | Notes |
@@ -74,12 +86,17 @@ Textbook: Fraleigh, *A First Course in Abstract Algebra* (7th ed.) · [PDF](math
 |----|------------|--------------|
 | 1 | [assignment](math113/homework/hw01.pdf) | [tex](math113/homework/hw01_sol.tex) · [pdf](math113/homework/hw01_sol.pdf) |
 | 2 | [assignment](math113/homework/hw02.pdf) | [tex](math113/homework/hw02_sol.tex) · [pdf](math113/homework/hw02_sol.pdf) |
+| 3 | [assignment](math113/homework/hw3.pdf) | [tex](math113/homework/hw03_sol.tex) · [pdf](math113/homework/hw03_sol.pdf) · *not yet written* |
 
 <a id="math118"></a>
 
 ## Math 118 — Fourier Analysis
 
 Textbook: Boggess & Narcowich, *A First Course in Wavelets with Fourier Analysis* (2nd ed.) · [PDF](math118_textbook.pdf)
+
+Comprehensive solutions: [tex](math118/solutions.tex) · [pdf](math118/solutions.pdf) · *not yet written*
+
+Chapter notes: [tex](math118/notes.tex) · [pdf](math118/notes.pdf) · *not yet written*
 
 ### Lectures
 
@@ -101,6 +118,10 @@ Textbook: Boggess & Narcowich, *A First Course in Wavelets with Fourier Analysis
 ## Stat 150 — Stochastic Processes
 
 Textbook: Durrett, *Essentials of Stochastic Processes* (3rd ed.) · [PDF](stat150_textbook_essentials.pdf) · [PDF](stat150_textbook_other.pdf)
+
+Comprehensive solutions: [tex](stat150/solutions.tex) · [pdf](stat150/solutions.pdf) · *not yet written*
+
+Chapter notes: [tex](stat150/notes.tex) · [pdf](stat150/notes.pdf) · *not yet written*
 
 ### Lectures
 
@@ -126,6 +147,7 @@ fa26_books/
 ├── math104/                 # one folder per course, e.g. math104
 │   ├── lectures/            #   lecture_NN.tex + lecture_NN.pdf
 │   ├── homework/            #   hwNN.pdf (assignment) + hwNN_sol.tex / .pdf
+│   ├── notes.tex            #   chapter-by-chapter reading notes
 │   └── solutions.tex        #   comprehensive per-chapter exercise solutions
 ├── math110/ math113/ math118/ stat150/    # same shape
 ├── practice/                # extra practice problems
@@ -168,9 +190,9 @@ Add a solved textbook exercise (per-course `solutions.tex`):
 \end{solution}
 ```
 
-Every `lecture_NN` and `hwNN_sol.tex` shows up in the index as soon as
-it exists on disk (unwritten ones are marked); `solutions.tex` appears
-once it has real content. The index regenerates on every sync.
+Every `lecture_NN`, `hwNN_sol.tex`, `notes.tex`, and `solutions.tex` shows
+up in the index as soon as it exists on disk (unwritten ones are marked).
+The index regenerates on every sync.
 
 Build changed notes and push:
 

@@ -130,6 +130,32 @@ generate_readme() {
     grep -Eq '^[[:space:]]*\\(exercise\{|begin\{problem\})' "$1"
   }
 
+  # notes.tex is "done" once it holds any real note line inside the document
+  # body. The fresh scaffold contains only structure: chapter banners
+  # (\chapterbanner), section headings (\notesec), the title block, the
+  # how-to box, \tableofcontents, and % prompts — none of those count.
+  notes_is_done() {
+    awk '
+      BEGIN { inb = 0; filled = 0 }
+      /\\begin\{document\}/ { inb = 1; next }
+      /\\end\{document\}/   { inb = 0 }
+      inb {
+        line = $0
+        gsub(/^[ \t]+|[ \t]+$/, "", line)
+        if (line == "") next
+        if (line ~ /^%/) next
+        if (line ~ /^\\(chapterbanner|notesec|tableofcontents|medskip|bigskip|clearpage)/) next
+        if (line ~ /^\\(begin|end)\{(document|center|tcolorbox)\}/) next
+        if (line ~ /^\\(sffamily|texttt)/) next
+        if (line ~ /^[{}]/) next
+        if (line ~ /^[a-z]+=/) next
+        if (line ~ /^(Record big ideas|warnings with|Add a missing|add a chapter)/) next
+        filled++
+      }
+      END { exit (filled > 0 ? 0 : 1) }
+    ' "$1"
+  }
+
   # The untouched scaffold body, extracted from the generator itself (the
   # template's document body contains no shell variables, so it compares raw).
   local template_body
@@ -151,7 +177,7 @@ generate_readme() {
   }
 
   local nav="" body=""
-  local total_lec=0 total_scaf=0 total_hw=0 total_sol=0
+  local total_lec=0 total_scaf=0 total_hw=0 total_sol=0 total_notes=0
 
   for entry in "${courses[@]}"; do
     IFS='|' read -r folder label longname textbook <<<"$entry"
@@ -160,12 +186,32 @@ generate_readme() {
 
     local section=""
 
-    # Comprehensive solutions: listed only once real exercises exist.
-    if [[ -f "$course_dir/solutions.tex" ]] && solutions_is_started "$course_dir/solutions.tex"; then
+    # Comprehensive solutions: indexed whenever solutions.tex exists; an
+    # unstarted scaffold (all exercise slots still commented out) is marked
+    # rather than hidden.
+    if [[ -f "$course_dir/solutions.tex" ]]; then
       local sol_links="Comprehensive solutions: [tex]($folder/solutions.tex)"
       [[ -f "$course_dir/solutions.pdf" ]] && sol_links="$sol_links · [pdf]($folder/solutions.pdf)"
+      if solutions_is_started "$course_dir/solutions.tex"; then
+        total_sol=$((total_sol + 1))
+      else
+        sol_links="$sol_links · *not yet written*"
+      fi
       section+="$sol_links"$'\n\n'
-      total_sol=$((total_sol + 1))
+    fi
+
+    # Chapter notes: indexed whenever notes.tex exists; a file containing
+    # only scaffold structure (banners, headings, prompts) is marked rather
+    # than hidden.
+    if [[ -f "$course_dir/notes.tex" ]]; then
+      local notes_links="Chapter notes: [tex]($folder/notes.tex)"
+      [[ -f "$course_dir/notes.pdf" ]] && notes_links="$notes_links · [pdf]($folder/notes.pdf)"
+      if notes_is_done "$course_dir/notes.tex"; then
+        total_notes=$((total_notes + 1))
+      else
+        notes_links="$notes_links · *not yet written*"
+      fi
+      section+="$notes_links"$'\n\n'
     fi
 
     # Lectures: list EVERY lecture on disk (.tex or .pdf), clickable, with
@@ -269,9 +315,9 @@ generate_readme() {
 
   {
     printf '# fa26_books\n\n'
-    printf 'LaTeX lecture notes, homework write-ups, and comprehensive solutions for Fall 2026.\n'
-    printf 'Every lecture and homework is indexed — unwritten files are\n'
-    printf 'marked — and every PDF opens right in your browser.\n\n'
+    printf 'LaTeX lecture notes, homework write-ups, chapter notes, and comprehensive solutions for Fall 2026.\n'
+    printf 'Every lecture, homework, notes, and solutions file is indexed — unwritten\n'
+    printf 'files are marked — and every PDF opens right in your browser.\n\n'
 
     if [[ -n "$nav" ]]; then
       printf '**Jump to:** %s\n\n' "$nav"
@@ -281,6 +327,7 @@ generate_readme() {
     (( total_lec > 0 )) && stats+=("**${total_lec}** $(plural "$total_lec" "lecture note")")
     (( total_scaf > 0 )) && stats+=("**${total_scaf}** $(plural "$total_scaf" "unstarted scaffold")")
     (( total_hw  > 0 )) && stats+=("**${total_hw}** $(plural "$total_hw" "homework write-up")")
+    (( total_notes > 0 )) && stats+=("**${total_notes}** $(plural "$total_notes" "chapter-notes file")")
     (( total_sol > 0 )) && stats+=("**${total_sol}** $(plural "$total_sol" "solution manual")")
     if (( ${#stats[@]} > 0 )); then
       local stats_line
@@ -326,6 +373,7 @@ generate_readme() {
     printf '├── math104/                 # one folder per course, e.g. math104\n'
     printf '│   ├── lectures/            #   lecture_NN.tex + lecture_NN.pdf\n'
     printf '│   ├── homework/            #   hwNN.pdf (assignment) + hwNN_sol.tex / .pdf\n'
+    printf '│   ├── notes.tex            #   chapter-by-chapter reading notes\n'
     printf '│   └── solutions.tex        #   comprehensive per-chapter exercise solutions\n'
     printf '├── math110/ math113/ math118/ stat150/    # same shape\n'
     printf '├── practice/                # extra practice problems\n'
@@ -358,9 +406,9 @@ generate_readme() {
     printf '  ...your write-up...\n'
     printf '\\end{solution}\n'
     printf '```\n\n'
-    printf 'Every `lecture_NN` and `hwNN_sol.tex` shows up in the index as soon as\n'
-    printf 'it exists on disk (unwritten ones are marked); `solutions.tex` appears\n'
-    printf 'once it has real content. The index regenerates on every sync.\n\n'
+    printf 'Every `lecture_NN`, `hwNN_sol.tex`, `notes.tex`, and `solutions.tex` shows\n'
+    printf 'up in the index as soon as it exists on disk (unwritten ones are marked).\n'
+    printf 'The index regenerates on every sync.\n\n'
     printf 'Build changed notes and push:\n\n'
     printf '```bash\n'
     printf './scripts/sync.sh                    # builds only changed .tex, then commits & pushes\n'

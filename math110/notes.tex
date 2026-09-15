@@ -1,0 +1,447 @@
+% !TEX program = lualatex
+% Math 110 — chapter-by-chapter notes scaffold
+% ============================================================
+%  Math 110 — Chapter-by-Chapter Reading Notes
+%  Axler, \emph{Linear Algebra Done Right} (4th ed.)
+%  Keshav Ramamurthy — Fall 2026
+% ------------------------------------------------------------
+%  HOW TO USE (one growing document, one banner per chapter)
+%
+%    Find the chapter banner and the section heading below it,
+%    then type your notes directly underneath:
+%
+%        Big idea: every Cauchy sequence converges iff ...
+%
+%    Structure the important ideas with the note environments
+%    (numbered within the current chapter):
+%
+%        \begin{definition} ... \end{definition}
+%        \begin{theorem} ... \end{theorem}
+%        \begin{example}  ... \end{example}
+%        \begin{remark}   ... \end{remark}
+%        \begin{idea}     ... \end{idea}
+%
+%    Add a missing section:  \notesec{§1.4}{Title}
+%    Add a chapter:          \chapterbanner{1}{Chapter 1}{Title}{description}
+% ============================================================
+\documentclass[11pt]{article}
+
+\usepackage{fontspec}
+\usepackage{microtype}
+\usepackage{mathtools,amssymb,amsfonts,amsthm,bm}
+\usepackage{enumitem}
+\usepackage{booktabs,array,xcolor}
+\usepackage{geometry,fancyhdr,setspace}
+\usepackage{etoolbox}
+\usepackage[most]{tcolorbox}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+% ---------- Page and paragraph rhythm (matches lecture/solutions templates) ----------
+\geometry{margin=1in,headheight=15pt}
+\setstretch{1.12}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em plus 0.12em minus 0.08em}
+\setlength{\abovedisplayskip}{0.8em plus 0.2em minus 0.1em}
+\setlength{\belowdisplayskip}{0.8em plus 0.2em minus 0.1em}
+\allowdisplaybreaks[3]
+\setlist{leftmargin=*,topsep=0.35em,itemsep=0.15em,parsep=0pt}
+
+% ---------- Palette (matches reference cheatsheet) ----------
+\definecolor{ink}{HTML}{1E293B}
+\definecolor{navy}{HTML}{183B56}
+\definecolor{paperblue}{HTML}{E8F1F8}
+\definecolor{gold}{HTML}{FFF3CD}
+\definecolor{mint}{HTML}{E8F5E9}
+\definecolor{muted}{HTML}{52606D}
+\definecolor{rule}{HTML}{C9D5DF}
+\color{ink}
+
+% ---------- Metadata ----------
+\newcommand{\studentname}{Keshav Ramamurthy}
+\newcommand{\coursename}{Math 110}
+\newcommand{\courselongname}{Abstract Linear Algebra}
+\newcommand{\textbookname}{Axler, \emph{Linear Algebra Done Right} (4th ed.)}
+\newcommand{\term}{Fall 2026}
+
+% ---------- Core notation (same as ~/.config/nvim/textemplate.tex) ----------
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\given}{\,\middle\vert\,}
+\newcommand{\indep}{\perp\!\!\!\perp}
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\deriv}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+\newcommand{\pderiv}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\lto}{\longrightarrow}
+\newcommand{\st}{\text{ such that }}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ker}{ker}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\spec}{spec}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+% ---------- Note environments (numbered by chapter) ----------
+\newcounter{chap}
+\newtheoremstyle{notestyle}{0.7em}{0.7em}{\itshape}{}{}{\bfseries}{.5em}{}
+\theoremstyle{notestyle}
+\newtheorem{theorem}{Theorem}[chap]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+% ---------- Note machinery ----------
+% Chapter banner: \chapterbanner{1}{Chapter 1}{Groups and Subgroups}{Fraleigh: ...}
+\newtcolorbox{chapterbox}[2]{%
+  enhanced,
+  colback=paperblue, colframe=navy, boxrule=0.7pt, arc=2.5pt,
+  left=10pt, right=10pt, top=12pt, bottom=8pt,
+  boxed title style={colback=navy, colframe=navy, arc=2pt, boxrule=0pt,
+    left=8pt, right=8pt, top=3pt, bottom=3pt},
+  attach boxed title to top left={yshift=-2.4mm, xshift=5mm},
+  title={\sffamily\bfseries\color{white}\large #1\quad #2}}
+\newcommand{\chapterbanner}[4]{%
+  \clearpage
+  \setcounter{chap}{#1}%
+  \setcounter{theorem}{0}%
+  \phantomsection
+  \addcontentsline{toc}{section}{#2\quad #3}%
+  \begin{chapterbox}{#2}{#3}
+    {\small\sffamily\color{muted}#4\par}
+  \end{chapterbox}
+  \medskip\nopagebreak}
+
+% Section heading: \notesec{§1.4}{Title}  →  navy heading + thin rule
+\newcommand{\notesec}[2]{%
+  \par\goodbreak\medskip\nopagebreak
+  {\sffamily\bfseries\color{navy}#1\quad #2}%
+  \par\nobreak\vspace{1.5pt}
+  {\color{rule}\hrule height 0.6pt}\par\nobreak\smallskip\nopagebreak
+  \phantomsection
+  \addcontentsline{toc}{subsection}{#1\quad #2}}
+
+% Quick structure inside notes
+\newenvironment{claim}{\par\smallskip\noindent\textit{Claim.}\ }{\par\smallskip}
+\newenvironment{idea}{\par\smallskip\noindent\textit{Idea.}\ }{\par\smallskip}
+\newenvironment{proofsketch}{\par\smallskip\noindent\textit{Proof sketch.}\ }{\par\smallskip}
+
+% ---------- Header ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\coursename}
+\fancyhead[C]{\courselongname\ — chapter notes}
+\fancyhead[R]{\studentname}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+
+% ---------- Title ----------
+\begin{center}
+  {\Large\sffamily\bfseries\color{navy}\coursename\ -- \courselongname}\\[3pt]
+  {\sffamily\color{muted} Chapter-by-chapter notes on the important ideas}\\[3pt]
+  {\small\sffamily\color{muted}\textbookname\quad\textbullet\quad \term\quad\textbullet\quad \studentname}
+\end{center}
+\medskip
+{\color{rule}\hrule height 0.8pt}
+\bigskip
+
+{\small
+\begin{tcolorbox}[colback=paperblue, colframe=rule, boxrule=0.4pt, arc=2pt,
+  left=7pt, right=7pt, top=5pt, bottom=5pt,
+  title={\sffamily\bfseries\color{navy} Taking notes},
+  colbacktitle=paperblue]
+\sffamily Find the chapter banner, then type under the section heading as you read:
+\begin{center}
+\texttt{\textbackslash notesec\{1A\}\{Span and Linear Independence\}}
+\end{center}
+Record big ideas with \texttt{idea}, definitions with \texttt{definition}, theorems with
+\texttt{theorem}, \texttt{lemma}, \texttt{proposition}, examples with \texttt{example}, and
+warnings with \texttt{remark} --- all numbered within the chapter.
+Add a missing section by copying a \texttt{\textbackslash notesec} slot;
+add a chapter with \texttt{\textbackslash chapterbanner}.
+\end{tcolorbox}
+}
+
+\medskip
+\tableofcontents
+
+\chapterbanner{1}{Chapter 1}{Vector Spaces}{Axler:\ \(\F^n\), vector space axioms, subspaces, sums and direct sums}
+
+\notesec{1A}{\(\R^n\) and \(\C^n\)}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{1B}{Definition of Vector Space}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{1C}{Subspaces}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\chapterbanner{2}{Chapter 2}{Finite-Dimensional Vector Spaces}{Axler:\ span, linear independence, bases, dimension}
+
+\notesec{2A}{Span and Linear Independence}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{2B}{Bases}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{2C}{Dimension}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\chapterbanner{3}{Chapter 3}{Linear Maps}{Axler:\ linear maps, null space and range, matrices, invertibility and isomorphisms, products and quotients, duality}
+
+\notesec{3A}{Vector Space of Linear Maps}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{3B}{Null Spaces and Ranges}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{3C}{Matrices}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{3D}{Invertibility and Isomorphisms}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{3E}{Products and Quotients of Vector Spaces}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{3F}{Duality}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\chapterbanner{4}{Chapter 4}{Polynomials}{Axler:\ zeros, the division algorithm, factorization over \(\C\) and over \(\R\)}
+
+\notesec{4.1}{Zeros of Polynomials}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{4.2}{Division Algorithm for Polynomials}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{4.3}{Factorization of Polynomials over \(\C\)}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{4.4}{Factorization of Polynomials over \(\R\)}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\chapterbanner{5}{Chapter 5}{Eigenvalues and Eigenvectors}{Axler:\ invariant subspaces, eigenvalues, the minimal polynomial, upper-triangular matrices, diagonalizability, commuting operators}
+
+\notesec{5A}{Invariant Subspaces}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{5B}{The Minimal Polynomial}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{5C}{Upper-Triangular Matrices}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{5D}{Diagonalizable Operators}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{5E}{Commuting Operators}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\chapterbanner{6}{Chapter 6}{Inner Product Spaces}{Axler:\ inner products and norms, orthonormal bases and Gram--Schmidt, orthogonal complements, minimization}
+
+\notesec{6A}{Inner Products and Norms}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{6B}{Orthonormal Bases}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{6C}{Orthogonal Complements and Minimization Problems}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\chapterbanner{7}{Chapter 7}{Operators on Inner Product Spaces}{Axler:\ adjoints, self-adjoint and normal operators, the spectral theorems, positive operators, isometries, SVD}
+
+\notesec{7A}{Self-Adjoint and Normal Operators}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{7B}{The Spectral Theorem}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{7C}{Positive Operators}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{7D}{Isometries, Unitary Operators, and Matrix Factorization}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{7E}{Singular Value Decomposition}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{7F}{Consequences of Singular Value Decomposition}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\chapterbanner{8}{Chapter 8}{Operators on Complex Vector Spaces}{Axler:\ generalized eigenvectors, nilpotent operators, generalized eigenspace decomposition, Jordan form, trace}
+
+\notesec{8A}{Generalized Eigenvectors and Nilpotent Operators}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{8B}{Generalized Eigenspace Decomposition}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{8C}{Consequences of Generalized Eigenspace Decomposition}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{8D}{Trace:\ A Connection Between Matrices and Operators}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\chapterbanner{9}{Chapter 9}{Multilinear Algebra and Determinants}{Axler:\ bilinear and quadratic forms, alternating multilinear forms, determinants, tensor products}
+
+\notesec{9A}{Bilinear Forms and Quadratic Forms}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{9B}{Alternating Multilinear Forms}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{9C}{Determinants}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\notesec{9D}{Tensor Products}
+% Big idea:
+% Key definitions \& theorems:
+% Examples / tricks:
+% Questions:
+
+\end{document}
