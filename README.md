@@ -6,7 +6,7 @@ files are marked — and every PDF opens right in your browser.
 
 **Jump to:** [Math 104](#math104) · [Math 110](#math110) · [Math 113](#math113) · [Math 118](#math118) · [Stat 150](#stat150)
 
-**12** lecture notes · **5** homework write-ups
+**15** lecture notes · **1** unstarted scaffold · **9** homework write-ups
 
 **Latest review plan:** [PDF](review/to_review_2026-09-08.pdf) · [tex](review/to_review_2026-09-08.tex)
 
@@ -26,6 +26,8 @@ Chapter notes: [tex](math104/notes.tex) · [pdf](math104/notes.pdf) · *not yet 
 |---|-------|
 | 01 | [PDF](math104/lectures/lecture_01.pdf) · [tex](math104/lectures/lecture_01.tex) |
 | 02 | [PDF](math104/lectures/lecture_02.pdf) · [tex](math104/lectures/lecture_02.tex) |
+| 03 | [PDF](math104/lectures/lecture_03.pdf) · [tex](math104/lectures/lecture_03.tex) |
+| 04 | [PDF](math104/lectures/lecture_04.pdf) · [tex](math104/lectures/lecture_04.tex) · *not yet written* |
 
 ### Homework
 
@@ -33,6 +35,9 @@ Chapter notes: [tex](math104/notes.tex) · [pdf](math104/notes.pdf) · *not yet 
 |----|------------|--------------|
 | 1 | [assignment](math104/homework/hw01.pdf) | [tex](math104/homework/hw01_sol.tex) · [pdf](math104/homework/hw01_sol.pdf) |
 | 2 | [assignment](math104/homework/hw02.pdf) | [tex](math104/homework/hw02_sol.tex) · [pdf](math104/homework/hw02_sol.pdf) |
+| 3 | [assignment](math104/homework/hw03.pdf) | [tex](math104/homework/hw03_sol.tex) · [pdf](math104/homework/hw03_sol.pdf) |
+| 4 | [assignment](math104/homework/hw4.pdf) | — |
+| 5 | [assignment](math104/homework/hw5.pdf) | — |
 
 <a id="math110"></a>
 
@@ -86,7 +91,8 @@ Chapter notes: [tex](math113/notes.tex) · [pdf](math113/notes.pdf) · *not yet 
 |----|------------|--------------|
 | 1 | [assignment](math113/homework/hw01.pdf) | [tex](math113/homework/hw01_sol.tex) · [pdf](math113/homework/hw01_sol.pdf) |
 | 2 | [assignment](math113/homework/hw02.pdf) | [tex](math113/homework/hw02_sol.tex) · [pdf](math113/homework/hw02_sol.pdf) |
-| 3 | [assignment](math113/homework/hw3.pdf) | [tex](math113/homework/hw03_sol.tex) · [pdf](math113/homework/hw03_sol.pdf) · *not yet written* |
+| 3 | [assignment](math113/homework/hw3.pdf) | [tex](math113/homework/hw03_sol.tex) · [pdf](math113/homework/hw03_sol.pdf) |
+| 4 | [assignment](math113/homework/hw4.pdf) | [tex](math113/homework/hw04_sol.tex) · [pdf](math113/homework/hw04_sol.pdf) |
 
 <a id="math118"></a>
 
@@ -106,12 +112,14 @@ Chapter notes: [tex](math118/notes.tex) · [pdf](math118/notes.pdf) · *not yet 
 | 02 | [PDF](math118/lectures/lecture_02.pdf) · [tex](math118/lectures/lecture_02.tex) |
 | 03 | [PDF](math118/lectures/lecture_03.pdf) · [tex](math118/lectures/lecture_03.tex) |
 | 04 | [PDF](math118/lectures/lecture_04.pdf) · [tex](math118/lectures/lecture_04.tex) |
+| 05 | [PDF](math118/lectures/lecture_05.pdf) · [tex](math118/lectures/lecture_05.tex) |
 
 ### Homework
 
 | HW | Assignment | My solutions |
 |----|------------|--------------|
 | 1 | [assignment](math118/homework/hw01.pdf) | [tex](math118/homework/hw01_sol.tex) · [pdf](math118/homework/hw01_sol.pdf) |
+| 2 | [assignment](math118/homework/hw02.pdf) | [tex](math118/homework/hw02_sol.tex) · [pdf](math118/homework/hw02_sol.pdf) |
 
 <a id="stat150"></a>
 
@@ -130,6 +138,7 @@ Chapter notes: [tex](stat150/notes.tex) · [pdf](stat150/notes.pdf) · *not yet 
 | 01 | [PDF](stat150/lectures/lecture_01.pdf) · [tex](stat150/lectures/lecture_01.tex) |
 | 02 | [PDF](stat150/lectures/lecture_02.pdf) · [tex](stat150/lectures/lecture_02.tex) |
 | 03 | [PDF](stat150/lectures/lecture_03.pdf) · [tex](stat150/lectures/lecture_03.tex) |
+| 04 | [PDF](stat150/lectures/lecture_04.pdf) · [tex](stat150/lectures/lecture_04.tex) |
 
 ## Practice & reference
 
