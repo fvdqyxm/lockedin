@@ -6,7 +6,7 @@ files are marked — and every PDF opens right in your browser.
 
 **Jump to:** [Math 104](#math104) · [Math 110](#math110) · [Math 113](#math113) · [Math 118](#math118) · [Stat 150](#stat150)
 
-**15** lecture notes · **1** unstarted scaffold · **9** homework write-ups
+**15** lecture notes · **1** unstarted scaffold · **10** homework write-ups
 
 **Latest review plan:** [PDF](review/to_review_2026-09-08.pdf) · [tex](review/to_review_2026-09-08.tex)
 
@@ -120,6 +120,7 @@ Chapter notes: [tex](math118/notes.tex) · [pdf](math118/notes.pdf) · *not yet 
 |----|------------|--------------|
 | 1 | [assignment](math118/homework/hw01.pdf) | [tex](math118/homework/hw01_sol.tex) · [pdf](math118/homework/hw01_sol.pdf) |
 | 2 | [assignment](math118/homework/hw02.pdf) | [tex](math118/homework/hw02_sol.tex) · [pdf](math118/homework/hw02_sol.pdf) |
+| 3 | [assignment](math118/homework/hw03.pdf) | [tex](math118/homework/hw03_sol.tex) · [pdf](math118/homework/hw03_sol.pdf) |
 
 <a id="stat150"></a>
 
